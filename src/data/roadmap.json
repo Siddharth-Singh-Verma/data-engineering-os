@@ -1,0 +1,1217 @@
+{
+  "nodes": [
+    {
+      "id": "python",
+      "position": {
+        "x": 100,
+        "y": 100
+      },
+      "data": {
+        "moduleId": "python",
+        "category": "foundation"
+      }
+    },
+    {
+      "id": "sql",
+      "position": {
+        "x": 450,
+        "y": 100
+      },
+      "data": {
+        "moduleId": "sql",
+        "category": "foundation"
+      }
+    },
+    {
+      "id": "git",
+      "position": {
+        "x": 800,
+        "y": 100
+      },
+      "data": {
+        "moduleId": "git",
+        "category": "foundation"
+      }
+    },
+    {
+      "id": "linux",
+      "position": {
+        "x": 1150,
+        "y": 100
+      },
+      "data": {
+        "moduleId": "linux",
+        "category": "foundation"
+      }
+    },
+    {
+      "id": "rest-apis",
+      "position": {
+        "x": 1150,
+        "y": 300
+      },
+      "data": {
+        "moduleId": "rest-apis",
+        "category": "foundation"
+      }
+    },
+    {
+      "id": "what-is-de",
+      "position": {
+        "x": 800,
+        "y": 300
+      },
+      "data": {
+        "moduleId": "what-is-de",
+        "category": "concepts"
+      }
+    },
+    {
+      "id": "role-of-de",
+      "position": {
+        "x": 450,
+        "y": 300
+      },
+      "data": {
+        "moduleId": "role-of-de",
+        "category": "concepts"
+      }
+    },
+    {
+      "id": "batch-vs-streaming",
+      "position": {
+        "x": 100,
+        "y": 300
+      },
+      "data": {
+        "moduleId": "batch-vs-streaming",
+        "category": "concepts"
+      }
+    },
+    {
+      "id": "etl-vs-elt",
+      "position": {
+        "x": 100,
+        "y": 500
+      },
+      "data": {
+        "moduleId": "etl-vs-elt",
+        "category": "concepts"
+      }
+    },
+    {
+      "id": "oltp-vs-olap",
+      "position": {
+        "x": 450,
+        "y": 500
+      },
+      "data": {
+        "moduleId": "oltp-vs-olap",
+        "category": "concepts"
+      }
+    },
+    {
+      "id": "data-pipeline",
+      "position": {
+        "x": 800,
+        "y": 500
+      },
+      "data": {
+        "moduleId": "data-pipeline",
+        "category": "concepts"
+      }
+    },
+    {
+      "id": "data-quality",
+      "position": {
+        "x": 1150,
+        "y": 500
+      },
+      "data": {
+        "moduleId": "data-quality",
+        "category": "concepts"
+      }
+    },
+    {
+      "id": "data-governance",
+      "position": {
+        "x": 1150,
+        "y": 700
+      },
+      "data": {
+        "moduleId": "data-governance",
+        "category": "concepts"
+      }
+    },
+    {
+      "id": "metadata",
+      "position": {
+        "x": 800,
+        "y": 700
+      },
+      "data": {
+        "moduleId": "metadata",
+        "category": "concepts"
+      }
+    },
+    {
+      "id": "data-warehouse",
+      "position": {
+        "x": 450,
+        "y": 700
+      },
+      "data": {
+        "moduleId": "data-warehouse",
+        "category": "architecture"
+      }
+    },
+    {
+      "id": "data-lake",
+      "position": {
+        "x": 100,
+        "y": 700
+      },
+      "data": {
+        "moduleId": "data-lake",
+        "category": "architecture"
+      }
+    },
+    {
+      "id": "lakehouse-arch",
+      "position": {
+        "x": 100,
+        "y": 900
+      },
+      "data": {
+        "moduleId": "lakehouse-arch",
+        "category": "architecture"
+      }
+    },
+    {
+      "id": "medallion",
+      "position": {
+        "x": 450,
+        "y": 900
+      },
+      "data": {
+        "moduleId": "medallion",
+        "category": "architecture"
+      }
+    },
+    {
+      "id": "data-mesh",
+      "position": {
+        "x": 800,
+        "y": 900
+      },
+      "data": {
+        "moduleId": "data-mesh",
+        "category": "architecture"
+      }
+    },
+    {
+      "id": "data-fabric",
+      "position": {
+        "x": 1150,
+        "y": 900
+      },
+      "data": {
+        "moduleId": "data-fabric",
+        "category": "architecture"
+      }
+    },
+    {
+      "id": "data-contracts",
+      "position": {
+        "x": 1150,
+        "y": 1100
+      },
+      "data": {
+        "moduleId": "data-contracts",
+        "category": "architecture"
+      }
+    },
+    {
+      "id": "csv-json",
+      "position": {
+        "x": 800,
+        "y": 1100
+      },
+      "data": {
+        "moduleId": "csv-json",
+        "category": "storage"
+      }
+    },
+    {
+      "id": "parquet",
+      "position": {
+        "x": 450,
+        "y": 1100
+      },
+      "data": {
+        "moduleId": "parquet",
+        "category": "storage"
+      }
+    },
+    {
+      "id": "avro",
+      "position": {
+        "x": 100,
+        "y": 1100
+      },
+      "data": {
+        "moduleId": "avro",
+        "category": "storage"
+      }
+    },
+    {
+      "id": "compression",
+      "position": {
+        "x": 100,
+        "y": 1300
+      },
+      "data": {
+        "moduleId": "compression",
+        "category": "storage"
+      }
+    },
+    {
+      "id": "delta-format",
+      "position": {
+        "x": 450,
+        "y": 1300
+      },
+      "data": {
+        "moduleId": "delta-format",
+        "category": "storage"
+      }
+    },
+    {
+      "id": "iceberg",
+      "position": {
+        "x": 800,
+        "y": 1300
+      },
+      "data": {
+        "moduleId": "iceberg",
+        "category": "storage"
+      }
+    },
+    {
+      "id": "hudi",
+      "position": {
+        "x": 1150,
+        "y": 1300
+      },
+      "data": {
+        "moduleId": "hudi",
+        "category": "storage"
+      }
+    },
+    {
+      "id": "horizontal-scaling",
+      "position": {
+        "x": 1150,
+        "y": 1500
+      },
+      "data": {
+        "moduleId": "horizontal-scaling",
+        "category": "distributed"
+      }
+    },
+    {
+      "id": "partitions-dist",
+      "position": {
+        "x": 800,
+        "y": 1500
+      },
+      "data": {
+        "moduleId": "partitions-dist",
+        "category": "distributed"
+      }
+    },
+    {
+      "id": "driver-executors",
+      "position": {
+        "x": 450,
+        "y": 1500
+      },
+      "data": {
+        "moduleId": "driver-executors",
+        "category": "distributed"
+      }
+    },
+    {
+      "id": "shuffling",
+      "position": {
+        "x": 100,
+        "y": 1500
+      },
+      "data": {
+        "moduleId": "shuffling",
+        "category": "distributed"
+      }
+    },
+    {
+      "id": "resource-management",
+      "position": {
+        "x": 100,
+        "y": 1700
+      },
+      "data": {
+        "moduleId": "resource-management",
+        "category": "distributed"
+      }
+    },
+    {
+      "id": "why-spark",
+      "position": {
+        "x": 450,
+        "y": 1700
+      },
+      "data": {
+        "moduleId": "why-spark",
+        "category": "spark"
+      }
+    },
+    {
+      "id": "rdd",
+      "position": {
+        "x": 800,
+        "y": 1700
+      },
+      "data": {
+        "moduleId": "rdd",
+        "category": "spark"
+      }
+    },
+    {
+      "id": "spark-dataframes",
+      "position": {
+        "x": 1150,
+        "y": 1700
+      },
+      "data": {
+        "moduleId": "spark-dataframes",
+        "category": "spark"
+      }
+    },
+    {
+      "id": "transformations-actions",
+      "position": {
+        "x": 1150,
+        "y": 1900
+      },
+      "data": {
+        "moduleId": "transformations-actions",
+        "category": "spark"
+      }
+    },
+    {
+      "id": "dag",
+      "position": {
+        "x": 800,
+        "y": 1900
+      },
+      "data": {
+        "moduleId": "dag",
+        "category": "spark"
+      }
+    },
+    {
+      "id": "spark-joins",
+      "position": {
+        "x": 450,
+        "y": 1900
+      },
+      "data": {
+        "moduleId": "spark-joins",
+        "category": "spark"
+      }
+    },
+    {
+      "id": "spark-caching",
+      "position": {
+        "x": 100,
+        "y": 1900
+      },
+      "data": {
+        "moduleId": "spark-caching",
+        "category": "spark"
+      }
+    },
+    {
+      "id": "spark-tuning",
+      "position": {
+        "x": 100,
+        "y": 2100
+      },
+      "data": {
+        "moduleId": "spark-tuning",
+        "category": "spark"
+      }
+    },
+    {
+      "id": "db-workspace",
+      "position": {
+        "x": 450,
+        "y": 2100
+      },
+      "data": {
+        "moduleId": "db-workspace",
+        "category": "databricks"
+      }
+    },
+    {
+      "id": "dlt",
+      "position": {
+        "x": 800,
+        "y": 2100
+      },
+      "data": {
+        "moduleId": "dlt",
+        "category": "databricks"
+      }
+    },
+    {
+      "id": "unity-catalog",
+      "position": {
+        "x": 1150,
+        "y": 2100
+      },
+      "data": {
+        "moduleId": "unity-catalog",
+        "category": "databricks"
+      }
+    },
+    {
+      "id": "er-model",
+      "position": {
+        "x": 1150,
+        "y": 2300
+      },
+      "data": {
+        "moduleId": "er-model",
+        "category": "modeling"
+      }
+    },
+    {
+      "id": "normalization",
+      "position": {
+        "x": 800,
+        "y": 2300
+      },
+      "data": {
+        "moduleId": "normalization",
+        "category": "modeling"
+      }
+    },
+    {
+      "id": "star-schema",
+      "position": {
+        "x": 450,
+        "y": 2300
+      },
+      "data": {
+        "moduleId": "star-schema",
+        "category": "modeling"
+      }
+    },
+    {
+      "id": "scd",
+      "position": {
+        "x": 100,
+        "y": 2300
+      },
+      "data": {
+        "moduleId": "scd",
+        "category": "modeling"
+      }
+    },
+    {
+      "id": "dbt-core",
+      "position": {
+        "x": 100,
+        "y": 2500
+      },
+      "data": {
+        "moduleId": "dbt-core",
+        "category": "transformation"
+      }
+    },
+    {
+      "id": "dbt-models",
+      "position": {
+        "x": 450,
+        "y": 2500
+      },
+      "data": {
+        "moduleId": "dbt-models",
+        "category": "transformation"
+      }
+    },
+    {
+      "id": "jinja-macros",
+      "position": {
+        "x": 800,
+        "y": 2500
+      },
+      "data": {
+        "moduleId": "jinja-macros",
+        "category": "transformation"
+      }
+    },
+    {
+      "id": "dbt-tests",
+      "position": {
+        "x": 1150,
+        "y": 2500
+      },
+      "data": {
+        "moduleId": "dbt-tests",
+        "category": "transformation"
+      }
+    },
+    {
+      "id": "airflow-intro",
+      "position": {
+        "x": 1150,
+        "y": 2700
+      },
+      "data": {
+        "moduleId": "airflow-intro",
+        "category": "orchestration"
+      }
+    },
+    {
+      "id": "airflow-dags",
+      "position": {
+        "x": 800,
+        "y": 2700
+      },
+      "data": {
+        "moduleId": "airflow-dags",
+        "category": "orchestration"
+      }
+    },
+    {
+      "id": "operators",
+      "position": {
+        "x": 450,
+        "y": 2700
+      },
+      "data": {
+        "moduleId": "operators",
+        "category": "orchestration"
+      }
+    },
+    {
+      "id": "airflow-arch",
+      "position": {
+        "x": 100,
+        "y": 2700
+      },
+      "data": {
+        "moduleId": "airflow-arch",
+        "category": "orchestration"
+      }
+    },
+    {
+      "id": "kafka-overview",
+      "position": {
+        "x": 100,
+        "y": 2900
+      },
+      "data": {
+        "moduleId": "kafka-overview",
+        "category": "streaming"
+      }
+    },
+    {
+      "id": "kafka-arch",
+      "position": {
+        "x": 450,
+        "y": 2900
+      },
+      "data": {
+        "moduleId": "kafka-arch",
+        "category": "streaming"
+      }
+    },
+    {
+      "id": "kafka-streams",
+      "position": {
+        "x": 800,
+        "y": 2900
+      },
+      "data": {
+        "moduleId": "kafka-streams",
+        "category": "streaming"
+      }
+    },
+    {
+      "id": "flink",
+      "position": {
+        "x": 1150,
+        "y": 2900
+      },
+      "data": {
+        "moduleId": "flink",
+        "category": "streaming"
+      }
+    },
+    {
+      "id": "aws-iam",
+      "position": {
+        "x": 1150,
+        "y": 3100
+      },
+      "data": {
+        "moduleId": "aws-iam",
+        "category": "aws"
+      }
+    },
+    {
+      "id": "s3",
+      "position": {
+        "x": 800,
+        "y": 3100
+      },
+      "data": {
+        "moduleId": "s3",
+        "category": "aws"
+      }
+    },
+    {
+      "id": "ec2",
+      "position": {
+        "x": 450,
+        "y": 3100
+      },
+      "data": {
+        "moduleId": "ec2",
+        "category": "aws"
+      }
+    },
+    {
+      "id": "rds",
+      "position": {
+        "x": 100,
+        "y": 3100
+      },
+      "data": {
+        "moduleId": "rds",
+        "category": "aws"
+      }
+    },
+    {
+      "id": "redshift",
+      "position": {
+        "x": 100,
+        "y": 3300
+      },
+      "data": {
+        "moduleId": "redshift",
+        "category": "aws"
+      }
+    },
+    {
+      "id": "docker",
+      "position": {
+        "x": 450,
+        "y": 3300
+      },
+      "data": {
+        "moduleId": "docker",
+        "category": "devops"
+      }
+    },
+    {
+      "id": "ci-cd",
+      "position": {
+        "x": 800,
+        "y": 3300
+      },
+      "data": {
+        "moduleId": "ci-cd",
+        "category": "devops"
+      }
+    },
+    {
+      "id": "terraform",
+      "position": {
+        "x": 1150,
+        "y": 3300
+      },
+      "data": {
+        "moduleId": "terraform",
+        "category": "devops"
+      }
+    },
+    {
+      "id": "de-projects",
+      "position": {
+        "x": 1150,
+        "y": 3500
+      },
+      "data": {
+        "moduleId": "de-projects",
+        "category": "projects"
+      }
+    },
+    {
+      "id": "batch-project",
+      "position": {
+        "x": 800,
+        "y": 3500
+      },
+      "data": {
+        "moduleId": "batch-project",
+        "category": "projects"
+      }
+    },
+    {
+      "id": "streaming-project",
+      "position": {
+        "x": 450,
+        "y": 3500
+      },
+      "data": {
+        "moduleId": "streaming-project",
+        "category": "projects"
+      }
+    },
+    {
+      "id": "sys-design-intro",
+      "position": {
+        "x": 100,
+        "y": 3500
+      },
+      "data": {
+        "moduleId": "sys-design-intro",
+        "category": "system-design"
+      }
+    },
+    {
+      "id": "sys-design-framework",
+      "position": {
+        "x": 100,
+        "y": 3700
+      },
+      "data": {
+        "moduleId": "sys-design-framework",
+        "category": "system-design"
+      }
+    },
+    {
+      "id": "sql-interview",
+      "position": {
+        "x": 450,
+        "y": 3700
+      },
+      "data": {
+        "moduleId": "sql-interview",
+        "category": "interview"
+      }
+    },
+    {
+      "id": "python-interview",
+      "position": {
+        "x": 800,
+        "y": 3700
+      },
+      "data": {
+        "moduleId": "python-interview",
+        "category": "interview"
+      }
+    },
+    {
+      "id": "behavioral-interview",
+      "position": {
+        "x": 1150,
+        "y": 3700
+      },
+      "data": {
+        "moduleId": "behavioral-interview",
+        "category": "interview"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-python-sql",
+      "source": "python",
+      "target": "sql"
+    },
+    {
+      "id": "e-sql-git",
+      "source": "sql",
+      "target": "git"
+    },
+    {
+      "id": "e-git-linux",
+      "source": "git",
+      "target": "linux"
+    },
+    {
+      "id": "e-linux-rest-apis",
+      "source": "linux",
+      "target": "rest-apis"
+    },
+    {
+      "id": "e-rest-apis-what-is-de",
+      "source": "rest-apis",
+      "target": "what-is-de"
+    },
+    {
+      "id": "e-what-is-de-role-of-de",
+      "source": "what-is-de",
+      "target": "role-of-de"
+    },
+    {
+      "id": "e-role-of-de-batch-vs-streaming",
+      "source": "role-of-de",
+      "target": "batch-vs-streaming"
+    },
+    {
+      "id": "e-batch-vs-streaming-etl-vs-elt",
+      "source": "batch-vs-streaming",
+      "target": "etl-vs-elt"
+    },
+    {
+      "id": "e-etl-vs-elt-oltp-vs-olap",
+      "source": "etl-vs-elt",
+      "target": "oltp-vs-olap"
+    },
+    {
+      "id": "e-oltp-vs-olap-data-pipeline",
+      "source": "oltp-vs-olap",
+      "target": "data-pipeline"
+    },
+    {
+      "id": "e-data-pipeline-data-quality",
+      "source": "data-pipeline",
+      "target": "data-quality"
+    },
+    {
+      "id": "e-data-quality-data-governance",
+      "source": "data-quality",
+      "target": "data-governance"
+    },
+    {
+      "id": "e-data-governance-metadata",
+      "source": "data-governance",
+      "target": "metadata"
+    },
+    {
+      "id": "e-metadata-data-warehouse",
+      "source": "metadata",
+      "target": "data-warehouse"
+    },
+    {
+      "id": "e-data-warehouse-data-lake",
+      "source": "data-warehouse",
+      "target": "data-lake"
+    },
+    {
+      "id": "e-data-lake-lakehouse-arch",
+      "source": "data-lake",
+      "target": "lakehouse-arch"
+    },
+    {
+      "id": "e-lakehouse-arch-medallion",
+      "source": "lakehouse-arch",
+      "target": "medallion"
+    },
+    {
+      "id": "e-medallion-data-mesh",
+      "source": "medallion",
+      "target": "data-mesh"
+    },
+    {
+      "id": "e-data-mesh-data-fabric",
+      "source": "data-mesh",
+      "target": "data-fabric"
+    },
+    {
+      "id": "e-data-fabric-data-contracts",
+      "source": "data-fabric",
+      "target": "data-contracts"
+    },
+    {
+      "id": "e-data-contracts-csv-json",
+      "source": "data-contracts",
+      "target": "csv-json"
+    },
+    {
+      "id": "e-csv-json-parquet",
+      "source": "csv-json",
+      "target": "parquet"
+    },
+    {
+      "id": "e-parquet-avro",
+      "source": "parquet",
+      "target": "avro"
+    },
+    {
+      "id": "e-avro-compression",
+      "source": "avro",
+      "target": "compression"
+    },
+    {
+      "id": "e-compression-delta-format",
+      "source": "compression",
+      "target": "delta-format"
+    },
+    {
+      "id": "e-delta-format-iceberg",
+      "source": "delta-format",
+      "target": "iceberg"
+    },
+    {
+      "id": "e-iceberg-hudi",
+      "source": "iceberg",
+      "target": "hudi"
+    },
+    {
+      "id": "e-hudi-horizontal-scaling",
+      "source": "hudi",
+      "target": "horizontal-scaling"
+    },
+    {
+      "id": "e-horizontal-scaling-partitions-dist",
+      "source": "horizontal-scaling",
+      "target": "partitions-dist"
+    },
+    {
+      "id": "e-partitions-dist-driver-executors",
+      "source": "partitions-dist",
+      "target": "driver-executors"
+    },
+    {
+      "id": "e-driver-executors-shuffling",
+      "source": "driver-executors",
+      "target": "shuffling"
+    },
+    {
+      "id": "e-shuffling-resource-management",
+      "source": "shuffling",
+      "target": "resource-management"
+    },
+    {
+      "id": "e-resource-management-why-spark",
+      "source": "resource-management",
+      "target": "why-spark"
+    },
+    {
+      "id": "e-why-spark-rdd",
+      "source": "why-spark",
+      "target": "rdd"
+    },
+    {
+      "id": "e-rdd-spark-dataframes",
+      "source": "rdd",
+      "target": "spark-dataframes"
+    },
+    {
+      "id": "e-spark-dataframes-transformations-actions",
+      "source": "spark-dataframes",
+      "target": "transformations-actions"
+    },
+    {
+      "id": "e-transformations-actions-dag",
+      "source": "transformations-actions",
+      "target": "dag"
+    },
+    {
+      "id": "e-dag-spark-joins",
+      "source": "dag",
+      "target": "spark-joins"
+    },
+    {
+      "id": "e-spark-joins-spark-caching",
+      "source": "spark-joins",
+      "target": "spark-caching"
+    },
+    {
+      "id": "e-spark-caching-spark-tuning",
+      "source": "spark-caching",
+      "target": "spark-tuning"
+    },
+    {
+      "id": "e-spark-tuning-db-workspace",
+      "source": "spark-tuning",
+      "target": "db-workspace"
+    },
+    {
+      "id": "e-db-workspace-dlt",
+      "source": "db-workspace",
+      "target": "dlt"
+    },
+    {
+      "id": "e-dlt-unity-catalog",
+      "source": "dlt",
+      "target": "unity-catalog"
+    },
+    {
+      "id": "e-unity-catalog-er-model",
+      "source": "unity-catalog",
+      "target": "er-model"
+    },
+    {
+      "id": "e-er-model-normalization",
+      "source": "er-model",
+      "target": "normalization"
+    },
+    {
+      "id": "e-normalization-star-schema",
+      "source": "normalization",
+      "target": "star-schema"
+    },
+    {
+      "id": "e-star-schema-scd",
+      "source": "star-schema",
+      "target": "scd"
+    },
+    {
+      "id": "e-scd-dbt-core",
+      "source": "scd",
+      "target": "dbt-core"
+    },
+    {
+      "id": "e-dbt-core-dbt-models",
+      "source": "dbt-core",
+      "target": "dbt-models"
+    },
+    {
+      "id": "e-dbt-models-jinja-macros",
+      "source": "dbt-models",
+      "target": "jinja-macros"
+    },
+    {
+      "id": "e-jinja-macros-dbt-tests",
+      "source": "jinja-macros",
+      "target": "dbt-tests"
+    },
+    {
+      "id": "e-dbt-tests-airflow-intro",
+      "source": "dbt-tests",
+      "target": "airflow-intro"
+    },
+    {
+      "id": "e-airflow-intro-airflow-dags",
+      "source": "airflow-intro",
+      "target": "airflow-dags"
+    },
+    {
+      "id": "e-airflow-dags-operators",
+      "source": "airflow-dags",
+      "target": "operators"
+    },
+    {
+      "id": "e-operators-airflow-arch",
+      "source": "operators",
+      "target": "airflow-arch"
+    },
+    {
+      "id": "e-airflow-arch-kafka-overview",
+      "source": "airflow-arch",
+      "target": "kafka-overview"
+    },
+    {
+      "id": "e-kafka-overview-kafka-arch",
+      "source": "kafka-overview",
+      "target": "kafka-arch"
+    },
+    {
+      "id": "e-kafka-arch-kafka-streams",
+      "source": "kafka-arch",
+      "target": "kafka-streams"
+    },
+    {
+      "id": "e-kafka-streams-flink",
+      "source": "kafka-streams",
+      "target": "flink"
+    },
+    {
+      "id": "e-flink-aws-iam",
+      "source": "flink",
+      "target": "aws-iam"
+    },
+    {
+      "id": "e-aws-iam-s3",
+      "source": "aws-iam",
+      "target": "s3"
+    },
+    {
+      "id": "e-s3-ec2",
+      "source": "s3",
+      "target": "ec2"
+    },
+    {
+      "id": "e-ec2-rds",
+      "source": "ec2",
+      "target": "rds"
+    },
+    {
+      "id": "e-rds-redshift",
+      "source": "rds",
+      "target": "redshift"
+    },
+    {
+      "id": "e-redshift-docker",
+      "source": "redshift",
+      "target": "docker"
+    },
+    {
+      "id": "e-docker-ci-cd",
+      "source": "docker",
+      "target": "ci-cd"
+    },
+    {
+      "id": "e-ci-cd-terraform",
+      "source": "ci-cd",
+      "target": "terraform"
+    },
+    {
+      "id": "e-terraform-de-projects",
+      "source": "terraform",
+      "target": "de-projects"
+    },
+    {
+      "id": "e-de-projects-batch-project",
+      "source": "de-projects",
+      "target": "batch-project"
+    },
+    {
+      "id": "e-batch-project-streaming-project",
+      "source": "batch-project",
+      "target": "streaming-project"
+    },
+    {
+      "id": "e-streaming-project-sys-design-intro",
+      "source": "streaming-project",
+      "target": "sys-design-intro"
+    },
+    {
+      "id": "e-sys-design-intro-sys-design-framework",
+      "source": "sys-design-intro",
+      "target": "sys-design-framework"
+    },
+    {
+      "id": "e-sys-design-framework-sql-interview",
+      "source": "sys-design-framework",
+      "target": "sql-interview"
+    },
+    {
+      "id": "e-sql-interview-python-interview",
+      "source": "sql-interview",
+      "target": "python-interview"
+    },
+    {
+      "id": "e-python-interview-behavioral-interview",
+      "source": "python-interview",
+      "target": "behavioral-interview"
+    }
+  ]
+}

@@ -1,0 +1,206 @@
+@import "tailwindcss";
+
+/* ─── Design Tokens ──────────────────────────────────────── */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* Dark palette */
+  --color-bg-primary: hsl(220 20% 7%);
+  --color-bg-secondary: hsl(220 15% 11%);
+  --color-bg-card: hsl(220 15% 13%);
+  --color-bg-card-hover: hsl(220 15% 16%);
+  --color-bg-surface: hsl(220 15% 18%);
+
+  --color-border-default: hsl(220 15% 20%);
+  --color-border-subtle: hsl(220 15% 15%);
+
+  --color-text-primary: hsl(220 10% 93%);
+  --color-text-secondary: hsl(220 10% 65%);
+  --color-text-muted: hsl(220 10% 45%);
+
+  --color-accent: hsl(217 91% 60%);
+  --color-accent-hover: hsl(217 91% 68%);
+  --color-accent-muted: hsl(217 91% 60% / 0.15);
+
+  --color-success: hsl(142 71% 45%);
+  --color-success-muted: hsl(142 71% 45% / 0.15);
+  --color-warning: hsl(38 92% 50%);
+  --color-warning-muted: hsl(38 92% 50% / 0.15);
+  --color-danger: hsl(0 84% 60%);
+  --color-danger-muted: hsl(0 84% 60% / 0.15);
+
+  /* Category palette */
+  --color-cat-foundation: hsl(155 60% 50%);
+  --color-cat-concepts: hsl(172 60% 45%);
+  --color-cat-storage: hsl(38 85% 55%);
+  --color-cat-distributed: hsl(25 90% 55%);
+  --color-cat-spark: hsl(12 85% 55%);
+  --color-cat-lakehouse: hsl(270 60% 60%);
+  --color-cat-modeling: hsl(330 65% 60%);
+  --color-cat-orchestration: hsl(217 80% 60%);
+  --color-cat-streaming: hsl(188 80% 50%);
+  --color-cat-cloud: hsl(200 80% 55%);
+  --color-cat-devops: hsl(215 20% 55%);
+  --color-cat-portfolio: hsl(45 85% 55%);
+
+  /* Spacing */
+  --spacing-page: 1.5rem;
+
+  /* Shadows */
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
+  --shadow-card-hover: 0 4px 12px 0 rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --shadow-glow: 0 0 20px 0 rgb(56 119 231 / 0.15);
+
+  /* Radii */
+  --radius-card: 0.75rem;
+  --radius-button: 0.5rem;
+  --radius-badge: 0.375rem;
+}
+
+/* ─── Light Theme Override ───────────────────────────────── */
+[data-theme="light"] {
+  --color-bg-primary: hsl(220 20% 98%);
+  --color-bg-secondary: hsl(220 15% 95%);
+  --color-bg-card: hsl(0 0% 100%);
+  --color-bg-card-hover: hsl(220 15% 97%);
+  --color-bg-surface: hsl(220 15% 93%);
+  --color-border-default: hsl(220 15% 85%);
+  --color-border-subtle: hsl(220 15% 90%);
+  --color-text-primary: hsl(220 20% 10%);
+  --color-text-secondary: hsl(220 10% 40%);
+  --color-text-muted: hsl(220 10% 60%);
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.08);
+  --shadow-card-hover: 0 4px 12px 0 rgb(0 0 0 / 0.12), 0 2px 4px -2px rgb(0 0 0 / 0.08);
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-default);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* ─── React Flow Overrides ───────────────────────────────── */
+.react-flow__background {
+  background: var(--color-bg-primary) !important;
+}
+.react-flow__minimap {
+  border-radius: var(--radius-card) !important;
+  overflow: hidden;
+  border: 1px solid var(--color-border-default) !important;
+  background: var(--color-bg-secondary) !important;
+}
+.react-flow__controls {
+  border-radius: var(--radius-card) !important;
+  border: 1px solid var(--color-border-default) !important;
+  background: var(--color-bg-card) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+.react-flow__controls-button {
+  background: var(--color-bg-card) !important;
+  color: var(--color-text-primary) !important;
+  border-bottom: 1px solid var(--color-border-subtle) !important;
+}
+.react-flow__controls-button:hover {
+  background: var(--color-bg-card-hover) !important;
+}
+
+/* ─── Animations ─────────────────────────────────────────── */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px 0 var(--glow-color, rgb(56 119 231 / 0.2)); }
+  50% { box-shadow: 0 0 20px 4px var(--glow-color, rgb(56 119 231 / 0.35)); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ─── Markdown Styles ────────────────────────────────────── */
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3 {
+  color: var(--color-text-primary);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.markdown-body p {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+.markdown-body code {
+  background: var(--color-bg-surface);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+}
+.markdown-body pre {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-card);
+  padding: 1rem;
+  overflow-x: auto;
+}
+.markdown-body pre code {
+  background: transparent;
+  padding: 0;
+}
+.markdown-body ul, .markdown-body ol {
+  color: var(--color-text-secondary);
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+.markdown-body li {
+  margin-bottom: 0.35rem;
+}
+.markdown-body a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+.markdown-body blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1rem;
+  color: var(--color-text-muted);
+  margin: 1rem 0;
+}
