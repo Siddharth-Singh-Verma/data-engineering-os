@@ -183,7 +183,7 @@ export function useProgress() {
 
   // Check if module is unlocked (all prerequisites completed)
   const isUnlocked = useCallback((prerequisites: string[]) => {
-    if (prerequisites.length === 0) return true;
+    if (!prerequisites || prerequisites.length === 0) return true;
     return prerequisites.every(p => progress.completedModules.includes(p));
   }, [progress.completedModules]);
 

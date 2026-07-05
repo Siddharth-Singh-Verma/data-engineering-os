@@ -76,7 +76,7 @@ export function TopicsTree({ modules, progress, onClose }: TopicsTreeProps) {
                 {phaseModules.map(module => {
                   const isCompleted = progress.completedModules.includes(module.id);
                   const isStarted = progress.moduleProgress[module.id]?.started;
-                  const isUnlocked = module.prerequisites.length === 0 || module.prerequisites.every(p => progress.completedModules.includes(p));
+                  const isUnlocked = !module.prerequisites || module.prerequisites.length === 0 || module.prerequisites.every(p => progress.completedModules.includes(p));
                   
                   return (
                     <NavLink

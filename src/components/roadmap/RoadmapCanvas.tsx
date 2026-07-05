@@ -45,7 +45,7 @@ export function RoadmapCanvas({ roadmapData, modules, progress, toggleModuleComp
         const mod = moduleMap[n.data.moduleId];
         const isCompleted = progress.completedModules.includes(n.id);
         const isUnlocked = mod
-          ? mod.prerequisites.every(p => progress.completedModules.includes(p))
+          ? (mod.prerequisites || []).every(p => progress.completedModules.includes(p))
           : true;
         const isStarted = progress.moduleProgress[n.id]?.started || false;
 
