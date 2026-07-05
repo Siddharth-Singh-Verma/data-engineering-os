@@ -50,13 +50,13 @@ export default function App() {
 
   // Page title/subtitle based on route
   const pageInfo = useMemo(() => {
-    if (location.pathname === '/dashboard') return { title: 'Dashboard', subtitle: 'Track your progress and readiness' };
+    if (location.pathname === '/roadmap') return { title: 'Roadmap', subtitle: `${stats.completedCount}/${stats.totalModules} modules completed` };
     if (location.pathname.startsWith('/module/')) {
       const id = location.pathname.split('/module/')[1];
       const mod = modules.find(m => m.id === id);
       return { title: mod?.title || 'Module', subtitle: mod?.phaseLabel };
     }
-    return { title: 'Roadmap', subtitle: `${stats.completedCount}/${stats.totalModules} modules completed` };
+    return { title: 'Dashboard', subtitle: 'Track your progress and readiness' };
   }, [location.pathname, stats]);
 
   return (
@@ -83,9 +83,19 @@ export default function App() {
         <main className="flex-1 overflow-y-auto">
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
-              {/* Roadmap page */}
+              {/* Dashboard page (Default Landing) */}
               <Route
                 path="/"
+                element={
+                  <div className="p-6">
+                    <DashboardPage stats={stats} modules={modules} />
+                  </div>
+                }
+              />
+
+              {/* Roadmap */}
+              <Route
+                path="/roadmap"
                 element={
                   <div className="h-full">
                     <RoadmapCanvas
@@ -94,16 +104,6 @@ export default function App() {
                       progress={progress}
                       toggleModuleComplete={toggleModuleComplete}
                     />
-                  </div>
-                }
-              />
-
-              {/* Dashboard */}
-              <Route
-                path="/dashboard"
-                element={
-                  <div className="p-6">
-                    <DashboardPage stats={stats} modules={modules} />
                   </div>
                 }
               />

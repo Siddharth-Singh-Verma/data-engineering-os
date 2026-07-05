@@ -835,6 +835,666 @@
         "moduleId": "behavioral-interview",
         "category": "interview"
       }
+    },
+    {
+      "id": "idempotency",
+      "position": {
+        "x": 1150,
+        "y": 3900
+      },
+      "data": {
+        "moduleId": "idempotency",
+        "category": "concepts"
+      }
+    },
+    {
+      "id": "schema-evolution",
+      "position": {
+        "x": 800,
+        "y": 3900
+      },
+      "data": {
+        "moduleId": "schema-evolution",
+        "category": "concepts"
+      }
+    },
+    {
+      "id": "data-lineage",
+      "position": {
+        "x": 450,
+        "y": 3900
+      },
+      "data": {
+        "moduleId": "data-lineage",
+        "category": "concepts"
+      }
+    },
+    {
+      "id": "data-observability",
+      "position": {
+        "x": 100,
+        "y": 3900
+      },
+      "data": {
+        "moduleId": "data-observability",
+        "category": "concepts"
+      }
+    },
+    {
+      "id": "cdc",
+      "position": {
+        "x": 100,
+        "y": 4100
+      },
+      "data": {
+        "moduleId": "cdc",
+        "category": "concepts"
+      }
+    },
+    {
+      "id": "lambda-arch",
+      "position": {
+        "x": 450,
+        "y": 4100
+      },
+      "data": {
+        "moduleId": "lambda-arch",
+        "category": "architecture"
+      }
+    },
+    {
+      "id": "kappa-arch",
+      "position": {
+        "x": 800,
+        "y": 4100
+      },
+      "data": {
+        "moduleId": "kappa-arch",
+        "category": "architecture"
+      }
+    },
+    {
+      "id": "data-catalog",
+      "position": {
+        "x": 1150,
+        "y": 4100
+      },
+      "data": {
+        "moduleId": "data-catalog",
+        "category": "architecture"
+      }
+    },
+    {
+      "id": "replication",
+      "position": {
+        "x": 1150,
+        "y": 4300
+      },
+      "data": {
+        "moduleId": "replication",
+        "category": "distributed"
+      }
+    },
+    {
+      "id": "cap-theorem",
+      "position": {
+        "x": 800,
+        "y": 4300
+      },
+      "data": {
+        "moduleId": "cap-theorem",
+        "category": "distributed"
+      }
+    },
+    {
+      "id": "consistency-models",
+      "position": {
+        "x": 450,
+        "y": 4300
+      },
+      "data": {
+        "moduleId": "consistency-models",
+        "category": "distributed"
+      }
+    },
+    {
+      "id": "data-locality",
+      "position": {
+        "x": 100,
+        "y": 4300
+      },
+      "data": {
+        "moduleId": "data-locality",
+        "category": "distributed"
+      }
+    },
+    {
+      "id": "spark-datasets",
+      "position": {
+        "x": 100,
+        "y": 4500
+      },
+      "data": {
+        "moduleId": "spark-datasets",
+        "category": "spark"
+      }
+    },
+    {
+      "id": "lazy-evaluation",
+      "position": {
+        "x": 450,
+        "y": 4500
+      },
+      "data": {
+        "moduleId": "lazy-evaluation",
+        "category": "spark"
+      }
+    },
+    {
+      "id": "tungsten",
+      "position": {
+        "x": 800,
+        "y": 4500
+      },
+      "data": {
+        "moduleId": "tungsten",
+        "category": "spark"
+      }
+    },
+    {
+      "id": "aqe",
+      "position": {
+        "x": 1150,
+        "y": 4500
+      },
+      "data": {
+        "moduleId": "aqe",
+        "category": "spark"
+      }
+    },
+    {
+      "id": "spark-window-functions",
+      "position": {
+        "x": 1150,
+        "y": 4700
+      },
+      "data": {
+        "moduleId": "spark-window-functions",
+        "category": "spark"
+      }
+    },
+    {
+      "id": "spark-structured-streaming",
+      "position": {
+        "x": 800,
+        "y": 4700
+      },
+      "data": {
+        "moduleId": "spark-structured-streaming",
+        "category": "spark"
+      }
+    },
+    {
+      "id": "spark-ui",
+      "position": {
+        "x": 450,
+        "y": 4700
+      },
+      "data": {
+        "moduleId": "spark-ui",
+        "category": "spark"
+      }
+    },
+    {
+      "id": "spark-partitioning",
+      "position": {
+        "x": 100,
+        "y": 4700
+      },
+      "data": {
+        "moduleId": "spark-partitioning",
+        "category": "spark"
+      }
+    },
+    {
+      "id": "db-notebooks",
+      "position": {
+        "x": 100,
+        "y": 4900
+      },
+      "data": {
+        "moduleId": "db-notebooks",
+        "category": "databricks"
+      }
+    },
+    {
+      "id": "db-clusters",
+      "position": {
+        "x": 450,
+        "y": 4900
+      },
+      "data": {
+        "moduleId": "db-clusters",
+        "category": "databricks"
+      }
+    },
+    {
+      "id": "db-jobs",
+      "position": {
+        "x": 800,
+        "y": 4900
+      },
+      "data": {
+        "moduleId": "db-jobs",
+        "category": "databricks"
+      }
+    },
+    {
+      "id": "db-sql",
+      "position": {
+        "x": 1150,
+        "y": 4900
+      },
+      "data": {
+        "moduleId": "db-sql",
+        "category": "databricks"
+      }
+    },
+    {
+      "id": "db-photon",
+      "position": {
+        "x": 1150,
+        "y": 5100
+      },
+      "data": {
+        "moduleId": "db-photon",
+        "category": "databricks"
+      }
+    },
+    {
+      "id": "db-cost",
+      "position": {
+        "x": 800,
+        "y": 5100
+      },
+      "data": {
+        "moduleId": "db-cost",
+        "category": "databricks"
+      }
+    },
+    {
+      "id": "denormalization",
+      "position": {
+        "x": 450,
+        "y": 5100
+      },
+      "data": {
+        "moduleId": "denormalization",
+        "category": "modeling"
+      }
+    },
+    {
+      "id": "snowflake-schema",
+      "position": {
+        "x": 100,
+        "y": 5100
+      },
+      "data": {
+        "moduleId": "snowflake-schema",
+        "category": "modeling"
+      }
+    },
+    {
+      "id": "fact-tables",
+      "position": {
+        "x": 100,
+        "y": 5300
+      },
+      "data": {
+        "moduleId": "fact-tables",
+        "category": "modeling"
+      }
+    },
+    {
+      "id": "grain",
+      "position": {
+        "x": 450,
+        "y": 5300
+      },
+      "data": {
+        "moduleId": "grain",
+        "category": "modeling"
+      }
+    },
+    {
+      "id": "kimball",
+      "position": {
+        "x": 800,
+        "y": 5300
+      },
+      "data": {
+        "moduleId": "kimball",
+        "category": "modeling"
+      }
+    },
+    {
+      "id": "data-vault",
+      "position": {
+        "x": 1150,
+        "y": 5300
+      },
+      "data": {
+        "moduleId": "data-vault",
+        "category": "modeling"
+      }
+    },
+    {
+      "id": "dbt-seeds",
+      "position": {
+        "x": 1150,
+        "y": 5500
+      },
+      "data": {
+        "moduleId": "dbt-seeds",
+        "category": "transformation"
+      }
+    },
+    {
+      "id": "dbt-sources",
+      "position": {
+        "x": 800,
+        "y": 5500
+      },
+      "data": {
+        "moduleId": "dbt-sources",
+        "category": "transformation"
+      }
+    },
+    {
+      "id": "dbt-snapshots",
+      "position": {
+        "x": 450,
+        "y": 5500
+      },
+      "data": {
+        "moduleId": "dbt-snapshots",
+        "category": "transformation"
+      }
+    },
+    {
+      "id": "dbt-incremental",
+      "position": {
+        "x": 100,
+        "y": 5500
+      },
+      "data": {
+        "moduleId": "dbt-incremental",
+        "category": "transformation"
+      }
+    },
+    {
+      "id": "dbt-best-practices",
+      "position": {
+        "x": 100,
+        "y": 5700
+      },
+      "data": {
+        "moduleId": "dbt-best-practices",
+        "category": "transformation"
+      }
+    },
+    {
+      "id": "airflow-hooks",
+      "position": {
+        "x": 450,
+        "y": 5700
+      },
+      "data": {
+        "moduleId": "airflow-hooks",
+        "category": "orchestration"
+      }
+    },
+    {
+      "id": "airflow-taskflow",
+      "position": {
+        "x": 800,
+        "y": 5700
+      },
+      "data": {
+        "moduleId": "airflow-taskflow",
+        "category": "orchestration"
+      }
+    },
+    {
+      "id": "airflow-xcom",
+      "position": {
+        "x": 1150,
+        "y": 5700
+      },
+      "data": {
+        "moduleId": "airflow-xcom",
+        "category": "orchestration"
+      }
+    },
+    {
+      "id": "airflow-prod-best-practices",
+      "position": {
+        "x": 1150,
+        "y": 5900
+      },
+      "data": {
+        "moduleId": "airflow-prod-best-practices",
+        "category": "orchestration"
+      }
+    },
+    {
+      "id": "kafka-topics",
+      "position": {
+        "x": 800,
+        "y": 5900
+      },
+      "data": {
+        "moduleId": "kafka-topics",
+        "category": "streaming"
+      }
+    },
+    {
+      "id": "kafka-producer",
+      "position": {
+        "x": 450,
+        "y": 5900
+      },
+      "data": {
+        "moduleId": "kafka-producer",
+        "category": "streaming"
+      }
+    },
+    {
+      "id": "kafka-consumer",
+      "position": {
+        "x": 100,
+        "y": 5900
+      },
+      "data": {
+        "moduleId": "kafka-consumer",
+        "category": "streaming"
+      }
+    },
+    {
+      "id": "kafka-schema-registry",
+      "position": {
+        "x": 100,
+        "y": 6100
+      },
+      "data": {
+        "moduleId": "kafka-schema-registry",
+        "category": "streaming"
+      }
+    },
+    {
+      "id": "kafka-connect",
+      "position": {
+        "x": 450,
+        "y": 6100
+      },
+      "data": {
+        "moduleId": "kafka-connect",
+        "category": "streaming"
+      }
+    },
+    {
+      "id": "aws-glue",
+      "position": {
+        "x": 800,
+        "y": 6100
+      },
+      "data": {
+        "moduleId": "aws-glue",
+        "category": "cloud"
+      }
+    },
+    {
+      "id": "aws-athena",
+      "position": {
+        "x": 1150,
+        "y": 6100
+      },
+      "data": {
+        "moduleId": "aws-athena",
+        "category": "cloud"
+      }
+    },
+    {
+      "id": "aws-lambda",
+      "position": {
+        "x": 1150,
+        "y": 6300
+      },
+      "data": {
+        "moduleId": "aws-lambda",
+        "category": "cloud"
+      }
+    },
+    {
+      "id": "aws-emr",
+      "position": {
+        "x": 800,
+        "y": 6300
+      },
+      "data": {
+        "moduleId": "aws-emr",
+        "category": "cloud"
+      }
+    },
+    {
+      "id": "docker-compose",
+      "position": {
+        "x": 450,
+        "y": 6300
+      },
+      "data": {
+        "moduleId": "docker-compose",
+        "category": "devops"
+      }
+    },
+    {
+      "id": "project-python-etl",
+      "position": {
+        "x": 100,
+        "y": 6300
+      },
+      "data": {
+        "moduleId": "project-python-etl",
+        "category": "projects"
+      }
+    },
+    {
+      "id": "project-spark-analytics",
+      "position": {
+        "x": 100,
+        "y": 6500
+      },
+      "data": {
+        "moduleId": "project-spark-analytics",
+        "category": "projects"
+      }
+    },
+    {
+      "id": "project-e2e",
+      "position": {
+        "x": 450,
+        "y": 6500
+      },
+      "data": {
+        "moduleId": "project-e2e",
+        "category": "projects"
+      }
+    },
+    {
+      "id": "sys-design-capacity",
+      "position": {
+        "x": 800,
+        "y": 6500
+      },
+      "data": {
+        "moduleId": "sys-design-capacity",
+        "category": "system-design"
+      }
+    },
+    {
+      "id": "sys-design-batch",
+      "position": {
+        "x": 1150,
+        "y": 6500
+      },
+      "data": {
+        "moduleId": "sys-design-batch",
+        "category": "system-design"
+      }
+    },
+    {
+      "id": "sys-design-streaming",
+      "position": {
+        "x": 1150,
+        "y": 6700
+      },
+      "data": {
+        "moduleId": "sys-design-streaming",
+        "category": "system-design"
+      }
+    },
+    {
+      "id": "interview-spark",
+      "position": {
+        "x": 800,
+        "y": 6700
+      },
+      "data": {
+        "moduleId": "interview-spark",
+        "category": "interview"
+      }
+    },
+    {
+      "id": "interview-resume",
+      "position": {
+        "x": 450,
+        "y": 6700
+      },
+      "data": {
+        "moduleId": "interview-resume",
+        "category": "interview"
+      }
+    },
+    {
+      "id": "interview-mock",
+      "position": {
+        "x": 100,
+        "y": 6700
+      },
+      "data": {
+        "moduleId": "interview-mock",
+        "category": "interview"
+      }
     }
   ],
   "edges": [
@@ -1212,6 +1872,306 @@
       "id": "e-python-interview-behavioral-interview",
       "source": "python-interview",
       "target": "behavioral-interview"
+    },
+    {
+      "id": "e-behavioral-interview-idempotency",
+      "source": "behavioral-interview",
+      "target": "idempotency"
+    },
+    {
+      "id": "e-idempotency-schema-evolution",
+      "source": "idempotency",
+      "target": "schema-evolution"
+    },
+    {
+      "id": "e-schema-evolution-data-lineage",
+      "source": "schema-evolution",
+      "target": "data-lineage"
+    },
+    {
+      "id": "e-data-lineage-data-observability",
+      "source": "data-lineage",
+      "target": "data-observability"
+    },
+    {
+      "id": "e-data-observability-cdc",
+      "source": "data-observability",
+      "target": "cdc"
+    },
+    {
+      "id": "e-cdc-lambda-arch",
+      "source": "cdc",
+      "target": "lambda-arch"
+    },
+    {
+      "id": "e-lambda-arch-kappa-arch",
+      "source": "lambda-arch",
+      "target": "kappa-arch"
+    },
+    {
+      "id": "e-kappa-arch-data-catalog",
+      "source": "kappa-arch",
+      "target": "data-catalog"
+    },
+    {
+      "id": "e-data-catalog-replication",
+      "source": "data-catalog",
+      "target": "replication"
+    },
+    {
+      "id": "e-replication-cap-theorem",
+      "source": "replication",
+      "target": "cap-theorem"
+    },
+    {
+      "id": "e-cap-theorem-consistency-models",
+      "source": "cap-theorem",
+      "target": "consistency-models"
+    },
+    {
+      "id": "e-consistency-models-data-locality",
+      "source": "consistency-models",
+      "target": "data-locality"
+    },
+    {
+      "id": "e-data-locality-spark-datasets",
+      "source": "data-locality",
+      "target": "spark-datasets"
+    },
+    {
+      "id": "e-spark-datasets-lazy-evaluation",
+      "source": "spark-datasets",
+      "target": "lazy-evaluation"
+    },
+    {
+      "id": "e-lazy-evaluation-tungsten",
+      "source": "lazy-evaluation",
+      "target": "tungsten"
+    },
+    {
+      "id": "e-tungsten-aqe",
+      "source": "tungsten",
+      "target": "aqe"
+    },
+    {
+      "id": "e-aqe-spark-window-functions",
+      "source": "aqe",
+      "target": "spark-window-functions"
+    },
+    {
+      "id": "e-spark-window-functions-spark-structured-streaming",
+      "source": "spark-window-functions",
+      "target": "spark-structured-streaming"
+    },
+    {
+      "id": "e-spark-structured-streaming-spark-ui",
+      "source": "spark-structured-streaming",
+      "target": "spark-ui"
+    },
+    {
+      "id": "e-spark-ui-spark-partitioning",
+      "source": "spark-ui",
+      "target": "spark-partitioning"
+    },
+    {
+      "id": "e-spark-partitioning-db-notebooks",
+      "source": "spark-partitioning",
+      "target": "db-notebooks"
+    },
+    {
+      "id": "e-db-notebooks-db-clusters",
+      "source": "db-notebooks",
+      "target": "db-clusters"
+    },
+    {
+      "id": "e-db-clusters-db-jobs",
+      "source": "db-clusters",
+      "target": "db-jobs"
+    },
+    {
+      "id": "e-db-jobs-db-sql",
+      "source": "db-jobs",
+      "target": "db-sql"
+    },
+    {
+      "id": "e-db-sql-db-photon",
+      "source": "db-sql",
+      "target": "db-photon"
+    },
+    {
+      "id": "e-db-photon-db-cost",
+      "source": "db-photon",
+      "target": "db-cost"
+    },
+    {
+      "id": "e-db-cost-denormalization",
+      "source": "db-cost",
+      "target": "denormalization"
+    },
+    {
+      "id": "e-denormalization-snowflake-schema",
+      "source": "denormalization",
+      "target": "snowflake-schema"
+    },
+    {
+      "id": "e-snowflake-schema-fact-tables",
+      "source": "snowflake-schema",
+      "target": "fact-tables"
+    },
+    {
+      "id": "e-fact-tables-grain",
+      "source": "fact-tables",
+      "target": "grain"
+    },
+    {
+      "id": "e-grain-kimball",
+      "source": "grain",
+      "target": "kimball"
+    },
+    {
+      "id": "e-kimball-data-vault",
+      "source": "kimball",
+      "target": "data-vault"
+    },
+    {
+      "id": "e-data-vault-dbt-seeds",
+      "source": "data-vault",
+      "target": "dbt-seeds"
+    },
+    {
+      "id": "e-dbt-seeds-dbt-sources",
+      "source": "dbt-seeds",
+      "target": "dbt-sources"
+    },
+    {
+      "id": "e-dbt-sources-dbt-snapshots",
+      "source": "dbt-sources",
+      "target": "dbt-snapshots"
+    },
+    {
+      "id": "e-dbt-snapshots-dbt-incremental",
+      "source": "dbt-snapshots",
+      "target": "dbt-incremental"
+    },
+    {
+      "id": "e-dbt-incremental-dbt-best-practices",
+      "source": "dbt-incremental",
+      "target": "dbt-best-practices"
+    },
+    {
+      "id": "e-dbt-best-practices-airflow-hooks",
+      "source": "dbt-best-practices",
+      "target": "airflow-hooks"
+    },
+    {
+      "id": "e-airflow-hooks-airflow-taskflow",
+      "source": "airflow-hooks",
+      "target": "airflow-taskflow"
+    },
+    {
+      "id": "e-airflow-taskflow-airflow-xcom",
+      "source": "airflow-taskflow",
+      "target": "airflow-xcom"
+    },
+    {
+      "id": "e-airflow-xcom-airflow-prod-best-practices",
+      "source": "airflow-xcom",
+      "target": "airflow-prod-best-practices"
+    },
+    {
+      "id": "e-airflow-prod-best-practices-kafka-topics",
+      "source": "airflow-prod-best-practices",
+      "target": "kafka-topics"
+    },
+    {
+      "id": "e-kafka-topics-kafka-producer",
+      "source": "kafka-topics",
+      "target": "kafka-producer"
+    },
+    {
+      "id": "e-kafka-producer-kafka-consumer",
+      "source": "kafka-producer",
+      "target": "kafka-consumer"
+    },
+    {
+      "id": "e-kafka-consumer-kafka-schema-registry",
+      "source": "kafka-consumer",
+      "target": "kafka-schema-registry"
+    },
+    {
+      "id": "e-kafka-schema-registry-kafka-connect",
+      "source": "kafka-schema-registry",
+      "target": "kafka-connect"
+    },
+    {
+      "id": "e-kafka-connect-aws-glue",
+      "source": "kafka-connect",
+      "target": "aws-glue"
+    },
+    {
+      "id": "e-aws-glue-aws-athena",
+      "source": "aws-glue",
+      "target": "aws-athena"
+    },
+    {
+      "id": "e-aws-athena-aws-lambda",
+      "source": "aws-athena",
+      "target": "aws-lambda"
+    },
+    {
+      "id": "e-aws-lambda-aws-emr",
+      "source": "aws-lambda",
+      "target": "aws-emr"
+    },
+    {
+      "id": "e-aws-emr-docker-compose",
+      "source": "aws-emr",
+      "target": "docker-compose"
+    },
+    {
+      "id": "e-docker-compose-project-python-etl",
+      "source": "docker-compose",
+      "target": "project-python-etl"
+    },
+    {
+      "id": "e-project-python-etl-project-spark-analytics",
+      "source": "project-python-etl",
+      "target": "project-spark-analytics"
+    },
+    {
+      "id": "e-project-spark-analytics-project-e2e",
+      "source": "project-spark-analytics",
+      "target": "project-e2e"
+    },
+    {
+      "id": "e-project-e2e-sys-design-capacity",
+      "source": "project-e2e",
+      "target": "sys-design-capacity"
+    },
+    {
+      "id": "e-sys-design-capacity-sys-design-batch",
+      "source": "sys-design-capacity",
+      "target": "sys-design-batch"
+    },
+    {
+      "id": "e-sys-design-batch-sys-design-streaming",
+      "source": "sys-design-batch",
+      "target": "sys-design-streaming"
+    },
+    {
+      "id": "e-sys-design-streaming-interview-spark",
+      "source": "sys-design-streaming",
+      "target": "interview-spark"
+    },
+    {
+      "id": "e-interview-spark-interview-resume",
+      "source": "interview-spark",
+      "target": "interview-resume"
+    },
+    {
+      "id": "e-interview-resume-interview-mock",
+      "source": "interview-resume",
+      "target": "interview-mock"
     }
   ]
 }

@@ -5022,5 +5022,3550 @@
       }
     ],
     "summary": "Use the STAR method (Situation, Task, Action, Result) to structure your behavioral answers. Focus heavily on the 'Action' and use metrics for the 'Result'."
+  },
+  {
+    "id": "idempotency",
+    "title": "Idempotency in Data Pipelines",
+    "phase": "concepts",
+    "phaseLabel": "Modern DE Concepts",
+    "description": "Understand why running a pipeline twice should produce the same result — and how to design for it.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 4,
+    "careerLevel": "junior",
+    "interviewImportance": 4,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Deeply — asked in every system design interview",
+    "prerequisites": [
+      "data-pipeline"
+    ],
+    "learningObjectives": [
+      "Define idempotency",
+      "Design idempotent writes using MERGE/UPSERT",
+      "Understand exactly-once vs at-least-once semantics"
+    ],
+    "problemItSolves": "If your Airflow DAG fails halfway and retries, it might insert the same 1M rows twice. Without idempotency, your data warehouse has duplicates and your reports are wrong.",
+    "whyItExists": "Failures are inevitable in distributed systems. Networks drop, servers crash, jobs timeout. Idempotency ensures that retrying a failed job does not corrupt data.",
+    "realWorldUsage": "Every production pipeline at Netflix, Uber, and Spotify uses idempotent writes. The standard pattern is MERGE (upsert) instead of INSERT.",
+    "theory": "## Idempotency\n\n### Definition\nAn operation is **idempotent** if running it once produces the same result as running it N times.\n\n### Why It Matters\n```\nRun 1: INSERT 1000 rows → Table has 1000 rows ✓\nRun 2: INSERT 1000 rows → Table has 2000 rows ✗ (DUPLICATES!)\n```\n\n### How to Achieve It\n1. **MERGE/UPSERT**: Instead of INSERT, use `MERGE INTO target USING source ON key WHEN MATCHED THEN UPDATE WHEN NOT MATCHED THEN INSERT`.\n2. **Delete-then-Insert**: Delete the partition first, then insert. `DELETE FROM table WHERE date = '2024-01-01'; INSERT INTO table SELECT * FROM staging WHERE date = '2024-01-01';`\n3. **Overwrite Partition**: In Spark: `df.write.mode('overwrite').partitionBy('date').saveAsTable(...)` overwrites only the affected partition.\n\n### Exactly-Once vs At-Least-Once\n- **At-Least-Once**: The message/event is processed at least once (may have duplicates). Kafka default.\n- **Exactly-Once**: The message is processed exactly once. Requires idempotent consumers + transactional writes.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Rewrite an INSERT-based pipeline to use MERGE"
+    ],
+    "nextTopics": [
+      "schema-evolution"
+    ],
+    "previousTopics": [
+      "data-pipeline"
+    ],
+    "commonMistakes": [
+      "Using INSERT instead of MERGE in retry-able pipelines",
+      "Assuming cloud services guarantee exactly-once delivery (most don't)"
+    ],
+    "interviewQuestions": [
+      "What is idempotency?",
+      "How do you make a Spark write idempotent?",
+      "What is the difference between exactly-once and at-least-once?"
+    ],
+    "flashcards": [
+      {
+        "front": "What does idempotent mean?",
+        "back": "An operation that produces the same result whether executed once or multiple times. Example: MERGE is idempotent, INSERT is not."
+      }
+    ],
+    "summary": "Idempotency ensures running a pipeline multiple times produces the same result. Achieve it using MERGE/UPSERT or partition-level overwrites."
+  },
+  {
+    "id": "schema-evolution",
+    "title": "Schema Evolution",
+    "phase": "concepts",
+    "phaseLabel": "Modern DE Concepts",
+    "description": "Learn how to safely change your data schema (add/remove/rename columns) without breaking downstream consumers.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "junior",
+    "interviewImportance": 3,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Well — critical for production lakehouse work",
+    "prerequisites": [
+      "data-pipeline",
+      "parquet"
+    ],
+    "learningObjectives": [
+      "Understand backward and forward compatibility",
+      "Handle schema changes in Parquet/Avro",
+      "Use Delta Lake schema evolution features"
+    ],
+    "problemItSolves": "Your upstream team adds a new column to their API response. If your pipeline is rigid, it crashes. If your storage format doesn't support evolution, you have to rewrite all historical data.",
+    "whyItExists": "Business requirements change constantly. Schemas must evolve without requiring expensive full-table rewrites or breaking dashboards.",
+    "realWorldUsage": "Delta Lake's `mergeSchema` option lets Spark automatically add new columns to existing tables. Avro's schema registry ensures producers and consumers agree on the schema.",
+    "theory": "## Schema Evolution\n\n### Compatibility Types\n- **Backward Compatible**: New schema can read OLD data. (Adding a column with a default value).\n- **Forward Compatible**: Old schema can read NEW data. (Adding an optional column).\n- **Full Compatible**: Both backward and forward. The gold standard.\n\n### Breaking Changes\n- Removing a required column.\n- Changing a column's data type (e.g., INT → STRING).\n- Renaming a column (old code still references the old name).\n\n### Delta Lake Schema Evolution\n```python\ndf.write.format('delta') \\\n  .option('mergeSchema', 'true') \\\n  .mode('append') \\\n  .save('/data/table')\n```\nThis automatically adds any new columns in the DataFrame to the Delta table.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Add a new column to a Delta table using mergeSchema"
+    ],
+    "nextTopics": [
+      "data-lineage"
+    ],
+    "previousTopics": [
+      "idempotency"
+    ],
+    "commonMistakes": [
+      "Removing columns without checking downstream dependencies",
+      "Not using a schema registry with Kafka/Avro"
+    ],
+    "interviewQuestions": [
+      "What is schema evolution?",
+      "Backward vs forward compatibility?",
+      "How does Delta Lake handle schema changes?"
+    ],
+    "flashcards": [
+      {
+        "front": "Backward vs Forward Compatibility?",
+        "back": "Backward: New code reads old data. Forward: Old code reads new data. Full: Both directions work."
+      }
+    ],
+    "summary": "Schema evolution allows safe column additions/modifications without breaking pipelines. Use Delta Lake mergeSchema or Avro Schema Registry."
+  },
+  {
+    "id": "data-lineage",
+    "title": "Data Lineage",
+    "phase": "concepts",
+    "phaseLabel": "Modern DE Concepts",
+    "description": "Track where data comes from, how it transforms, and where it ends up.",
+    "difficulty": "intermediate",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 2,
+    "careerLevel": "mid",
+    "interviewImportance": 2,
+    "productionImportance": 4,
+    "interviewRecommendation": "Know Concept — important for governance discussions",
+    "prerequisites": [
+      "data-pipeline",
+      "data-governance"
+    ],
+    "learningObjectives": [
+      "Define data lineage",
+      "Understand column-level vs table-level lineage",
+      "Know tools like OpenLineage, DataHub, Atlan"
+    ],
+    "problemItSolves": "A dashboard number looks wrong. Without lineage, you spend hours manually tracing which tables feed into it. With lineage, you click a button and see the full chain: Source API → Bronze → Silver → Gold → Dashboard.",
+    "whyItExists": "Regulatory compliance (GDPR: 'show me where this user's PII lives') and debugging both require knowing the full data journey.",
+    "realWorldUsage": "Companies like Airbnb use DataHub. Databricks Unity Catalog has built-in lineage. OpenLineage is the open-source standard.",
+    "theory": "## Data Lineage\n\n### What Is It?\nA visual or queryable map of data flow:\n```\nPostgres (source) → Airbyte → S3 Bronze → Spark → S3 Silver → dbt → Snowflake Gold → Tableau Dashboard\n```\n\n### Types\n- **Table-Level**: Which tables feed into which tables.\n- **Column-Level**: Which specific columns are derived from which source columns.\n\n### Tools\n| Tool | Type | Notes |\n|------|------|-------|\n| OpenLineage | Open Source Standard | Integrates with Airflow, Spark |\n| DataHub | Open Source Platform | LinkedIn's metadata platform |\n| Atlan | Commercial | Modern data catalog |\n| Unity Catalog | Databricks | Built into Databricks |",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "data-observability"
+    ],
+    "previousTopics": [
+      "data-governance"
+    ],
+    "commonMistakes": [
+      "Only tracking table-level lineage (column-level is much more useful for debugging)"
+    ],
+    "interviewQuestions": [
+      "What is data lineage?",
+      "Table-level vs column-level lineage?",
+      "Name a lineage tool."
+    ],
+    "flashcards": [
+      {
+        "front": "What is Data Lineage?",
+        "back": "A map showing where data comes from, how it's transformed, and where it goes. Enables impact analysis, debugging, and compliance."
+      }
+    ],
+    "summary": "Data lineage tracks the complete journey of data from source to consumption. Critical for debugging, compliance, and impact analysis."
+  },
+  {
+    "id": "data-observability",
+    "title": "Data Observability",
+    "phase": "concepts",
+    "phaseLabel": "Modern DE Concepts",
+    "description": "Monitor the health of your data pipelines: freshness, volume, schema, distribution, and lineage.",
+    "difficulty": "intermediate",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 2,
+    "careerLevel": "mid",
+    "interviewImportance": 2,
+    "productionImportance": 4,
+    "interviewRecommendation": "Know Concept — increasingly asked in mid/senior interviews",
+    "prerequisites": [
+      "data-quality",
+      "data-lineage"
+    ],
+    "learningObjectives": [
+      "Define the 5 pillars of data observability",
+      "Understand proactive vs reactive monitoring",
+      "Know tools like Monte Carlo, Great Expectations, Elementary"
+    ],
+    "problemItSolves": "Your pipeline ran successfully (Airflow shows green), but the data inside is wrong — 90% of records have NULL revenue. Without observability, no one notices until the CFO sees a broken report.",
+    "whyItExists": "Pipeline success ≠ data correctness. You need to monitor the DATA itself, not just the pipeline infrastructure.",
+    "realWorldUsage": "Companies use Monte Carlo or Elementary to set up automated anomaly detection on data freshness, volume, and distributions.",
+    "theory": "## Data Observability\n\n### The 5 Pillars\n1. **Freshness**: Is the data up-to-date? When was the table last updated?\n2. **Volume**: Did the expected number of rows arrive? (Yesterday had 1M, today has 100 — something is wrong).\n3. **Schema**: Did any columns get added, removed, or changed type?\n4. **Distribution**: Are values within expected ranges? (Revenue suddenly negative?).\n5. **Lineage**: Which upstream changes caused this issue?\n\n### Tools\n- **Monte Carlo**: Commercial leader in data observability.\n- **Great Expectations**: Open-source data validation library.\n- **Elementary**: Open-source dbt-native observability.\n- **Soda**: Open-source data quality checks.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "lambda-arch"
+    ],
+    "previousTopics": [
+      "data-lineage"
+    ],
+    "commonMistakes": [
+      "Only monitoring pipeline status (green/red) and not the actual data quality"
+    ],
+    "interviewQuestions": [
+      "What are the 5 pillars of data observability?",
+      "Pipeline success vs data correctness?"
+    ],
+    "flashcards": [
+      {
+        "front": "5 Pillars of Data Observability?",
+        "back": "1. Freshness 2. Volume 3. Schema 4. Distribution 5. Lineage"
+      }
+    ],
+    "summary": "Data observability monitors the data itself (not just pipelines) across 5 pillars: freshness, volume, schema, distribution, and lineage."
+  },
+  {
+    "id": "cdc",
+    "title": "Change Data Capture (CDC)",
+    "phase": "concepts",
+    "phaseLabel": "Modern DE Concepts",
+    "description": "Capture only the rows that changed in a source database, instead of re-extracting the entire table every time.",
+    "difficulty": "intermediate",
+    "estimatedHours": 3,
+    "importance": "must-know",
+    "interviewWeight": 4,
+    "careerLevel": "junior",
+    "interviewImportance": 4,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Deeply — one of the most frequently asked DE concepts",
+    "prerequisites": [
+      "data-pipeline",
+      "batch-vs-streaming"
+    ],
+    "learningObjectives": [
+      "Define CDC and its benefits",
+      "Compare log-based vs query-based CDC",
+      "Understand Debezium + Kafka CDC architecture"
+    ],
+    "problemItSolves": "Your source Postgres table has 500M rows. Extracting ALL 500M rows every night takes 6 hours and costs $200/run. CDC captures only the ~50K rows that changed, reducing the job to 2 minutes.",
+    "whyItExists": "As databases grow, full-table extractions become prohibitively slow and expensive. CDC enables near-real-time data synchronization.",
+    "realWorldUsage": "Debezium reads the Postgres WAL (Write-Ahead Log) and streams every INSERT, UPDATE, DELETE to a Kafka topic. A downstream consumer applies these changes to the data warehouse.",
+    "theory": "## Change Data Capture\n\n### Types of CDC\n1. **Query-Based (Timestamp)**: `SELECT * FROM orders WHERE updated_at > last_run_time`. Simple but misses deletes and has race conditions.\n2. **Log-Based**: Reads the database's transaction log (WAL for Postgres, Binlog for MySQL). Captures ALL changes including deletes. Gold standard.\n3. **Trigger-Based**: Database triggers write changes to a shadow table. Adds overhead to the source DB.\n\n### Log-Based CDC Architecture\n```\nPostgres (WAL) → Debezium → Kafka Topic → Spark/Flink → Delta Lake\n```\n\n### Debezium\nThe open-source standard for log-based CDC. Runs as a Kafka Connect connector. Supports Postgres, MySQL, MongoDB, SQL Server, Oracle.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Set up Debezium with Docker Compose to stream changes from Postgres to a Kafka topic"
+    ],
+    "nextTopics": [
+      "kafka-overview"
+    ],
+    "previousTopics": [
+      "batch-vs-streaming"
+    ],
+    "commonMistakes": [
+      "Using query-based CDC and missing DELETE operations",
+      "Not handling schema changes in the CDC stream"
+    ],
+    "interviewQuestions": [
+      "What is CDC?",
+      "Query-based vs log-based CDC?",
+      "What is Debezium?",
+      "How does log-based CDC work with Postgres?"
+    ],
+    "flashcards": [
+      {
+        "front": "Query-based vs Log-based CDC?",
+        "back": "Query-based: Polls with WHERE updated_at > X. Misses deletes, has race conditions. Log-based: Reads the DB transaction log (WAL/Binlog). Captures all changes including deletes. Preferred."
+      }
+    ],
+    "summary": "CDC captures only changed rows from a source database. Log-based CDC (Debezium) reads the transaction log and is the production standard."
+  },
+  {
+    "id": "lambda-arch",
+    "title": "Lambda Architecture",
+    "phase": "architecture",
+    "phaseLabel": "Modern Data Architecture",
+    "description": "Understand the dual-pipeline architecture that processes data in both batch and real-time simultaneously.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "good-to-know",
+    "interviewWeight": 3,
+    "careerLevel": "junior",
+    "interviewImportance": 3,
+    "productionImportance": 2,
+    "interviewRecommendation": "Know Concept — historical knowledge, being replaced by Kappa/Lakehouse",
+    "prerequisites": [
+      "batch-vs-streaming",
+      "data-warehouse"
+    ],
+    "learningObjectives": [
+      "Understand the 3 layers of Lambda Architecture",
+      "Identify its problems (code duplication)",
+      "Know when Lambda is still used"
+    ],
+    "problemItSolves": "You need both accurate historical analytics (batch) AND real-time dashboards (streaming). Lambda runs both pipelines and merges their results.",
+    "whyItExists": "Created by Nathan Marz (creator of Apache Storm) in 2011. It was the first architecture to combine batch and streaming.",
+    "realWorldUsage": "While modern architectures (Kappa, Lakehouse) are preferred, many legacy systems at banks and telecoms still use Lambda.",
+    "theory": "## Lambda Architecture\n\n### The 3 Layers\n1. **Batch Layer**: Processes ALL historical data periodically (e.g., nightly Spark job). Produces the 'batch view' — accurate but stale.\n2. **Speed Layer**: Processes real-time data as it arrives (e.g., Kafka + Flink). Produces the 'real-time view' — fresh but approximate.\n3. **Serving Layer**: Merges the batch view and real-time view to answer queries.\n\n### The Problem\n**Code Duplication**: You must write the same business logic TWICE — once in Spark (batch) and once in Flink (streaming). Maintaining two codebases for the same logic is a nightmare.\n\n### Why It's Being Replaced\nDelta Lake + Structured Streaming allows a single codebase to handle both batch and streaming (the Lakehouse pattern).",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "kappa-arch"
+    ],
+    "previousTopics": [
+      "lakehouse-arch"
+    ],
+    "commonMistakes": [
+      "Choosing Lambda for a new project (use Lakehouse or Kappa instead)"
+    ],
+    "interviewQuestions": [
+      "What are the 3 layers of Lambda Architecture?",
+      "What is the main problem with Lambda?",
+      "Lambda vs Kappa?"
+    ],
+    "flashcards": [
+      {
+        "front": "Main problem with Lambda Architecture?",
+        "back": "Code duplication. You must write the same business logic twice: once for the batch layer (Spark) and once for the speed layer (Flink)."
+      }
+    ],
+    "summary": "Lambda Architecture uses parallel batch + streaming pipelines merged by a serving layer. Being replaced by Lakehouse/Kappa due to code duplication."
+  },
+  {
+    "id": "kappa-arch",
+    "title": "Kappa Architecture",
+    "phase": "architecture",
+    "phaseLabel": "Modern Data Architecture",
+    "description": "A streaming-only architecture that eliminates the batch layer entirely.",
+    "difficulty": "intermediate",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 2,
+    "careerLevel": "mid",
+    "interviewImportance": 2,
+    "productionImportance": 2,
+    "interviewRecommendation": "Know Concept — often compared with Lambda in interviews",
+    "prerequisites": [
+      "lambda-arch"
+    ],
+    "learningObjectives": [
+      "Understand the Kappa simplification",
+      "Know when streaming-only works",
+      "Identify limitations of pure Kappa"
+    ],
+    "problemItSolves": "Lambda's code duplication is unsustainable. Kappa says: 'If you can process everything as a stream, why maintain a separate batch system?'",
+    "whyItExists": "Proposed by Jay Kreps (co-creator of Kafka) in 2014 as a response to Lambda's complexity.",
+    "realWorldUsage": "Companies with primarily real-time use cases (ad tech, fraud detection) sometimes adopt pure Kappa. Most companies use a hybrid Lakehouse approach.",
+    "theory": "## Kappa Architecture\n\n### Core Idea\nTreat everything as a stream. If you need to reprocess historical data, replay the Kafka topic from the beginning.\n\n### How Reprocessing Works\n1. Keep all raw data in Kafka with long retention (or infinite retention with tiered storage).\n2. When business logic changes, deploy a new streaming job that reads from offset 0.\n3. The new job reprocesses all historical events with the new logic.\n\n### Limitations\n- Reprocessing from offset 0 can be very slow for large datasets.\n- Complex analytical queries (aggregations over years of data) are still better suited for batch engines.\n- Not practical if Kafka retention is limited.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "data-catalog"
+    ],
+    "previousTopics": [
+      "lambda-arch"
+    ],
+    "commonMistakes": [
+      "Trying to use pure Kappa when you have complex historical aggregation requirements"
+    ],
+    "interviewQuestions": [
+      "What is Kappa Architecture?",
+      "Lambda vs Kappa?",
+      "When would you NOT use Kappa?"
+    ],
+    "flashcards": [
+      {
+        "front": "Lambda vs Kappa Architecture?",
+        "back": "Lambda: Dual pipeline (batch + streaming). Kappa: Streaming only. Kappa is simpler but doesn't handle complex historical analytics well."
+      }
+    ],
+    "summary": "Kappa Architecture processes everything as a stream, eliminating Lambda's code duplication. Limited for complex historical analytics."
+  },
+  {
+    "id": "data-catalog",
+    "title": "Data Catalog",
+    "phase": "architecture",
+    "phaseLabel": "Modern Data Architecture",
+    "description": "A searchable inventory of all datasets in your organization — the 'Google for your data'.",
+    "difficulty": "beginner",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 1,
+    "careerLevel": "mid",
+    "interviewImportance": 1,
+    "productionImportance": 3,
+    "interviewRecommendation": "Know Concept — briefly mentioned in governance discussions",
+    "prerequisites": [
+      "data-governance",
+      "metadata"
+    ],
+    "learningObjectives": [
+      "Define a data catalog",
+      "Know popular catalog tools (DataHub, Atlan, Unity Catalog)",
+      "Understand metadata management"
+    ],
+    "problemItSolves": "An analyst asks: 'Do we have customer churn data?' Without a catalog, they email 5 teams and wait 3 days. With a catalog, they search and find the table in seconds.",
+    "whyItExists": "As companies accumulate hundreds of tables across multiple databases and lakes, discovering and understanding data becomes impossible without a centralized catalog.",
+    "realWorldUsage": "Databricks Unity Catalog, AWS Glue Catalog, DataHub (open source), and Atlan are the most popular options.",
+    "theory": "## Data Catalog\n\n### What It Stores\n- **Technical Metadata**: Table names, column types, partitions, locations.\n- **Business Metadata**: Descriptions, owners, tags, classifications.\n- **Operational Metadata**: Last updated, row counts, freshness.\n- **Lineage**: Where data comes from and where it goes.\n\n### Popular Tools\n| Tool | Type | Notes |\n|------|------|-------|\n| Unity Catalog | Databricks Native | Governance + catalog |\n| AWS Glue Catalog | AWS Native | Used with Athena, EMR |\n| DataHub | Open Source | LinkedIn's metadata platform |\n| Atlan | Commercial | Modern, Notion-like UI |",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "csv-json"
+    ],
+    "previousTopics": [
+      "data-governance"
+    ],
+    "commonMistakes": [
+      "Building a data catalog but not enforcing data owners to maintain descriptions"
+    ],
+    "interviewQuestions": [
+      "What is a data catalog?",
+      "Why do organizations need one?"
+    ],
+    "flashcards": [
+      {
+        "front": "What is a Data Catalog?",
+        "back": "A searchable inventory of all datasets in an organization, storing technical, business, and operational metadata. Think 'Google for your company's data'."
+      }
+    ],
+    "summary": "A data catalog is a searchable inventory of all datasets, enabling data discovery across the organization."
+  },
+  {
+    "id": "replication",
+    "title": "Replication & Fault Tolerance",
+    "phase": "distributed",
+    "phaseLabel": "Distributed Computing",
+    "description": "Understand how distributed systems copy data across machines to survive hardware failures.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "junior",
+    "interviewImportance": 3,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Well — fundamental distributed systems knowledge",
+    "prerequisites": [
+      "horizontal-scaling"
+    ],
+    "learningObjectives": [
+      "Define replication factor",
+      "Understand leader-follower replication",
+      "Explain how Kafka and HDFS replicate data"
+    ],
+    "problemItSolves": "If your data is stored on a single server and that server's hard drive fails, your data is gone. Replication copies the data to 2+ other servers so failures don't cause data loss.",
+    "whyItExists": "Hardware fails constantly at scale. Google found that in a cluster of 10,000 servers, 2-3 servers die EVERY DAY.",
+    "realWorldUsage": "Kafka default replication factor is 3. HDFS default is also 3. This means every piece of data exists on 3 different machines.",
+    "theory": "## Replication\n\n### Replication Factor\nThe number of copies of each piece of data. RF=3 means 3 copies on 3 different machines.\n\n### Leader-Follower Model (Kafka)\n- One replica is the **Leader**: handles all reads and writes.\n- Other replicas are **Followers**: passively replicate from the leader.\n- If the leader dies, a follower is promoted to the new leader.\n\n### HDFS Block Replication\n- A 1GB file is split into 128MB blocks.\n- Each block is replicated 3 times across different racks.\n- If a DataNode fails, the NameNode automatically re-replicates the lost blocks.\n\n### Trade-off\nHigher replication = more fault tolerance but more storage cost and write latency.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "cap-theorem"
+    ],
+    "previousTopics": [
+      "horizontal-scaling"
+    ],
+    "commonMistakes": [
+      "Setting replication factor to 1 in production (no fault tolerance)"
+    ],
+    "interviewQuestions": [
+      "What is replication factor?",
+      "How does Kafka handle leader failure?",
+      "What is the default HDFS replication factor?"
+    ],
+    "flashcards": [
+      {
+        "front": "What happens when a Kafka leader replica dies?",
+        "back": "One of the in-sync follower replicas is automatically elected as the new leader. Producers and consumers are redirected. This is why RF >= 3 is recommended."
+      }
+    ],
+    "summary": "Replication copies data across multiple machines for fault tolerance. Standard replication factor is 3 (Kafka, HDFS)."
+  },
+  {
+    "id": "cap-theorem",
+    "title": "CAP Theorem (Overview)",
+    "phase": "distributed",
+    "phaseLabel": "Distributed Computing",
+    "description": "Understand the fundamental trade-off in distributed systems: Consistency, Availability, and Partition Tolerance.",
+    "difficulty": "advanced",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 2,
+    "careerLevel": "mid",
+    "interviewImportance": 2,
+    "productionImportance": 2,
+    "interviewRecommendation": "Know Concept — occasionally asked in system design interviews",
+    "prerequisites": [
+      "replication"
+    ],
+    "learningObjectives": [
+      "State the CAP theorem",
+      "Explain why you can only choose 2 of 3",
+      "Classify Kafka, Cassandra, and Postgres as CP or AP"
+    ],
+    "problemItSolves": "When designing a distributed system, you must make a conscious choice: do you prioritize always being available (AP) or always being consistent (CP)? You cannot have both during a network partition.",
+    "whyItExists": "Proven by Eric Brewer in 2000. It formalized what distributed systems engineers had observed in practice.",
+    "realWorldUsage": "Kafka is CP (consistent — during a leader election, the partition is briefly unavailable). Cassandra is AP (available — it may serve slightly stale data during partitions).",
+    "theory": "## CAP Theorem\n\n### The 3 Properties\n- **Consistency**: Every read receives the most recent write.\n- **Availability**: Every request receives a response (even if it's stale).\n- **Partition Tolerance**: The system continues to operate despite network partitions.\n\n### The Rule\nIn the presence of a network partition, you must choose either Consistency or Availability. You cannot have both.\n\n### Examples\n| System | Type | Behavior During Partition |\n|--------|------|---------------------------|\n| Postgres (single node) | CA | No partition tolerance |\n| Kafka | CP | Brief unavailability during leader election |\n| Cassandra | AP | Serves potentially stale data |\n| DynamoDB | AP | Eventually consistent reads by default |",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "consistency-models"
+    ],
+    "previousTopics": [
+      "replication"
+    ],
+    "commonMistakes": [
+      "Thinking you can have all 3 (C, A, and P) simultaneously"
+    ],
+    "interviewQuestions": [
+      "What is the CAP theorem?",
+      "Is Kafka CP or AP?",
+      "Why can't you have all 3?"
+    ],
+    "flashcards": [
+      {
+        "front": "CAP Theorem?",
+        "back": "In a distributed system experiencing a network partition, you must choose either Consistency (every read gets the latest write) or Availability (every request gets a response). You cannot have both."
+      }
+    ],
+    "summary": "CAP theorem: during network partitions, distributed systems must choose between consistency and availability. Kafka is CP, Cassandra is AP."
+  },
+  {
+    "id": "consistency-models",
+    "title": "Consistency Models",
+    "phase": "distributed",
+    "phaseLabel": "Distributed Computing",
+    "description": "Understand strong consistency, eventual consistency, and everything in between.",
+    "difficulty": "advanced",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 2,
+    "careerLevel": "senior",
+    "interviewImportance": 2,
+    "productionImportance": 3,
+    "interviewRecommendation": "Know Concept — relevant for senior system design discussions",
+    "prerequisites": [
+      "cap-theorem"
+    ],
+    "learningObjectives": [
+      "Define strong vs eventual consistency",
+      "Understand read-after-write consistency",
+      "Know which databases use which model"
+    ],
+    "problemItSolves": "After writing a record, a user immediately reads it back and gets the OLD value. This is because the system uses eventual consistency and the write hasn't propagated yet.",
+    "whyItExists": "Different applications have different tolerance for stale reads. A bank transfer MUST be strongly consistent. A social media 'like' count can be eventually consistent.",
+    "realWorldUsage": "DynamoDB defaults to eventually consistent reads (cheaper, faster) but offers strongly consistent reads at higher cost.",
+    "theory": "## Consistency Models\n\n### Strong Consistency\nEvery read always returns the most recent write. Like a single-server database.\n- **Pros**: Simplest mental model.\n- **Cons**: Higher latency, lower availability.\n- **Examples**: Postgres, traditional RDBMS.\n\n### Eventual Consistency\nReads may return stale data, but will eventually converge to the latest write.\n- **Pros**: Higher availability, lower latency.\n- **Cons**: Application must handle stale reads.\n- **Examples**: DynamoDB (default), Cassandra, S3.\n\n### Read-After-Write Consistency\nA user always sees their OWN writes immediately. Other users may see stale data.\n- **Example**: S3 provides read-after-write consistency for new objects.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "data-locality"
+    ],
+    "previousTopics": [
+      "cap-theorem"
+    ],
+    "commonMistakes": [
+      "Assuming S3 is strongly consistent for all operations (it is now, since Dec 2020, but many resources still say otherwise)"
+    ],
+    "interviewQuestions": [
+      "Strong vs eventual consistency?",
+      "When would you choose eventual consistency?"
+    ],
+    "flashcards": [
+      {
+        "front": "Strong vs Eventual Consistency?",
+        "back": "Strong: Every read returns the latest write (higher latency). Eventual: Reads may be stale but converge over time (lower latency, higher availability). Choose based on business requirements."
+      }
+    ],
+    "summary": "Strong consistency guarantees latest reads but has higher latency. Eventual consistency trades freshness for speed and availability."
+  },
+  {
+    "id": "data-locality",
+    "title": "Data Locality",
+    "phase": "distributed",
+    "phaseLabel": "Distributed Computing",
+    "description": "The principle of moving computation to where the data lives, rather than moving data to where the computation runs.",
+    "difficulty": "intermediate",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 2,
+    "careerLevel": "junior",
+    "interviewImportance": 2,
+    "productionImportance": 4,
+    "interviewRecommendation": "Know Concept — explains why Spark runs on the same cluster as HDFS",
+    "prerequisites": [
+      "driver-executors",
+      "shuffling"
+    ],
+    "learningObjectives": [
+      "Define data locality",
+      "Understand the network bottleneck",
+      "Explain how Spark optimizes for locality"
+    ],
+    "problemItSolves": "Moving 1TB of data over the network takes minutes. Running the code on the machine where the 1TB already lives takes seconds. Data locality eliminates the network bottleneck.",
+    "whyItExists": "Networks are 10-100x slower than local disk reads. In large-scale processing, network I/O is the #1 bottleneck.",
+    "realWorldUsage": "Spark's task scheduler tries to assign tasks to executors that have the data on their local HDFS DataNode (PROCESS_LOCAL > NODE_LOCAL > RACK_LOCAL > ANY).",
+    "theory": "## Data Locality\n\n### The Problem\n- Local disk read: ~500 MB/s\n- Network transfer: ~100 MB/s (shared with other jobs)\n- Moving 1TB over network: ~170 minutes\n- Reading 1TB from local disk: ~34 minutes\n\n### Spark Locality Levels\n| Level | Description | Speed |\n|-------|-------------|-------|\n| PROCESS_LOCAL | Data is in the same JVM (cached) | Fastest |\n| NODE_LOCAL | Data is on the same machine's disk | Fast |\n| RACK_LOCAL | Data is on a different machine in the same rack | Medium |\n| ANY | Data is on a different rack | Slowest |",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "why-spark"
+    ],
+    "previousTopics": [
+      "shuffling"
+    ],
+    "commonMistakes": [
+      "Ignoring data locality when configuring Spark clusters (putting Spark executors in a different AZ from the HDFS data)"
+    ],
+    "interviewQuestions": [
+      "What is data locality?",
+      "What are Spark's locality levels?"
+    ],
+    "flashcards": [
+      {
+        "front": "What is Data Locality?",
+        "back": "Moving computation to where the data lives, rather than moving data over the network. Spark's task scheduler optimizes for this: PROCESS_LOCAL > NODE_LOCAL > RACK_LOCAL > ANY."
+      }
+    ],
+    "summary": "Data locality runs computation where the data lives to avoid network overhead. Spark optimizes task assignment for maximum locality."
+  },
+  {
+    "id": "spark-datasets",
+    "title": "Spark Datasets (Typed API)",
+    "phase": "spark",
+    "phaseLabel": "Apache Spark",
+    "description": "The type-safe API that combines the best of RDDs (compile-time safety) and DataFrames (Catalyst optimization).",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "good-to-know",
+    "interviewWeight": 3,
+    "careerLevel": "junior",
+    "interviewImportance": 3,
+    "productionImportance": 3,
+    "interviewRecommendation": "Know Concept — more relevant for Scala shops",
+    "prerequisites": [
+      "spark-dataframes"
+    ],
+    "learningObjectives": [
+      "Understand Dataset[T] vs DataFrame",
+      "Know when to use Datasets vs DataFrames",
+      "Convert between DataFrames and Datasets"
+    ],
+    "problemItSolves": "DataFrames are untyped — you reference columns as strings ('col_name'). If you misspell a column name, you only find out at RUNTIME. Datasets catch these errors at COMPILE TIME.",
+    "whyItExists": "DataFrames traded type safety for optimization. Datasets bring back type safety while keeping Catalyst optimization.",
+    "realWorldUsage": "Datasets are primarily used in Scala. In PySpark (Python), there is no Dataset API — only DataFrames. Most DE interviews focus on DataFrames.",
+    "theory": "## Spark Datasets\n\n### DataFrame vs Dataset\n- **DataFrame** = `Dataset[Row]` — untyped rows, column access via strings.\n- **Dataset[T]** = Typed rows, access via case class fields.\n\n### Scala Example\n```scala\ncase class Order(id: Long, product: String, amount: Double)\nval orders: Dataset[Order] = spark.read.json(\"orders.json\").as[Order]\norders.filter(_.amount > 100.0) // Compile-time type checking!\n```\n\n### When to Use\n- **Scala projects** needing compile-time safety → Dataset\n- **Python (PySpark)** → DataFrame (Datasets don't exist in Python)\n- **Performance-critical SQL** → DataFrame/SQL (Catalyst optimizes better)",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Convert a DataFrame to a typed Dataset in Scala"
+    ],
+    "nextTopics": [
+      "lazy-evaluation"
+    ],
+    "previousTopics": [
+      "spark-dataframes"
+    ],
+    "commonMistakes": [
+      "Trying to use Datasets in PySpark (they don't exist)",
+      "Using Datasets for everything in Scala (DataFrames are often sufficient)"
+    ],
+    "interviewQuestions": [
+      "What is the difference between DataFrame and Dataset?",
+      "When would you use Dataset over DataFrame?",
+      "Do Datasets exist in PySpark?"
+    ],
+    "flashcards": [
+      {
+        "front": "DataFrame vs Dataset?",
+        "back": "DataFrame = Dataset[Row] (untyped). Dataset[T] = typed with case class. Datasets provide compile-time type safety but are Scala-only. In PySpark, only DataFrames exist."
+      }
+    ],
+    "summary": "Datasets provide type-safe transformations in Scala. DataFrames (Dataset[Row]) are preferred in PySpark since Datasets don't exist in Python."
+  },
+  {
+    "id": "lazy-evaluation",
+    "title": "Lazy Evaluation in Spark",
+    "phase": "spark",
+    "phaseLabel": "Apache Spark",
+    "description": "Why Spark doesn't execute your code immediately — and how this enables massive optimization.",
+    "difficulty": "beginner",
+    "estimatedHours": 1,
+    "importance": "must-know",
+    "interviewWeight": 4,
+    "careerLevel": "foundation",
+    "interviewImportance": 4,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Deeply — fundamental concept, asked in every Spark interview",
+    "prerequisites": [
+      "transformations-actions"
+    ],
+    "learningObjectives": [
+      "Define lazy evaluation",
+      "Explain how it enables DAG optimization",
+      "Identify triggers (actions) that force execution"
+    ],
+    "problemItSolves": "If Spark executed every operation immediately, it couldn't optimize the execution plan. Lazy evaluation lets Spark see your ENTIRE pipeline before choosing the optimal execution strategy.",
+    "whyItExists": "By deferring execution, Spark's Catalyst optimizer can rearrange, combine, and eliminate operations before running anything. This often results in 10-100x faster execution.",
+    "realWorldUsage": "Every Spark program uses lazy evaluation implicitly. You chain transformations (.filter().groupBy().agg()) and nothing runs until you call an action (.show(), .write(), .count()).",
+    "theory": "## Lazy Evaluation\n\n### How It Works\n```python\n# These are TRANSFORMATIONS — nothing executes yet\ndf = spark.read.parquet('data.parquet')  # Lazy\ndf2 = df.filter(df.age > 18)            # Lazy\ndf3 = df2.groupBy('country').count()    # Lazy\n\n# This is an ACTION — NOW Spark builds the DAG and executes\ndf3.show()  # Triggers execution!\n```\n\n### Why It's Powerful\n1. **Predicate Pushdown**: Spark pushes `filter(age > 18)` into the Parquet reader, reading only matching rows.\n2. **Column Pruning**: If `show()` only needs 2 columns, Spark skips reading the other 50 columns.\n3. **Operation Fusion**: Multiple map operations are fused into a single pass.\n\n### Actions That Trigger Execution\n| Action | What It Does |\n|--------|-------------|\n| `.show()` | Display first rows |\n| `.count()` | Count rows |\n| `.collect()` | Return all rows to driver |\n| `.write()` | Write to storage |\n| `.first()` | Return first row |",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Write a chain of 5 transformations and verify nothing executes until .show()"
+    ],
+    "nextTopics": [
+      "dag"
+    ],
+    "previousTopics": [
+      "transformations-actions"
+    ],
+    "commonMistakes": [
+      "Calling .collect() on large DataFrames (brings all data to driver, causes OOM)",
+      "Not understanding why print(df.filter(...)) doesn't show results (it's still lazy)"
+    ],
+    "interviewQuestions": [
+      "What is lazy evaluation in Spark?",
+      "Why is lazy evaluation important?",
+      "Name 3 actions and 3 transformations.",
+      "What is predicate pushdown?"
+    ],
+    "flashcards": [
+      {
+        "front": "Transformations vs Actions in Spark?",
+        "back": "Transformations (filter, map, groupBy) are lazy — they build a plan. Actions (show, count, write, collect) trigger execution of the entire plan."
+      }
+    ],
+    "summary": "Lazy evaluation defers execution until an action is called, letting Catalyst optimize the entire pipeline before running anything."
+  },
+  {
+    "id": "tungsten",
+    "title": "Project Tungsten",
+    "phase": "spark",
+    "phaseLabel": "Apache Spark",
+    "description": "Spark's execution engine that bypasses JVM garbage collection with custom memory management and code generation.",
+    "difficulty": "advanced",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 2,
+    "careerLevel": "senior",
+    "interviewImportance": 2,
+    "productionImportance": 4,
+    "interviewRecommendation": "Know Concept — shows deep Spark understanding in senior interviews",
+    "prerequisites": [
+      "dag"
+    ],
+    "learningObjectives": [
+      "Understand off-heap memory management",
+      "Know what whole-stage code generation is",
+      "Explain how Tungsten improves CPU efficiency"
+    ],
+    "problemItSolves": "The JVM's garbage collector causes unpredictable pauses during large-scale data processing. Tungsten manages memory manually (off-heap) to avoid GC pressure.",
+    "whyItExists": "Spark 1.x spent 50% of CPU time on serialization and garbage collection. Tungsten, introduced in Spark 1.4+, reduced this to near-zero.",
+    "realWorldUsage": "Tungsten is automatically used in all modern Spark (2.x+) DataFrame/SQL operations. You don't need to enable it — it's the default engine.",
+    "theory": "## Project Tungsten\n\n### 3 Key Optimizations\n1. **Off-Heap Memory**: Manages memory outside the JVM heap using `sun.misc.Unsafe`. No garbage collection overhead.\n2. **Binary Processing**: Operates directly on binary data (bytes) instead of Java objects. Eliminates serialization cost.\n3. **Whole-Stage Code Generation**: Instead of interpreting a query plan row-by-row, Tungsten generates optimized Java bytecode that processes data in tight loops.\n\n### Impact\n- **Before Tungsten**: 50% CPU time on GC + serialization.\n- **After Tungsten**: Nearly 100% CPU time on actual computation.\n\n### How to Verify\nIn Spark UI, look for `WholeStageCodegen` in the Physical Plan — this means Tungsten code generation is active.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "aqe"
+    ],
+    "previousTopics": [
+      "dag"
+    ],
+    "commonMistakes": [
+      "Thinking Tungsten needs to be manually enabled (it's on by default in Spark 2.x+)"
+    ],
+    "interviewQuestions": [
+      "What is Project Tungsten?",
+      "How does Tungsten improve Spark performance?",
+      "What is whole-stage code generation?"
+    ],
+    "flashcards": [
+      {
+        "front": "What is Project Tungsten?",
+        "back": "Spark's execution engine that manages memory off-heap (no GC), processes binary data directly (no serialization), and generates optimized bytecode (whole-stage codegen)."
+      }
+    ],
+    "summary": "Tungsten eliminates JVM overhead through off-heap memory, binary processing, and whole-stage code generation. Active by default in modern Spark."
+  },
+  {
+    "id": "aqe",
+    "title": "Adaptive Query Execution (AQE)",
+    "phase": "spark",
+    "phaseLabel": "Apache Spark",
+    "description": "Spark 3.x's ability to re-optimize the execution plan at runtime based on actual data statistics.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 4,
+    "careerLevel": "junior",
+    "interviewImportance": 4,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Deeply — frequently asked in Spark 3.x interviews",
+    "prerequisites": [
+      "dag",
+      "spark-joins"
+    ],
+    "learningObjectives": [
+      "Understand runtime re-optimization",
+      "Know the 3 AQE features: coalesce, skew join, broadcast conversion",
+      "Enable/configure AQE"
+    ],
+    "problemItSolves": "Catalyst optimizes BEFORE execution based on estimated statistics. But estimates can be wildly wrong. AQE fixes the plan MID-EXECUTION using actual data sizes.",
+    "whyItExists": "Before AQE, a sort-merge join on a 1GB table and a 10MB table would waste resources. Catalyst couldn't know the filtered table was only 10MB until runtime.",
+    "realWorldUsage": "Enabled by default since Spark 3.2. Three killer features: auto-coalesce small partitions, convert sort-merge to broadcast join at runtime, handle skewed joins.",
+    "theory": "## Adaptive Query Execution (AQE)\n\n### The 3 Features\n\n#### 1. Coalescing Post-Shuffle Partitions\n```\nBefore AQE: 200 shuffle partitions → 180 are tiny (< 1MB each)\nAfter AQE:  200 → 20 partitions (merged small partitions)\n```\n`spark.sql.adaptive.coalescePartitions.enabled = true`\n\n#### 2. Converting Sort-Merge Join to Broadcast Join\nIf after filtering, one side of a join becomes small enough (< `broadcastThreshold`):\n```\nBefore: Sort-Merge Join (expensive shuffle both sides)\nAfter:  Broadcast Hash Join (no shuffle!)\n```\n\n#### 3. Optimizing Skew Joins\nIf one partition has 10x more data than others:\n```\nBefore: One task takes 60 min, others take 1 min\nAfter:  Skewed partition is split into sub-partitions\n```\n\n### Configuration\n```python\nspark.conf.set('spark.sql.adaptive.enabled', 'true')  # Default in 3.2+\nspark.conf.set('spark.sql.adaptive.skewJoin.enabled', 'true')\n```",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Enable AQE and compare execution plans with and without it"
+    ],
+    "nextTopics": [
+      "spark-window-functions"
+    ],
+    "previousTopics": [
+      "dag"
+    ],
+    "commonMistakes": [
+      "Not enabling AQE on Spark 3.0-3.1 (it's off by default before 3.2)",
+      "Setting shuffle partitions to 200 manually when AQE can auto-coalesce"
+    ],
+    "interviewQuestions": [
+      "What is AQE?",
+      "Name the 3 AQE optimizations.",
+      "How does AQE handle data skew?",
+      "When was AQE enabled by default?"
+    ],
+    "flashcards": [
+      {
+        "front": "3 AQE Optimizations?",
+        "back": "1. Coalesce small post-shuffle partitions. 2. Convert sort-merge join to broadcast join at runtime. 3. Split skewed partitions for balanced execution."
+      }
+    ],
+    "summary": "AQE re-optimizes Spark's execution plan at runtime using actual data statistics. Handles partition coalescing, join conversion, and skew."
+  },
+  {
+    "id": "spark-window-functions",
+    "title": "Window Functions in Spark",
+    "phase": "spark",
+    "phaseLabel": "Apache Spark",
+    "description": "Perform calculations across rows related to the current row without reducing the number of rows — ranking, running totals, lag/lead.",
+    "difficulty": "intermediate",
+    "estimatedHours": 3,
+    "importance": "must-know",
+    "interviewWeight": 5,
+    "careerLevel": "junior",
+    "interviewImportance": 5,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Deeply — asked in 90% of Spark SQL interviews",
+    "prerequisites": [
+      "spark-dataframes"
+    ],
+    "learningObjectives": [
+      "Use ROW_NUMBER, RANK, DENSE_RANK",
+      "Use LAG, LEAD for previous/next row",
+      "Use SUM/AVG OVER for running totals",
+      "Define window frames (ROWS BETWEEN)"
+    ],
+    "problemItSolves": "You need to find the top 3 products per category, or calculate a running total of revenue, or find the previous order date for each customer. GROUP BY would collapse the rows — Window functions keep all rows while adding computed columns.",
+    "whyItExists": "SQL GROUP BY reduces rows to one per group. Window functions let you compute aggregates while preserving every original row.",
+    "realWorldUsage": "Window functions are the #1 most tested SQL/Spark concept in data engineering interviews. Used daily for ranking, deduplication, and time-series analysis.",
+    "theory": "## Window Functions\n\n### Syntax\n```sql\nSELECT *,\n  ROW_NUMBER() OVER (PARTITION BY category ORDER BY revenue DESC) AS rank\nFROM products\n```\n\n### Ranking Functions\n| Function | Behavior for Ties |\n|----------|-------------------|\n| ROW_NUMBER() | 1, 2, 3 (no ties) |\n| RANK() | 1, 1, 3 (skips) |\n| DENSE_RANK() | 1, 1, 2 (no skip) |\n\n### Offset Functions\n```sql\nLAG(column, 1) OVER (ORDER BY date)   -- Previous row value\nLEAD(column, 1) OVER (ORDER BY date)  -- Next row value\n```\n\n### Aggregation Windows\n```sql\nSUM(revenue) OVER (\n  PARTITION BY customer_id\n  ORDER BY date\n  ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW\n) AS running_total\n```\n\n### PySpark\n```python\nfrom pyspark.sql import Window\nfrom pyspark.sql import functions as F\n\nw = Window.partitionBy('category').orderBy(F.desc('revenue'))\ndf.withColumn('rank', F.row_number().over(w))\n```",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Find top 3 products per category using ROW_NUMBER",
+      "Calculate running total of daily revenue",
+      "Find the time gap between consecutive orders per customer using LAG"
+    ],
+    "nextTopics": [
+      "spark-partitioning"
+    ],
+    "previousTopics": [
+      "spark-dataframes"
+    ],
+    "commonMistakes": [
+      "Confusing RANK vs ROW_NUMBER vs DENSE_RANK",
+      "Using ROW_NUMBER without ORDER BY (non-deterministic results)",
+      "Not understanding ROWS BETWEEN vs RANGE BETWEEN"
+    ],
+    "interviewQuestions": [
+      "ROW_NUMBER vs RANK vs DENSE_RANK?",
+      "How do you find the top N per group?",
+      "What is a running total using window functions?",
+      "LAG vs LEAD?",
+      "How do you deduplicate using window functions?"
+    ],
+    "flashcards": [
+      {
+        "front": "ROW_NUMBER vs RANK vs DENSE_RANK?",
+        "back": "ROW_NUMBER: 1,2,3 (no ties). RANK: 1,1,3 (skips after ties). DENSE_RANK: 1,1,2 (no skip). Use ROW_NUMBER for deduplication."
+      }
+    ],
+    "summary": "Window functions compute aggregates/rankings across related rows without collapsing them. ROW_NUMBER, LAG/LEAD, and running totals are interview essentials."
+  },
+  {
+    "id": "spark-structured-streaming",
+    "title": "Spark Structured Streaming",
+    "phase": "spark",
+    "phaseLabel": "Apache Spark",
+    "description": "Process real-time data streams using the same DataFrame/SQL API as batch processing.",
+    "difficulty": "intermediate",
+    "estimatedHours": 3,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "mid",
+    "interviewImportance": 3,
+    "productionImportance": 4,
+    "interviewRecommendation": "Learn Well — increasingly important for modern DE roles",
+    "prerequisites": [
+      "spark-dataframes",
+      "batch-vs-streaming"
+    ],
+    "learningObjectives": [
+      "Set up a streaming query",
+      "Understand output modes (append, complete, update)",
+      "Handle watermarks and late data",
+      "Use triggers"
+    ],
+    "problemItSolves": "You need to process Kafka messages in real-time using Spark, but you don't want to learn a completely different API. Structured Streaming lets you use the same DataFrame API for both batch and streaming.",
+    "whyItExists": "Before Structured Streaming, Spark had DStreams (RDD-based streaming) which was a completely different API. Structured Streaming unified batch and streaming under DataFrames.",
+    "realWorldUsage": "Reads from Kafka topics, processes data using DataFrame transformations, and writes to Delta Lake, Kafka, or a database. The standard for streaming in the Databricks ecosystem.",
+    "theory": "## Structured Streaming\n\n### Basic Pattern\n```python\n# Read stream\ndf = spark.readStream \\\n  .format('kafka') \\\n  .option('subscribe', 'orders') \\\n  .load()\n\n# Transform (same DataFrame API!)\nresult = df.selectExpr('CAST(value AS STRING)') \\\n  .groupBy('product').count()\n\n# Write stream\nresult.writeStream \\\n  .outputMode('complete') \\\n  .format('delta') \\\n  .option('checkpointLocation', '/checkpoints/orders') \\\n  .start()\n```\n\n### Output Modes\n| Mode | Behavior | Use Case |\n|------|----------|----------|\n| Append | Only new rows | Event logs |\n| Complete | Entire result table | Aggregations |\n| Update | Only changed rows | Upserts |\n\n### Watermarks (Late Data)\n```python\ndf.withWatermark('event_time', '10 minutes') \\\n  .groupBy(window('event_time', '5 minutes')).count()\n```\nData arriving more than 10 minutes late is dropped.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": {
+      "title": "Real-Time Sales Dashboard",
+      "description": "Read simulated sales events from a file source, compute running totals per category using Structured Streaming, and write results to a Delta table.",
+      "skills": [
+        "Spark",
+        "Structured Streaming",
+        "Delta Lake"
+      ],
+      "estimatedHours": 3
+    },
+    "exercises": [
+      "Set up a file-based streaming source",
+      "Use watermarks to handle late-arriving events"
+    ],
+    "nextTopics": [
+      "spark-ui"
+    ],
+    "previousTopics": [
+      "spark-dataframes"
+    ],
+    "commonMistakes": [
+      "Forgetting to set checkpointLocation (required for fault tolerance)",
+      "Using 'complete' mode without aggregation (errors out)"
+    ],
+    "interviewQuestions": [
+      "What is Structured Streaming?",
+      "Append vs Complete vs Update mode?",
+      "What are watermarks?",
+      "How does Structured Streaming achieve exactly-once?"
+    ],
+    "flashcards": [
+      {
+        "front": "3 Output Modes in Structured Streaming?",
+        "back": "Append: only new rows. Complete: entire result (for aggregations). Update: only changed rows. Append is most common for event logs."
+      }
+    ],
+    "summary": "Structured Streaming uses the same DataFrame API for real-time processing. Supports Kafka, watermarks for late data, and exactly-once via checkpoints."
+  },
+  {
+    "id": "spark-ui",
+    "title": "Spark UI & Debugging",
+    "phase": "spark",
+    "phaseLabel": "Apache Spark",
+    "description": "Read the Spark Web UI to identify performance bottlenecks: skew, spill, shuffle, and stage failures.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "junior",
+    "interviewImportance": 3,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Well — practical skill that separates juniors from mids",
+    "prerequisites": [
+      "dag",
+      "spark-tuning"
+    ],
+    "learningObjectives": [
+      "Navigate the Jobs, Stages, and Tasks tabs",
+      "Identify data skew from task duration variance",
+      "Spot spill (memory overflow to disk)",
+      "Read the SQL/DataFrame execution plan"
+    ],
+    "problemItSolves": "Your Spark job takes 3 hours but you don't know why. The Spark UI shows that 99 out of 100 tasks finish in 10 seconds, but 1 task takes 2.5 hours. That's data skew.",
+    "whyItExists": "Without visibility into task-level execution, debugging Spark performance is guesswork. The Spark UI makes bottlenecks visible.",
+    "realWorldUsage": "Every Spark developer checks the Spark UI daily. Databricks provides a similar view in its cluster UI. Key things to check: task duration variance, shuffle read/write sizes, GC time.",
+    "theory": "## Spark UI\n\n### Key Tabs\n1. **Jobs**: Shows all jobs (triggered by actions). Look for failed jobs.\n2. **Stages**: Shows stages within each job. A stage = a set of tasks that can run in parallel.\n3. **Tasks**: Shows individual task metrics. THIS IS WHERE YOU FIND SKEW.\n\n### Red Flags to Look For\n| Symptom | What to Check | Solution |\n|---------|---------------|----------|\n| 1 task takes 100x longer than others | Data skew | Salting, repartition |\n| 'Spill (Disk)' > 0 | Not enough memory | Increase executor memory |\n| High 'Shuffle Read' | Too much data shuffled | Broadcast join, reduce shuffles |\n| High 'GC Time' | Too many Java objects | Use DataFrame API (Tungsten) |\n\n### Reading the Physical Plan\n```\n== Physical Plan ==\n*(2) HashAggregate(...)\n+- Exchange hashpartitioning(...)      ← SHUFFLE!\n   +- *(1) HashAggregate(...)\n      +- *(1) FileScan parquet [...]    ← FILE READ\n```\nLook for `Exchange` = shuffle. More shuffles = more network I/O.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Run a skewed join and identify the skew in Spark UI",
+      "Find the shuffle size in the Stages tab"
+    ],
+    "nextTopics": [
+      "spark-debugging"
+    ],
+    "previousTopics": [
+      "spark-tuning"
+    ],
+    "commonMistakes": [
+      "Ignoring the Spark UI and blindly adding more resources",
+      "Not checking task-level metrics (only looking at stage-level)"
+    ],
+    "interviewQuestions": [
+      "How do you identify data skew in Spark UI?",
+      "What does 'Spill to Disk' mean?",
+      "How do you read a Spark execution plan?"
+    ],
+    "flashcards": [
+      {
+        "front": "How to identify data skew in Spark UI?",
+        "back": "Go to Stages > Tasks tab. If one task's duration is 10-100x longer than others, it's data skew. The skewed task is processing a much larger partition."
+      }
+    ],
+    "summary": "The Spark UI reveals bottlenecks at the task level. Key diagnostics: task duration variance (skew), spill (memory), shuffle sizes, and GC time."
+  },
+  {
+    "id": "spark-partitioning",
+    "title": "Partitioning in Spark",
+    "phase": "spark",
+    "phaseLabel": "Apache Spark",
+    "description": "Control how data is distributed across executors — the most impactful Spark tuning technique.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 4,
+    "careerLevel": "junior",
+    "interviewImportance": 4,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Deeply — critical for performance tuning interviews",
+    "prerequisites": [
+      "spark-dataframes",
+      "partitions-dist"
+    ],
+    "learningObjectives": [
+      "repartition vs coalesce",
+      "Set spark.sql.shuffle.partitions",
+      "Partition by column for optimized writes",
+      "Understand partition count impact"
+    ],
+    "problemItSolves": "200 default shuffle partitions is wrong for most workloads. Too many partitions = overhead from task scheduling. Too few = OOM or slow tasks from large partitions.",
+    "whyItExists": "The number and distribution of partitions directly determines parallelism, memory usage, and whether your job completes in 5 minutes or 5 hours.",
+    "realWorldUsage": "Rule of thumb: each partition should be 100-200MB. If you have 100GB of data, use ~500-1000 partitions. Use AQE's auto-coalesce when possible.",
+    "theory": "## Spark Partitioning\n\n### repartition vs coalesce\n| | repartition(N) | coalesce(N) |\n|---|---|---|\n| Direction | Increase or decrease | Decrease only |\n| Shuffle | Full shuffle | No shuffle (merges locally) |\n| Use case | Need even distribution | Reduce partitions after filter |\n\n### shuffle.partitions\n```python\nspark.conf.set('spark.sql.shuffle.partitions', 200)  # Default\n# For small data (< 10GB): use 20-50\n# For large data (> 100GB): use 500-2000\n# Best: enable AQE auto-coalesce\n```\n\n### Partitioned Writes\n```python\ndf.write.partitionBy('date').format('delta').save('/data/table')\n```\nCreates a folder structure: `/data/table/date=2024-01-01/`, `/data/table/date=2024-01-02/`...\nQueries filtering by date read only the relevant partition.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Experiment with different partition counts and measure execution time",
+      "Write a partitioned Delta table and query it with a filter"
+    ],
+    "nextTopics": [
+      "spark-tuning"
+    ],
+    "previousTopics": [
+      "spark-dataframes"
+    ],
+    "commonMistakes": [
+      "Using repartition when coalesce would suffice (unnecessary shuffle)",
+      "Writing unpartitioned tables (full table scans every query)",
+      "Using too many small partitions (task scheduling overhead)"
+    ],
+    "interviewQuestions": [
+      "repartition vs coalesce?",
+      "What is the default number of shuffle partitions?",
+      "How do you decide the right partition count?",
+      "What is partition pruning?"
+    ],
+    "flashcards": [
+      {
+        "front": "repartition vs coalesce?",
+        "back": "repartition(N): full shuffle, can increase or decrease partitions, ensures even distribution. coalesce(N): no shuffle, can only decrease, may create uneven partitions."
+      }
+    ],
+    "summary": "Partitioning controls data distribution across executors. Use repartition for even distribution, coalesce to reduce without shuffle, and partitionBy for optimized storage."
+  },
+  {
+    "id": "db-notebooks",
+    "title": "Databricks Notebooks",
+    "phase": "databricks",
+    "phaseLabel": "Databricks",
+    "description": "Interactive development environment for data engineering — run Python, SQL, Scala, and R in a single notebook.",
+    "difficulty": "beginner",
+    "estimatedHours": 1,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "junior",
+    "interviewImportance": 3,
+    "productionImportance": 4,
+    "interviewRecommendation": "Learn Well — every Databricks interview includes notebook knowledge",
+    "prerequisites": [
+      "db-workspace"
+    ],
+    "learningObjectives": [
+      "Create and organize notebooks",
+      "Use magic commands (%sql, %python, %md)",
+      "Understand notebook workflows vs jobs"
+    ],
+    "problemItSolves": "You need a collaborative, interactive environment to write Spark code, query data, and visualize results — all without setting up a local development environment.",
+    "whyItExists": "Notebooks provide instant access to a configured Spark cluster without local setup. They're the primary development tool in Databricks.",
+    "realWorldUsage": "80% of Databricks development happens in notebooks during prototyping. Production pipelines are typically moved to jobs with .py files.",
+    "theory": "## Databricks Notebooks\n\n### Magic Commands\n```\n%python  # Switch cell language to Python\n%sql     # Switch to SQL\n%scala   # Switch to Scala\n%md      # Markdown documentation\n%run ./other_notebook  # Execute another notebook\n```\n\n### Widgets (Parameters)\n```python\ndbutils.widgets.text('date', '2024-01-01')\ndate = dbutils.widgets.get('date')\n```\n\n### Best Practices\n- Use notebooks for exploration, `.py` files for production\n- Version control notebooks via Repos\n- Use `%run` to share utility functions",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Create a notebook that uses %sql and %python in the same workflow"
+    ],
+    "nextTopics": [
+      "db-clusters"
+    ],
+    "previousTopics": [
+      "db-workspace"
+    ],
+    "commonMistakes": [
+      "Using notebooks directly in production (use Jobs with .py files instead)"
+    ],
+    "interviewQuestions": [
+      "How do you parameterize a Databricks notebook?",
+      "What are magic commands?"
+    ],
+    "flashcards": [
+      {
+        "front": "How to parameterize a Databricks notebook?",
+        "back": "Use dbutils.widgets.text('param_name', 'default_value') to define parameters and dbutils.widgets.get('param_name') to read them."
+      }
+    ],
+    "summary": "Databricks Notebooks provide interactive multi-language development. Use for exploration; move to .py files for production."
+  },
+  {
+    "id": "db-clusters",
+    "title": "Databricks Clusters",
+    "phase": "databricks",
+    "phaseLabel": "Databricks",
+    "description": "Configure and manage the compute infrastructure that runs your Spark jobs in Databricks.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "junior",
+    "interviewImportance": 3,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Well — cost optimization questions are common",
+    "prerequisites": [
+      "db-notebooks",
+      "driver-executors"
+    ],
+    "learningObjectives": [
+      "Configure all-purpose vs job clusters",
+      "Understand autoscaling",
+      "Choose instance types",
+      "Manage cluster policies"
+    ],
+    "problemItSolves": "Running Spark requires provisioning virtual machines. Clusters abstract this — you specify how many and what type of machines, and Databricks handles the rest.",
+    "whyItExists": "Databricks clusters provide managed Spark — no manual installation, configuration, or tuning of the underlying infrastructure.",
+    "realWorldUsage": "Production workloads use Job Clusters (spun up per job, auto-terminated). Development uses All-Purpose Clusters (shared, long-running).",
+    "theory": "## Databricks Clusters\n\n### Types\n| Type | Use | Cost |\n|------|-----|------|\n| All-Purpose | Interactive dev, notebooks | Higher (always running) |\n| Job Cluster | Automated pipelines | Lower (auto-terminates) |\n\n### Autoscaling\n```\nMin workers: 2\nMax workers: 10\n```\nDatabricks automatically adds/removes workers based on workload.\n\n### Key Settings\n- **Databricks Runtime**: Choose the Spark version + libraries\n- **Spot Instances**: 60-80% cheaper but can be reclaimed\n- **Auto-termination**: Shut down after X minutes of inactivity\n\n### Cost Optimization\n1. Use Job Clusters instead of All-Purpose for production\n2. Enable Spot Instances for non-critical workloads\n3. Set aggressive auto-termination (15 min)",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Configure an autoscaling cluster with spot instances"
+    ],
+    "nextTopics": [
+      "db-jobs"
+    ],
+    "previousTopics": [
+      "db-notebooks"
+    ],
+    "commonMistakes": [
+      "Leaving all-purpose clusters running overnight",
+      "Not using spot instances for dev/test"
+    ],
+    "interviewQuestions": [
+      "All-Purpose vs Job Clusters?",
+      "How do you optimize Databricks costs?",
+      "What are spot instances?"
+    ],
+    "flashcards": [
+      {
+        "front": "All-Purpose vs Job Clusters in Databricks?",
+        "back": "All-Purpose: interactive development, long-running, shared. Job Clusters: automated pipelines, created per job, auto-terminate. Job clusters are 2-3x cheaper."
+      }
+    ],
+    "summary": "Databricks clusters provide managed Spark compute. Use All-Purpose for dev, Job Clusters for production. Optimize with spot instances and autoscaling."
+  },
+  {
+    "id": "db-jobs",
+    "title": "Databricks Jobs & Workflows",
+    "phase": "databricks",
+    "phaseLabel": "Databricks",
+    "description": "Schedule and orchestrate production data pipelines using Databricks' built-in workflow engine.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "junior",
+    "interviewImportance": 3,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Well — key for production Databricks work",
+    "prerequisites": [
+      "db-clusters"
+    ],
+    "learningObjectives": [
+      "Create single-task and multi-task jobs",
+      "Configure schedules and triggers",
+      "Set up alerts and retries",
+      "Chain tasks with dependencies"
+    ],
+    "problemItSolves": "You have 5 notebooks that need to run in a specific order every night. Jobs let you orchestrate them as a DAG with dependencies, retries, and alerts.",
+    "whyItExists": "While Airflow is the traditional orchestrator, Databricks Jobs provide native orchestration for Databricks-centric pipelines without external tools.",
+    "realWorldUsage": "Many teams use Databricks Jobs for Databricks-native pipelines and Airflow for cross-system orchestration.",
+    "theory": "## Databricks Jobs\n\n### Multi-Task Jobs\n```\nTask 1: Extract (notebook)\n  ↓\nTask 2: Transform (notebook)\n  ↓\nTask 3: Load (notebook)\n  ↓\nTask 4: Validate (notebook)\n```\n\n### Key Features\n- **Schedule**: Cron-based scheduling\n- **Retries**: Auto-retry failed tasks (configurable count + delay)\n- **Alerts**: Email/Slack notifications on failure/success\n- **Parameters**: Pass parameters between tasks\n- **Conditional Execution**: Run tasks based on previous task results\n\n### Databricks Jobs vs Airflow\n| Feature | Databricks Jobs | Airflow |\n|---------|----------------|--------|\n| Best for | Databricks-only pipelines | Multi-system orchestration |\n| Setup | Zero setup | Requires infrastructure |\n| Flexibility | Limited to Databricks | Any system |",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Create a multi-task job with 3 dependent notebooks"
+    ],
+    "nextTopics": [
+      "dlt"
+    ],
+    "previousTopics": [
+      "db-clusters"
+    ],
+    "commonMistakes": [
+      "Using Databricks Jobs when you need cross-system orchestration (use Airflow instead)"
+    ],
+    "interviewQuestions": [
+      "Databricks Jobs vs Airflow?",
+      "How do you handle retries in Databricks Jobs?"
+    ],
+    "flashcards": [
+      {
+        "front": "Databricks Jobs vs Airflow?",
+        "back": "Jobs: native to Databricks, zero setup, limited to Databricks tasks. Airflow: external orchestrator, handles any system, more complex setup. Use Jobs for Databricks-only, Airflow for multi-system."
+      }
+    ],
+    "summary": "Databricks Jobs orchestrate multi-task pipelines natively. Use for Databricks-only workflows; use Airflow for cross-system orchestration."
+  },
+  {
+    "id": "db-sql",
+    "title": "Databricks SQL (DBSQL)",
+    "phase": "databricks",
+    "phaseLabel": "Databricks",
+    "description": "Run SQL queries on your lakehouse with a BI-optimized SQL warehouse — Databricks' answer to Snowflake.",
+    "difficulty": "intermediate",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 2,
+    "careerLevel": "mid",
+    "interviewImportance": 2,
+    "productionImportance": 3,
+    "interviewRecommendation": "Know Concept — relevant for Databricks-specific interviews",
+    "prerequisites": [
+      "db-workspace",
+      "spark-dataframes"
+    ],
+    "learningObjectives": [
+      "Understand SQL Warehouses",
+      "Create dashboards in DBSQL",
+      "Connect BI tools (Tableau, Power BI)"
+    ],
+    "problemItSolves": "Data analysts want to query lakehouse data using SQL without writing Spark code. DBSQL provides a SQL-native interface with BI tool connectivity.",
+    "whyItExists": "Databricks wanted to compete with Snowflake by offering a SQL-native analytics experience on top of the lakehouse.",
+    "realWorldUsage": "Analysts connect Tableau/Power BI to a DBSQL SQL Warehouse to query Delta tables directly.",
+    "theory": "## Databricks SQL\n\n### SQL Warehouses\nServerless or Classic compute optimized for SQL workloads.\n- **Serverless**: Instant startup, pay-per-query\n- **Classic**: Dedicated compute, better for sustained workloads\n\n### Features\n- SQL Editor with auto-complete\n- Built-in dashboards and visualizations\n- Query history and caching\n- BI tool connectivity (JDBC/ODBC)\n\n### vs Snowflake\nDBSQL runs on your lakehouse (Delta Lake). Snowflake has its own proprietary storage.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "db-photon"
+    ],
+    "previousTopics": [
+      "db-workspace"
+    ],
+    "commonMistakes": [
+      "Using a general-purpose cluster for BI queries instead of a SQL Warehouse"
+    ],
+    "interviewQuestions": [
+      "What is DBSQL?",
+      "Serverless vs Classic SQL Warehouses?"
+    ],
+    "flashcards": [
+      {
+        "front": "What is Databricks SQL (DBSQL)?",
+        "back": "A SQL-native analytics interface on the lakehouse. Provides SQL Warehouses (serverless or classic compute) optimized for BI queries, dashboards, and tool connectivity."
+      }
+    ],
+    "summary": "DBSQL provides SQL-native analytics on the lakehouse with BI tool connectivity. Alternative to Snowflake for SQL workloads."
+  },
+  {
+    "id": "db-photon",
+    "title": "Photon Engine",
+    "phase": "databricks",
+    "phaseLabel": "Databricks",
+    "description": "Databricks' native C++ execution engine that replaces Spark's JVM-based engine for up to 3x faster queries.",
+    "difficulty": "advanced",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 1,
+    "careerLevel": "senior",
+    "interviewImportance": 1,
+    "productionImportance": 3,
+    "interviewRecommendation": "Overview Only — niche Databricks knowledge",
+    "prerequisites": [
+      "db-sql",
+      "tungsten"
+    ],
+    "learningObjectives": [
+      "Understand why Photon is faster than Spark's JVM engine",
+      "Know when Photon is used",
+      "Compare Photon vs Tungsten"
+    ],
+    "problemItSolves": "Even with Tungsten, Spark's JVM has overhead. Photon is a C++ engine that processes data with zero JVM overhead, achieving 2-3x speedups.",
+    "whyItExists": "Databricks needed to match/beat Snowflake's query performance. Photon delivers native-speed execution on Delta Lake.",
+    "realWorldUsage": "Photon is automatically used in DBSQL and Photon-enabled clusters. No code changes needed.",
+    "theory": "## Photon Engine\n\n### What It Is\nA vectorized query engine written in C++ that runs inside Databricks Runtime.\n\n### How It's Faster\n1. **No JVM overhead**: Direct CPU instructions instead of Java bytecode\n2. **Vectorized execution**: Processes columns (vectors) instead of rows\n3. **SIMD instructions**: Uses CPU-level parallelism\n\n### When It's Used\n- Automatically enabled on Photon-capable runtimes\n- Best for SQL/DataFrame workloads on Delta Lake\n- Not used for: UDFs, RDD operations, non-Delta sources",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "db-cost"
+    ],
+    "previousTopics": [
+      "db-sql"
+    ],
+    "commonMistakes": [
+      "Expecting Photon to speed up Python UDFs (it doesn't)"
+    ],
+    "interviewQuestions": [
+      "What is Photon?",
+      "How is it faster than Spark's default engine?"
+    ],
+    "flashcards": [
+      {
+        "front": "What is Databricks Photon?",
+        "back": "A C++ vectorized execution engine that replaces Spark's JVM-based engine. 2-3x faster for SQL/DataFrame workloads on Delta Lake. No code changes required."
+      }
+    ],
+    "summary": "Photon is Databricks' C++ query engine that bypasses JVM overhead for 2-3x faster SQL workloads on Delta Lake."
+  },
+  {
+    "id": "db-cost",
+    "title": "Databricks Cost Optimization",
+    "phase": "databricks",
+    "phaseLabel": "Databricks",
+    "description": "Practical strategies to reduce your Databricks bill by 40-70% without sacrificing performance.",
+    "difficulty": "intermediate",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 2,
+    "careerLevel": "mid",
+    "interviewImportance": 2,
+    "productionImportance": 5,
+    "interviewRecommendation": "Know Concept — shows production maturity",
+    "prerequisites": [
+      "db-clusters",
+      "db-jobs"
+    ],
+    "learningObjectives": [
+      "Use Job Clusters over All-Purpose",
+      "Leverage Spot Instances",
+      "Right-size clusters",
+      "Use serverless SQL Warehouses"
+    ],
+    "problemItSolves": "Databricks can get expensive fast. A single unoptimized all-purpose cluster running 24/7 can cost $5,000+/month. These strategies can cut that to $1,500.",
+    "whyItExists": "Cloud compute costs are the #1 concern for data teams. Knowing how to optimize costs is a critical skill for production DEs.",
+    "realWorldUsage": "Senior DEs are often responsible for the Databricks budget. Cost optimization is a regular production concern.",
+    "theory": "## Cost Optimization Strategies\n\n### 1. Use Job Clusters\nAll-Purpose: ~$0.40/DBU | Job Cluster: ~$0.15/DBU\nSave 60% by switching production workloads to Job Clusters.\n\n### 2. Spot Instances\nAWS Spot Instances are 60-80% cheaper than on-demand.\nSet workers (not driver) as spot instances.\n\n### 3. Auto-Termination\nSet auto-terminate to 10-15 minutes for development clusters.\n\n### 4. Right-Sizing\nDon't use a 20-node cluster for a job that needs 3 nodes.\nUse autoscaling: min=2, max=10.\n\n### 5. Delta Optimization\n- `OPTIMIZE` to compact small files\n- `VACUUM` to remove old versions\n- `ZORDER` for query-specific optimization\n\n### 6. Serverless SQL Warehouses\nPay only for actual query time, not idle compute.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [],
+    "previousTopics": [
+      "db-clusters"
+    ],
+    "commonMistakes": [
+      "Running all-purpose clusters 24/7 for scheduled jobs"
+    ],
+    "interviewQuestions": [
+      "How do you reduce Databricks costs?",
+      "Spot instances — when to use?"
+    ],
+    "flashcards": [
+      {
+        "front": "Top 3 Databricks Cost Savings?",
+        "back": "1. Job Clusters instead of All-Purpose (60% savings). 2. Spot Instances for workers (60-80% cheaper). 3. Auto-termination for idle clusters."
+      }
+    ],
+    "summary": "Key cost optimizations: Job Clusters over All-Purpose (60% savings), Spot Instances (60-80% cheaper), auto-termination, and right-sizing."
+  },
+  {
+    "id": "denormalization",
+    "title": "Denormalization",
+    "phase": "modeling",
+    "phaseLabel": "Data Modeling",
+    "description": "Intentionally adding redundancy to speed up reads at the cost of more complex writes.",
+    "difficulty": "beginner",
+    "estimatedHours": 1,
+    "importance": "must-know",
+    "interviewWeight": 4,
+    "careerLevel": "junior",
+    "interviewImportance": 4,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Deeply — normalization vs denormalization is a classic interview question",
+    "prerequisites": [
+      "normalization"
+    ],
+    "learningObjectives": [
+      "Define denormalization",
+      "Know when to denormalize",
+      "Understand the trade-offs"
+    ],
+    "problemItSolves": "A normalized database requires 5 JOINs to answer a simple business question. Each JOIN adds latency. Denormalization pre-joins the data into fewer tables for faster reads.",
+    "whyItExists": "OLTP systems normalize for write efficiency. OLAP/analytics systems denormalize for read efficiency. Data warehouses are denormalized by design.",
+    "realWorldUsage": "Every data warehouse uses denormalization. Star schemas are intentionally denormalized. Wide fact tables with pre-joined dimension attributes are standard.",
+    "theory": "## Denormalization\n\n### Normalization vs Denormalization\n| Aspect | Normalized | Denormalized |\n|--------|-----------|-------------|\n| Redundancy | None | Intentional |\n| JOINs needed | Many | Few/none |\n| Read speed | Slower | Faster |\n| Write speed | Faster | Slower |\n| Best for | OLTP (writes) | OLAP (reads) |\n\n### When to Denormalize\n- Data warehouse / analytical workloads\n- Dashboard queries that need sub-second response\n- When JOINs are the performance bottleneck\n\n### Common Techniques\n- Pre-join dimension attributes into fact tables\n- Store calculated fields (e.g., total_revenue)\n- Flatten nested structures",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Take a 3NF schema and denormalize it into a star schema"
+    ],
+    "nextTopics": [
+      "star-schema"
+    ],
+    "previousTopics": [
+      "normalization"
+    ],
+    "commonMistakes": [
+      "Denormalizing an OLTP database (causes update anomalies)",
+      "Not understanding that denormalization is intentional for analytics"
+    ],
+    "interviewQuestions": [
+      "Normalization vs Denormalization?",
+      "When would you denormalize?",
+      "Trade-offs?"
+    ],
+    "flashcards": [
+      {
+        "front": "Normalization vs Denormalization?",
+        "back": "Normalization: Eliminate redundancy, optimize writes (OLTP). Denormalization: Add redundancy, optimize reads (OLAP). Data warehouses are intentionally denormalized."
+      }
+    ],
+    "summary": "Denormalization adds intentional redundancy to speed up analytical reads. Standard practice in data warehouses and star schemas."
+  },
+  {
+    "id": "snowflake-schema",
+    "title": "Snowflake Schema",
+    "phase": "modeling",
+    "phaseLabel": "Data Modeling",
+    "description": "A normalized variant of the star schema where dimension tables are further broken into sub-dimensions.",
+    "difficulty": "intermediate",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 3,
+    "careerLevel": "junior",
+    "interviewImportance": 3,
+    "productionImportance": 2,
+    "interviewRecommendation": "Learn Well — often compared with Star Schema in interviews",
+    "prerequisites": [
+      "star-schema"
+    ],
+    "learningObjectives": [
+      "Define snowflake schema",
+      "Compare with star schema",
+      "Know when snowflake is preferred"
+    ],
+    "problemItSolves": "Star schema dimension tables can get very wide. Snowflake schema normalizes dimensions into sub-dimensions, reducing storage but adding JOINs.",
+    "whyItExists": "When storage was expensive, normalizing dimensions saved significant space. Today, with cheap storage and fast columnar formats, star schemas are usually preferred.",
+    "realWorldUsage": "Less common today. Most modern warehouses prefer star schemas for simplicity. Snowflake schema is mainly seen in legacy systems.",
+    "theory": "## Snowflake Schema\n\n### Structure\n```\n           Category Table\n                ↑\n           Product Table ← Fact Table → Customer Table\n                                              ↓\n                                        City Table\n                                              ↓\n                                        Country Table\n```\nDimensions are normalized into multiple levels.\n\n### Star vs Snowflake\n| Aspect | Star | Snowflake |\n|--------|------|-----------|\n| Dimension tables | Denormalized (wide) | Normalized (narrow) |\n| JOINs needed | Fewer | More |\n| Query speed | Faster | Slower |\n| Storage | More | Less |\n| Modern preference | ✓ Preferred | Legacy |",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "grain"
+    ],
+    "previousTopics": [
+      "star-schema"
+    ],
+    "commonMistakes": [
+      "Choosing snowflake schema for a new data warehouse (star is almost always better)"
+    ],
+    "interviewQuestions": [
+      "Star vs Snowflake schema?",
+      "When would you use a Snowflake schema?"
+    ],
+    "flashcards": [
+      {
+        "front": "Star vs Snowflake Schema?",
+        "back": "Star: denormalized dimensions (wide, fewer JOINs, faster reads). Snowflake: normalized dimensions (narrow, more JOINs, less storage). Star is preferred in modern warehouses."
+      }
+    ],
+    "summary": "Snowflake schema normalizes dimensions into sub-tables. Less common today — star schemas are preferred for simplicity and speed."
+  },
+  {
+    "id": "fact-tables",
+    "title": "Fact Tables & Dimension Tables",
+    "phase": "modeling",
+    "phaseLabel": "Data Modeling",
+    "description": "The two building blocks of dimensional modeling — facts store measurements, dimensions provide context.",
+    "difficulty": "beginner",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 5,
+    "careerLevel": "foundation",
+    "interviewImportance": 5,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Deeply — fundamental concept tested in every data modeling interview",
+    "prerequisites": [
+      "denormalization"
+    ],
+    "learningObjectives": [
+      "Define fact tables (measurements)",
+      "Define dimension tables (context)",
+      "Identify fact vs dimension in real scenarios",
+      "Understand additive, semi-additive, non-additive measures"
+    ],
+    "problemItSolves": "You need to store transactional data (sales, clicks, events) alongside the context (who, what, when, where). Separating facts from dimensions enables efficient querying.",
+    "whyItExists": "Ralph Kimball's dimensional modeling approach separates 'what happened' (facts) from 'the context of what happened' (dimensions).",
+    "realWorldUsage": "Every data warehouse has fact tables (orders, sessions, transactions) and dimension tables (customers, products, dates).",
+    "theory": "## Fact & Dimension Tables\n\n### Fact Tables\nStore **measurements/metrics** — things you count, sum, or average.\n```\nfact_orders:\n| order_id | customer_key | product_key | date_key | quantity | revenue |\n```\n- Rows = events/transactions\n- Columns = foreign keys + measures\n- Typically the LARGEST tables (millions/billions of rows)\n\n### Dimension Tables\nStore **descriptive context** — who, what, when, where.\n```\ndim_customer:\n| customer_key | name | email | city | country | segment |\n```\n- Rows = entities\n- Columns = attributes\n- Typically SMALLER tables (thousands/millions of rows)\n\n### Measure Types\n| Type | Can Sum Across All Dims? | Example |\n|------|--------------------------|--------|\n| Additive | Yes | Revenue, Quantity |\n| Semi-Additive | Some dimensions | Account Balance (can't sum across time) |\n| Non-Additive | No | Temperature, Ratio |",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Design a fact table and 3 dimension tables for an e-commerce company"
+    ],
+    "nextTopics": [
+      "star-schema"
+    ],
+    "previousTopics": [
+      "denormalization"
+    ],
+    "commonMistakes": [
+      "Putting descriptive attributes in fact tables (they belong in dimensions)",
+      "Making fact tables too wide with non-measure columns"
+    ],
+    "interviewQuestions": [
+      "What is a fact table?",
+      "What is a dimension table?",
+      "Additive vs semi-additive vs non-additive measures?",
+      "Give an example of a fact and dimension table."
+    ],
+    "flashcards": [
+      {
+        "front": "Fact Table vs Dimension Table?",
+        "back": "Fact: measurements/metrics (revenue, quantity). Tall, narrow. Dimension: descriptive context (customer name, product category). Short, wide."
+      }
+    ],
+    "summary": "Fact tables store measurements (revenue, counts). Dimension tables store context (customer, product, date). Together they form the star schema."
+  },
+  {
+    "id": "grain",
+    "title": "Grain (Granularity)",
+    "phase": "modeling",
+    "phaseLabel": "Data Modeling",
+    "description": "The level of detail stored in a fact table — the most important decision in dimensional modeling.",
+    "difficulty": "intermediate",
+    "estimatedHours": 1,
+    "importance": "must-know",
+    "interviewWeight": 4,
+    "careerLevel": "junior",
+    "interviewImportance": 4,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Deeply — Kimball's #1 rule: always declare the grain",
+    "prerequisites": [
+      "fact-tables"
+    ],
+    "learningObjectives": [
+      "Define grain",
+      "Declare grain before designing a fact table",
+      "Understand the impact of wrong granularity"
+    ],
+    "problemItSolves": "If you don't define the grain, you'll build a fact table where some rows represent individual orders and others represent daily summaries. Queries will produce incorrect results.",
+    "whyItExists": "Kimball's first rule: 'Before designing a fact table, you must declare its grain.' The grain determines what each row represents.",
+    "realWorldUsage": "Example grains: 'one row per order line item', 'one row per daily customer session', 'one row per hourly sensor reading'.",
+    "theory": "## Grain\n\n### What Is It?\nThe grain defines what ONE ROW in a fact table represents.\n\n### Examples\n| Fact Table | Grain |\n|-----------|-------|\n| fact_orders | One row per order line item |\n| fact_sessions | One row per user session |\n| fact_daily_revenue | One row per store per day |\n| fact_sensor_readings | One row per sensor per minute |\n\n### Rules\n1. **Always declare the grain FIRST** before adding any columns.\n2. **Every fact in the table must be true at the declared grain.**\n3. **Don't mix grains** in the same fact table.\n\n### Wrong Example\n```\nfact_mixed:\n| order_id | daily_total | item_quantity |\n```\n`daily_total` is at day grain, `item_quantity` is at order-item grain. This table is BROKEN.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Declare the grain for 3 different business scenarios"
+    ],
+    "nextTopics": [
+      "kimball"
+    ],
+    "previousTopics": [
+      "fact-tables"
+    ],
+    "commonMistakes": [
+      "Mixing grains in a single fact table",
+      "Starting to design columns before declaring the grain"
+    ],
+    "interviewQuestions": [
+      "What is grain in dimensional modeling?",
+      "Why is declaring the grain important?",
+      "What happens if you mix grains?"
+    ],
+    "flashcards": [
+      {
+        "front": "What is Grain in Dimensional Modeling?",
+        "back": "Grain = what one row in a fact table represents. Example: 'one row per order line item'. Kimball's Rule #1: Always declare the grain before designing the table."
+      }
+    ],
+    "summary": "Grain defines what each row represents in a fact table. Kimball's #1 rule: always declare the grain first. Never mix grains."
+  },
+  {
+    "id": "kimball",
+    "title": "Kimball Methodology",
+    "phase": "modeling",
+    "phaseLabel": "Data Modeling",
+    "description": "The bottom-up dimensional modeling approach — the most widely used data warehouse design methodology.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 4,
+    "careerLevel": "junior",
+    "interviewImportance": 4,
+    "productionImportance": 4,
+    "interviewRecommendation": "Learn Deeply — the standard methodology for data warehouse design",
+    "prerequisites": [
+      "grain",
+      "star-schema",
+      "scd"
+    ],
+    "learningObjectives": [
+      "Understand the 4-step Kimball design process",
+      "Compare Kimball vs Inmon",
+      "Know the bus matrix"
+    ],
+    "problemItSolves": "How do you systematically design a data warehouse that business users can query easily? Kimball provides a proven methodology.",
+    "whyItExists": "Ralph Kimball published 'The Data Warehouse Toolkit' in 1996. His bottom-up approach starts with individual business processes and builds dimensional models for each.",
+    "realWorldUsage": "Most modern data warehouses use Kimball dimensional modeling. The star schema + fact/dimension pattern is Kimball's core contribution.",
+    "theory": "## Kimball Methodology\n\n### The 4-Step Design Process\n1. **Select the business process** (e.g., sales, inventory, marketing)\n2. **Declare the grain** (e.g., one row per order line item)\n3. **Choose the dimensions** (who, what, when, where)\n4. **Identify the facts** (revenue, quantity, cost)\n\n### Kimball vs Inmon\n| Aspect | Kimball | Inmon |\n|--------|---------|-------|\n| Approach | Bottom-up | Top-down |\n| Model | Star schema (denormalized) | 3NF (normalized) |\n| Speed to value | Fast (build one star at a time) | Slow (design everything first) |\n| Complexity | Simpler | More complex |\n| Modern preference | More common | Less common |\n\n### The Bus Matrix\nA table mapping business processes (rows) to shared dimensions (columns). Ensures consistency across star schemas.\n\n| | Date | Customer | Product | Store |\n|---|---|---|---|---|\n| Sales | ✓ | ✓ | ✓ | ✓ |\n| Inventory | ✓ | | ✓ | ✓ |\n| Marketing | ✓ | ✓ | | |",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Create a bus matrix for an e-commerce company with 3 business processes"
+    ],
+    "nextTopics": [
+      "data-vault"
+    ],
+    "previousTopics": [
+      "grain"
+    ],
+    "commonMistakes": [
+      "Skipping step 2 (declaring the grain)",
+      "Not building a bus matrix to ensure consistent dimensions"
+    ],
+    "interviewQuestions": [
+      "Kimball vs Inmon?",
+      "What is the Kimball 4-step design process?",
+      "What is a bus matrix?"
+    ],
+    "flashcards": [
+      {
+        "front": "Kimball vs Inmon?",
+        "back": "Kimball: bottom-up, star schemas, fast to value. Inmon: top-down, 3NF normalized, design everything first. Kimball is more common in modern warehouses."
+      }
+    ],
+    "summary": "Kimball's 4-step process: select business process, declare grain, choose dimensions, identify facts. Bottom-up approach using star schemas."
+  },
+  {
+    "id": "data-vault",
+    "title": "Data Vault (Overview)",
+    "phase": "modeling",
+    "phaseLabel": "Data Modeling",
+    "description": "An alternative modeling approach designed for agility and auditability — hubs, links, and satellites.",
+    "difficulty": "advanced",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 1,
+    "careerLevel": "senior",
+    "interviewImportance": 1,
+    "productionImportance": 2,
+    "interviewRecommendation": "Overview Only — niche, rarely asked except at specific companies",
+    "prerequisites": [
+      "kimball"
+    ],
+    "learningObjectives": [
+      "Understand hubs, links, and satellites",
+      "Know when Data Vault is preferred over Kimball",
+      "Identify trade-offs"
+    ],
+    "problemItSolves": "Kimball models are tightly coupled to business logic. When business rules change, you have to redesign fact/dimension tables. Data Vault separates raw data from business logic for maximum flexibility.",
+    "whyItExists": "Designed by Dan Linstedt for environments where source systems change frequently and full auditability is required (banking, insurance, government).",
+    "realWorldUsage": "Used primarily in highly regulated industries. Most startups and tech companies prefer Kimball.",
+    "theory": "## Data Vault\n\n### The 3 Entity Types\n1. **Hub**: Business keys (e.g., customer_id, product_id)\n2. **Link**: Relationships between hubs (e.g., customer-order link)\n3. **Satellite**: Descriptive attributes with full history\n\n### Advantages\n- Full auditability (every change is tracked)\n- Agile (new sources can be added without redesign)\n- Handles raw data ingestion well\n\n### Disadvantages\n- Very complex to query (many JOINs)\n- Requires a business vault or information mart on top\n- Overkill for most use cases",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "dbt-core"
+    ],
+    "previousTopics": [
+      "kimball"
+    ],
+    "commonMistakes": [
+      "Choosing Data Vault for a startup (Kimball is simpler and faster to implement)"
+    ],
+    "interviewQuestions": [
+      "What is Data Vault?",
+      "Hubs, Links, and Satellites?",
+      "Data Vault vs Kimball?"
+    ],
+    "flashcards": [
+      {
+        "front": "Data Vault: Hubs, Links, Satellites?",
+        "back": "Hubs: business keys. Links: relationships between hubs. Satellites: descriptive attributes with full history. Designed for auditability and agility."
+      }
+    ],
+    "summary": "Data Vault uses hubs, links, and satellites for maximum auditability and flexibility. Best for regulated industries; Kimball preferred elsewhere."
+  },
+  {
+    "id": "dbt-seeds",
+    "title": "dbt Seeds",
+    "phase": "transformation",
+    "phaseLabel": "Transformation (dbt)",
+    "description": "Load small CSV files into your warehouse as tables — perfect for lookup data, country codes, and mapping tables.",
+    "difficulty": "beginner",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 2,
+    "careerLevel": "junior",
+    "interviewImportance": 2,
+    "productionImportance": 3,
+    "interviewRecommendation": "Know Concept — a minor but handy dbt feature",
+    "prerequisites": [
+      "dbt-core"
+    ],
+    "learningObjectives": [
+      "Create and use seed files",
+      "Know when to use seeds vs sources",
+      "Run dbt seed"
+    ],
+    "problemItSolves": "You have a small CSV of 200 country codes that your SQL models need to JOIN against. Seeds let you commit this CSV to your dbt project and load it as a warehouse table.",
+    "whyItExists": "Small reference data doesn't justify a full ingestion pipeline. Seeds provide a Git-versioned way to manage small static datasets.",
+    "realWorldUsage": "Seeds are used for lookup tables (country codes, currency mappings, department lists) under ~10,000 rows.",
+    "theory": "## dbt Seeds\n\n### How It Works\n1. Place a CSV file in `seeds/` directory:\n```\nseeds/country_codes.csv:\ncountry_code,country_name\nUS,United States\nIN,India\nGB,United Kingdom\n```\n\n2. Run `dbt seed`\n3. A table `country_codes` is created in your warehouse\n4. Reference it in models: `{{ ref('country_codes') }}`\n\n### When NOT to Use Seeds\n- Data > 10,000 rows (use an ingestion tool instead)\n- Data that changes frequently (seeds are for static reference data)\n- Binary or complex data types",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Create a seed file and reference it in a dbt model"
+    ],
+    "nextTopics": [
+      "dbt-sources"
+    ],
+    "previousTopics": [
+      "dbt-core"
+    ],
+    "commonMistakes": [
+      "Using seeds for large datasets (they're meant for small reference data only)"
+    ],
+    "interviewQuestions": [
+      "What are dbt seeds?",
+      "When would you use a seed vs a source?"
+    ],
+    "flashcards": [
+      {
+        "front": "What are dbt Seeds?",
+        "back": "Small CSV files in the seeds/ directory that dbt loads as warehouse tables. Used for static reference data (country codes, lookup tables) under 10K rows."
+      }
+    ],
+    "summary": "dbt seeds load small CSVs as warehouse tables. Use for static reference data; not for large or frequently changing datasets."
+  },
+  {
+    "id": "dbt-sources",
+    "title": "dbt Sources",
+    "phase": "transformation",
+    "phaseLabel": "Transformation (dbt)",
+    "description": "Declare your raw data tables as sources so dbt can track lineage, test freshness, and generate documentation.",
+    "difficulty": "beginner",
+    "estimatedHours": 1,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "junior",
+    "interviewImportance": 3,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Well — fundamental dbt concept",
+    "prerequisites": [
+      "dbt-core"
+    ],
+    "learningObjectives": [
+      "Define sources in schema.yml",
+      "Use {{ source() }} function",
+      "Set up freshness checks"
+    ],
+    "problemItSolves": "Without sources, dbt models reference raw tables as hardcoded strings. Sources centralize these references, enable lineage tracking, and support freshness monitoring.",
+    "whyItExists": "Sources tell dbt about tables that exist outside your dbt project (raw tables loaded by Fivetran, Airbyte, etc.).",
+    "realWorldUsage": "Every production dbt project defines sources. `dbt source freshness` alerts you when raw data hasn't been updated on schedule.",
+    "theory": "## dbt Sources\n\n### Definition (schema.yml)\n```yaml\nsources:\n  - name: raw\n    database: analytics\n    schema: raw_stripe\n    tables:\n      - name: payments\n        loaded_at_field: _etl_loaded_at\n        freshness:\n          warn_after: {count: 12, period: hour}\n          error_after: {count: 24, period: hour}\n```\n\n### Usage in Models\n```sql\n-- Instead of: SELECT * FROM raw_stripe.payments\nSELECT * FROM {{ source('raw', 'payments') }}\n```\n\n### Freshness Check\n```bash\ndbt source freshness\n```\nAlerts if source data is stale.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Define 3 sources and check their freshness"
+    ],
+    "nextTopics": [
+      "dbt-snapshots"
+    ],
+    "previousTopics": [
+      "dbt-seeds"
+    ],
+    "commonMistakes": [
+      "Hardcoding raw table names instead of using {{ source() }}",
+      "Not setting up freshness checks on critical sources"
+    ],
+    "interviewQuestions": [
+      "What are dbt sources?",
+      "How do you check source freshness?",
+      "source() vs ref()?"
+    ],
+    "flashcards": [
+      {
+        "front": "source() vs ref() in dbt?",
+        "back": "source('schema', 'table'): references raw tables external to dbt. ref('model_name'): references other dbt models. Sources enable freshness monitoring and lineage."
+      }
+    ],
+    "summary": "dbt sources declare raw tables with freshness monitoring. Use {{ source() }} instead of hardcoded table names for lineage tracking."
+  },
+  {
+    "id": "dbt-snapshots",
+    "title": "dbt Snapshots",
+    "phase": "transformation",
+    "phaseLabel": "Transformation (dbt)",
+    "description": "Track historical changes to source data over time — dbt's implementation of Slowly Changing Dimensions (Type 2).",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "good-to-know",
+    "interviewWeight": 2,
+    "careerLevel": "mid",
+    "interviewImportance": 2,
+    "productionImportance": 4,
+    "interviewRecommendation": "Know Concept — connects SCD theory to practical implementation",
+    "prerequisites": [
+      "dbt-core",
+      "scd"
+    ],
+    "learningObjectives": [
+      "Create snapshot files",
+      "Understand timestamp vs check strategy",
+      "Query snapshot history"
+    ],
+    "problemItSolves": "Your source customer table only has the current state. When a customer changes their address, the old address is overwritten. Snapshots capture every historical state.",
+    "whyItExists": "Implementing SCD Type 2 manually is tedious. dbt snapshots automate it — they compare source data to the snapshot table and track all changes.",
+    "realWorldUsage": "Used to track changes in customer attributes, product prices, employee records, and any slowly changing dimension.",
+    "theory": "## dbt Snapshots\n\n### How It Works\n```sql\n-- snapshots/customer_snapshot.sql\n{% snapshot customer_snapshot %}\n  {{\n    config(\n      target_schema='snapshots',\n      unique_key='customer_id',\n      strategy='timestamp',\n      updated_at='updated_at'\n    )\n  }}\n  SELECT * FROM {{ source('raw', 'customers') }}\n{% endsnapshot %}\n```\n\n### Result Table\n```\n| customer_id | name | address | dbt_valid_from | dbt_valid_to |\n|-------------|------|---------|----------------|-------------|\n| 1 | Alice | NYC | 2024-01-01 | 2024-06-15 |\n| 1 | Alice | SF | 2024-06-15 | NULL |\n```\n`dbt_valid_to = NULL` means this is the CURRENT record.\n\n### Strategies\n- **Timestamp**: Uses an `updated_at` column. Preferred.\n- **Check**: Compares all column values. Use when no timestamp exists.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Create a snapshot for a customer table and simulate an address change"
+    ],
+    "nextTopics": [
+      "dbt-incremental"
+    ],
+    "previousTopics": [
+      "scd"
+    ],
+    "commonMistakes": [
+      "Using 'check' strategy on tables with many columns (slow)",
+      "Not running snapshots frequently enough to capture all changes"
+    ],
+    "interviewQuestions": [
+      "What are dbt snapshots?",
+      "How do snapshots implement SCD Type 2?",
+      "Timestamp vs check strategy?"
+    ],
+    "flashcards": [
+      {
+        "front": "dbt Snapshots: Timestamp vs Check Strategy?",
+        "back": "Timestamp: uses updated_at column to detect changes. Faster, preferred. Check: compares all column values. Use when no timestamp exists."
+      }
+    ],
+    "summary": "dbt snapshots automate SCD Type 2 by tracking historical changes. Use timestamp strategy when possible; check strategy as fallback."
+  },
+  {
+    "id": "dbt-incremental",
+    "title": "dbt Incremental Models",
+    "phase": "transformation",
+    "phaseLabel": "Transformation (dbt)",
+    "description": "Process only NEW or changed data instead of rebuilding the entire table — essential for large datasets.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 4,
+    "careerLevel": "junior",
+    "interviewImportance": 4,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Deeply — critical for production dbt at scale",
+    "prerequisites": [
+      "dbt-models"
+    ],
+    "learningObjectives": [
+      "Create incremental models",
+      "Use is_incremental() macro",
+      "Handle late-arriving data",
+      "Choose merge vs append strategy"
+    ],
+    "problemItSolves": "A `dbt run` on a 500GB fact table takes 4 hours because it rebuilds from scratch every time. Incremental models process only the new data since the last run, reducing it to 5 minutes.",
+    "whyItExists": "As data volumes grow, full-refresh models become too slow and expensive. Incremental models are the standard for production dbt projects.",
+    "realWorldUsage": "Most production fact table models are incremental. They use a high-water mark (e.g., MAX(updated_at)) to process only new rows.",
+    "theory": "## Incremental Models\n\n### Basic Pattern\n```sql\n{{ config(\n  materialized='incremental',\n  unique_key='order_id'\n) }}\n\nSELECT * FROM {{ source('raw', 'orders') }}\n\n{% if is_incremental() %}\n  WHERE updated_at > (SELECT MAX(updated_at) FROM {{ this }})\n{% endif %}\n```\n\n### How It Works\n- **First run**: Full table creation (like `table` materialization)\n- **Subsequent runs**: Only processes rows WHERE updated_at > last max\n- **unique_key**: Enables MERGE (upsert) to handle updates\n\n### Strategies\n| Strategy | Behavior |\n|----------|----------|\n| `append` | INSERT only, no dedup |\n| `merge` | UPSERT (INSERT + UPDATE). Default when unique_key is set |\n| `delete+insert` | Delete matching rows, then insert |",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Convert a table model to incremental with a unique_key"
+    ],
+    "nextTopics": [
+      "dbt-best-practices"
+    ],
+    "previousTopics": [
+      "dbt-models"
+    ],
+    "commonMistakes": [
+      "Forgetting is_incremental() check (processes all data every run)",
+      "Not setting unique_key (causes duplicates instead of upserts)",
+      "Not handling late-arriving data"
+    ],
+    "interviewQuestions": [
+      "How do incremental models work in dbt?",
+      "What is is_incremental()?",
+      "How do you handle late-arriving data?",
+      "merge vs append strategy?"
+    ],
+    "flashcards": [
+      {
+        "front": "How does dbt incremental work?",
+        "back": "First run: full table build. Subsequent runs: only processes rows WHERE updated_at > MAX(updated_at) from previous run. Uses unique_key for MERGE/upsert."
+      }
+    ],
+    "summary": "Incremental models process only new/changed data using a high-water mark. Essential for production dbt at scale. Use unique_key for upsert behavior."
+  },
+  {
+    "id": "dbt-best-practices",
+    "title": "dbt Best Practices & Project Structure",
+    "phase": "transformation",
+    "phaseLabel": "Transformation (dbt)",
+    "description": "Organize your dbt project for maintainability — staging, intermediate, and mart layers.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "mid",
+    "interviewImportance": 3,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Well — shows production experience with dbt",
+    "prerequisites": [
+      "dbt-models",
+      "dbt-incremental",
+      "dbt-tests"
+    ],
+    "learningObjectives": [
+      "Structure models into staging/intermediate/marts",
+      "Follow naming conventions",
+      "Write DRY SQL with CTEs",
+      "Implement the dbt project evaluation framework"
+    ],
+    "problemItSolves": "Without a clear structure, a dbt project with 200+ models becomes unmaintainable. Best practices ensure consistency and make onboarding new team members easy.",
+    "whyItExists": "dbt Labs published their style guide and project structure recommendations based on patterns from thousands of production dbt projects.",
+    "realWorldUsage": "Every mature dbt project follows the staging → intermediate → mart pattern. It's the industry standard.",
+    "theory": "## dbt Project Structure\n\n### Recommended Layer Pattern\n```\nmodels/\n├── staging/          # 1:1 with source tables\n│   ├── stripe/\n│   │   ├── stg_stripe__payments.sql\n│   │   └── stg_stripe__customers.sql\n│   └── _stripe__sources.yml\n├── intermediate/     # Business logic, joins\n│   └── int_customer_payments.sql\n└── marts/            # Final business tables\n    ├── finance/\n    │   └── fct_revenue.sql\n    └── marketing/\n        └── dim_customers.sql\n```\n\n### Naming Conventions\n- `stg_`: Staging (1:1 source mirror, renamed columns)\n- `int_`: Intermediate (business logic, joins)\n- `fct_`: Fact tables (measurements)\n- `dim_`: Dimension tables (context)\n\n### Key Rules\n1. Staging models are always `views` (cheap to rebuild)\n2. Mart models are `tables` or `incremental`\n3. Never reference `source()` outside staging layer\n4. Use CTEs instead of subqueries",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Reorganize a flat dbt project into staging/intermediate/marts layers"
+    ],
+    "nextTopics": [
+      "airflow-intro"
+    ],
+    "previousTopics": [
+      "dbt-incremental"
+    ],
+    "commonMistakes": [
+      "Referencing source() in mart models (always go through staging)",
+      "Using subqueries instead of CTEs",
+      "Not following naming conventions"
+    ],
+    "interviewQuestions": [
+      "How do you structure a dbt project?",
+      "staging vs intermediate vs marts?",
+      "Naming conventions in dbt?"
+    ],
+    "flashcards": [
+      {
+        "front": "dbt Project Layers?",
+        "back": "Staging (stg_): 1:1 source mirrors, views. Intermediate (int_): business logic, joins. Marts (fct_/dim_): final business tables. Never reference source() outside staging."
+      }
+    ],
+    "summary": "Structure dbt projects in 3 layers: staging (source mirrors), intermediate (business logic), marts (final tables). Follow stg_/int_/fct_/dim_ naming."
+  },
+  {
+    "id": "airflow-hooks",
+    "title": "Airflow Hooks & Connections",
+    "phase": "orchestration",
+    "phaseLabel": "Orchestration",
+    "description": "Hooks provide interfaces to external systems (databases, APIs, cloud). Connections store credentials.",
+    "difficulty": "intermediate",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 2,
+    "careerLevel": "junior",
+    "interviewImportance": 2,
+    "productionImportance": 4,
+    "interviewRecommendation": "Know Concept",
+    "prerequisites": [
+      "airflow-intro"
+    ],
+    "learningObjectives": [
+      "Define hooks",
+      "Configure connections in Airflow UI",
+      "Use hooks in custom operators"
+    ],
+    "problemItSolves": "Your Airflow DAG needs to connect to Postgres, S3, and Slack. Without hooks, you'd hardcode credentials. Hooks + Connections centralize this.",
+    "whyItExists": "Hooks abstract away the complexity of connecting to external systems. Connections store the credentials securely.",
+    "realWorldUsage": "Every Airflow deployment uses connections. The most common: PostgresHook, S3Hook, SlackHook.",
+    "theory": "## Hooks & Connections\n\n### Connections\nStored in Airflow's metadata database. Configure via UI: Admin > Connections.\n```\nConn ID: my_postgres\nConn Type: Postgres\nHost: db.example.com\nSchema: analytics\nLogin: airflow_user\nPassword: ****\nPort: 5432\n```\n\n### Using Hooks\n```python\nfrom airflow.providers.postgres.hooks.postgres import PostgresHook\n\nhook = PostgresHook(postgres_conn_id='my_postgres')\ndf = hook.get_pandas_df('SELECT * FROM orders')\n```",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "operators"
+    ],
+    "previousTopics": [
+      "airflow-intro"
+    ],
+    "commonMistakes": [
+      "Hardcoding credentials in DAG files"
+    ],
+    "interviewQuestions": [
+      "What is an Airflow Hook?",
+      "How do Connections work?"
+    ],
+    "flashcards": [
+      {
+        "front": "Airflow Hook vs Connection?",
+        "back": "Connection: stores credentials (conn_id, host, login, password). Hook: Python class that uses a Connection to interact with an external system (PostgresHook, S3Hook)."
+      }
+    ],
+    "summary": "Hooks provide Python interfaces to external systems. Connections store credentials securely. Configure connections in Airflow UI."
+  },
+  {
+    "id": "airflow-taskflow",
+    "title": "TaskFlow API",
+    "phase": "orchestration",
+    "phaseLabel": "Orchestration",
+    "description": "Airflow 2.x's Pythonic way to define DAGs using decorated functions instead of operator classes.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "junior",
+    "interviewImportance": 3,
+    "productionImportance": 4,
+    "interviewRecommendation": "Learn Well — modern Airflow development pattern",
+    "prerequisites": [
+      "airflow-dags"
+    ],
+    "learningObjectives": [
+      "Use @task decorator",
+      "Pass data between tasks automatically",
+      "Convert classic DAGs to TaskFlow"
+    ],
+    "problemItSolves": "Classic Airflow DAGs require verbose operator instantiation and manual XCom usage. TaskFlow lets you write normal Python functions with @task decorators.",
+    "whyItExists": "Introduced in Airflow 2.0 to simplify DAG authoring. Reduces boilerplate by 50-70%.",
+    "realWorldUsage": "All new Airflow projects should use TaskFlow API. It's the recommended pattern in Airflow 2.x+.",
+    "theory": "## TaskFlow API\n\n### Classic Style (Verbose)\n```python\nwith DAG('classic_dag', ...) as dag:\n    extract = PythonOperator(\n        task_id='extract',\n        python_callable=extract_fn\n    )\n    transform = PythonOperator(\n        task_id='transform',\n        python_callable=transform_fn\n    )\n    extract >> transform\n```\n\n### TaskFlow Style (Clean)\n```python\n@dag(schedule='@daily', start_date=datetime(2024,1,1))\ndef my_pipeline():\n    @task\n    def extract():\n        return {'data': [1,2,3]}\n    \n    @task\n    def transform(data):\n        return [x * 2 for x in data['data']]\n    \n    raw = extract()\n    transform(raw)  # XCom passed automatically!\n\nmy_pipeline()\n```",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Rewrite a classic DAG using TaskFlow API"
+    ],
+    "nextTopics": [
+      "airflow-xcom"
+    ],
+    "previousTopics": [
+      "airflow-dags"
+    ],
+    "commonMistakes": [
+      "Using classic style for new Airflow 2.x projects"
+    ],
+    "interviewQuestions": [
+      "What is the TaskFlow API?",
+      "How does it handle XCom?",
+      "TaskFlow vs classic operators?"
+    ],
+    "flashcards": [
+      {
+        "front": "TaskFlow API vs Classic Airflow?",
+        "back": "TaskFlow: @task decorator, automatic XCom, Pythonic. Classic: PythonOperator, manual XCom push/pull. TaskFlow is recommended for Airflow 2.x+."
+      }
+    ],
+    "summary": "TaskFlow API uses @task decorators for clean DAG authoring with automatic XCom. The recommended pattern for Airflow 2.x+."
+  },
+  {
+    "id": "airflow-xcom",
+    "title": "XCom (Cross-Communication)",
+    "phase": "orchestration",
+    "phaseLabel": "Orchestration",
+    "description": "Pass small pieces of data between Airflow tasks — like the output of one task becoming the input of another.",
+    "difficulty": "intermediate",
+    "estimatedHours": 1,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "junior",
+    "interviewImportance": 3,
+    "productionImportance": 4,
+    "interviewRecommendation": "Learn Well — fundamental Airflow concept",
+    "prerequisites": [
+      "airflow-dags"
+    ],
+    "learningObjectives": [
+      "Push and pull XCom values",
+      "Understand XCom size limits",
+      "Use TaskFlow automatic XCom"
+    ],
+    "problemItSolves": "Task A extracts a file path. Task B needs that path to process the file. XCom passes data between them.",
+    "whyItExists": "Airflow tasks run in separate processes (possibly on different machines). XCom is the mechanism for inter-task communication.",
+    "realWorldUsage": "XCom is used in nearly every DAG. TaskFlow API makes it automatic — return values are automatically pushed to XCom.",
+    "theory": "## XCom\n\n### Manual Push/Pull\n```python\n# Task A: Push\ndef extract(**context):\n    context['ti'].xcom_push(key='file_path', value='/data/file.csv')\n\n# Task B: Pull\ndef transform(**context):\n    path = context['ti'].xcom_pull(task_ids='extract', key='file_path')\n```\n\n### TaskFlow (Automatic)\n```python\n@task\ndef extract():\n    return '/data/file.csv'  # Auto-pushed to XCom\n\n@task\ndef transform(path):  # Auto-pulled from XCom\n    print(path)\n```\n\n### Limitations\n- XCom is stored in the metadata database\n- **Max size ~48KB** (default SQLite) to ~1GB (Postgres)\n- Do NOT pass large DataFrames via XCom\n- For large data: write to S3/GCS, pass the path via XCom",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "airflow-pools"
+    ],
+    "previousTopics": [
+      "airflow-dags"
+    ],
+    "commonMistakes": [
+      "Passing large DataFrames through XCom (use file paths instead)"
+    ],
+    "interviewQuestions": [
+      "What is XCom?",
+      "XCom size limits?",
+      "How do you pass large data between tasks?"
+    ],
+    "flashcards": [
+      {
+        "front": "XCom Size Limit?",
+        "back": "XCom is stored in the Airflow metadata DB. Keep values small (paths, counts, status). For large data, write to S3/GCS and pass the file path via XCom."
+      }
+    ],
+    "summary": "XCom passes small data between Airflow tasks. Use for paths, counts, and status — not large datasets. TaskFlow makes XCom automatic."
+  },
+  {
+    "id": "airflow-prod-best-practices",
+    "title": "Airflow Production Best Practices",
+    "phase": "orchestration",
+    "phaseLabel": "Orchestration",
+    "description": "Battle-tested patterns for running Airflow reliably in production at scale.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "mid",
+    "interviewImportance": 3,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Well — shows production maturity",
+    "prerequisites": [
+      "airflow-dags",
+      "operators",
+      "airflow-arch"
+    ],
+    "learningObjectives": [
+      "Design idempotent DAGs",
+      "Implement proper error handling",
+      "Set up monitoring and alerting",
+      "Configure resource management"
+    ],
+    "problemItSolves": "Your development DAGs work fine, but in production they fail silently, consume too many resources, and are impossible to debug. Best practices fix this.",
+    "whyItExists": "Accumulated wisdom from running Airflow at companies like Airbnb (who created it), Lyft, and Spotify.",
+    "realWorldUsage": "Senior DEs are expected to know these patterns. They're the difference between a hobby project and a production-grade pipeline.",
+    "theory": "## Production Best Practices\n\n### 1. Idempotent DAGs\nEvery DAG should produce the same result when re-run.\n```python\n# Bad: INSERT INTO (creates duplicates on retry)\n# Good: MERGE/UPSERT or DELETE+INSERT\n```\n\n### 2. Atomic Tasks\nEach task should either fully succeed or fully fail. No partial state.\n\n### 3. Don't Use Latest, Use Execution Date\n```python\n# Bad: process today's data\n# Good: process {{ ds }} (execution date)\n```\n\n### 4. Set Proper Retries\n```python\ndefault_args = {\n    'retries': 3,\n    'retry_delay': timedelta(minutes=5),\n    'retry_exponential_backoff': True,\n}\n```\n\n### 5. Use SLAs and Alerts\n```python\nsla=timedelta(hours=2)  # Alert if task takes > 2 hours\n```",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Review an existing DAG and apply 5 best practices"
+    ],
+    "nextTopics": [
+      "kafka-overview"
+    ],
+    "previousTopics": [
+      "airflow-arch"
+    ],
+    "commonMistakes": [
+      "Not setting retries on production tasks",
+      "Using `start_date=datetime.now()` instead of a fixed date"
+    ],
+    "interviewQuestions": [
+      "What makes a DAG idempotent?",
+      "How do you handle retries?",
+      "What is the difference between execution_date and logical_date?"
+    ],
+    "flashcards": [
+      {
+        "front": "Key Airflow Production Rules?",
+        "back": "1. Idempotent tasks. 2. Atomic operations. 3. Use execution_date, not datetime.now(). 4. Set retries with exponential backoff. 5. SLAs and alerting."
+      }
+    ],
+    "summary": "Production Airflow requires idempotent tasks, atomic operations, execution_date over now(), proper retries, and SLA alerting."
+  },
+  {
+    "id": "kafka-topics",
+    "title": "Kafka Topics & Partitions (Deep Dive)",
+    "phase": "streaming",
+    "phaseLabel": "Streaming",
+    "description": "A Kafka topic is a named stream of records, partitioned for parallelism and replicated for fault tolerance.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 4,
+    "careerLevel": "junior",
+    "interviewImportance": 4,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Deeply — core Kafka architecture concept",
+    "prerequisites": [
+      "kafka-overview"
+    ],
+    "learningObjectives": [
+      "Create and configure topics",
+      "Understand partition count impact",
+      "Configure replication factor"
+    ],
+    "problemItSolves": "You need to stream 100K events/second. A single queue can't handle this. Kafka topics split the stream across multiple partitions for parallel processing.",
+    "whyItExists": "Topics + partitions are the core abstraction that makes Kafka horizontally scalable. More partitions = more parallelism.",
+    "realWorldUsage": "Production Kafka clusters at companies like LinkedIn handle 7 trillion messages per day across millions of partitions.",
+    "theory": "## Kafka Topics\n\n### Anatomy\n```\nTopic: orders\n├── Partition 0: [msg1, msg4, msg7...]\n├── Partition 1: [msg2, msg5, msg8...]\n└── Partition 2: [msg3, msg6, msg9...]\n```\n\n### Key Decisions\n| Setting | Recommendation |\n|---------|---------------|\n| Partitions | Start with 6-12 per topic |\n| Replication Factor | 3 for production |\n| Retention | 7 days (or infinite with tiered storage) |\n\n### Partition Key\n```python\nproducer.send('orders', key=b'customer_123', value=order_json)\n```\nMessages with the SAME key always go to the SAME partition. Ensures ordering per customer.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Create a topic with 6 partitions and RF=3"
+    ],
+    "nextTopics": [
+      "kafka-producer"
+    ],
+    "previousTopics": [
+      "kafka-overview"
+    ],
+    "commonMistakes": [
+      "Setting partition count too low (can't increase easily)",
+      "Setting partition count too high (metadata overhead)"
+    ],
+    "interviewQuestions": [
+      "How does Kafka partition data?",
+      "What is a partition key?",
+      "How do you choose the number of partitions?"
+    ],
+    "flashcards": [
+      {
+        "front": "How does Kafka partitioning work?",
+        "back": "Messages are assigned to partitions by hashing the key. Same key → same partition → guaranteed ordering per key. More partitions → more parallelism."
+      }
+    ],
+    "summary": "Kafka topics are split into partitions for parallelism. Same key → same partition for ordering. Use 6-12 partitions per topic, RF=3 for production."
+  },
+  {
+    "id": "kafka-producer",
+    "title": "Kafka Producer",
+    "phase": "streaming",
+    "phaseLabel": "Streaming",
+    "description": "The client that publishes messages to Kafka topics — with acknowledgment levels, serialization, and batching.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "junior",
+    "interviewImportance": 3,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Well — essential for building Kafka pipelines",
+    "prerequisites": [
+      "kafka-topics"
+    ],
+    "learningObjectives": [
+      "Configure producer acks levels",
+      "Understand serialization",
+      "Optimize batching and compression"
+    ],
+    "problemItSolves": "You need to send 50K events/second to Kafka reliably. The producer configuration determines throughput, durability, and latency trade-offs.",
+    "whyItExists": "Producers are the entry point for all data into Kafka. Their configuration directly impacts data loss risk and throughput.",
+    "realWorldUsage": "Every application that sends data to Kafka uses a producer — from microservices logging events to CDC tools like Debezium.",
+    "theory": "## Kafka Producer\n\n### Acknowledgment Levels (acks)\n| Setting | Durability | Throughput |\n|---------|-----------|------------|\n| acks=0 | No guarantee | Highest |\n| acks=1 | Leader only | Medium |\n| acks=all | All replicas | Lowest (safest) |\n\n### Python Example\n```python\nfrom kafka import KafkaProducer\nimport json\n\nproducer = KafkaProducer(\n    bootstrap_servers='kafka:9092',\n    value_serializer=lambda v: json.dumps(v).encode('utf-8'),\n    acks='all',\n    retries=3\n)\n\nproducer.send('orders', key=b'cust_1', value={'item': 'laptop', 'price': 999})\nproducer.flush()\n```\n\n### Batching\nProducers batch messages before sending to reduce network calls.\n- `batch.size`: Max batch size in bytes (default 16KB)\n- `linger.ms`: Wait time to fill batch (default 0ms)",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Write a Python producer that sends 1000 messages to a topic"
+    ],
+    "nextTopics": [
+      "kafka-consumer"
+    ],
+    "previousTopics": [
+      "kafka-topics"
+    ],
+    "commonMistakes": [
+      "Using acks=0 for critical data (risk of data loss)",
+      "Not calling flush() before shutdown"
+    ],
+    "interviewQuestions": [
+      "What are Kafka acks levels?",
+      "acks=0 vs acks=1 vs acks=all?",
+      "How does producer batching work?"
+    ],
+    "flashcards": [
+      {
+        "front": "Kafka acks=0 vs acks=1 vs acks=all?",
+        "back": "acks=0: fire and forget (fastest, may lose data). acks=1: wait for leader ack (balanced). acks=all: wait for all replicas (safest, slowest). Use acks=all for production."
+      }
+    ],
+    "summary": "Kafka producers send messages with configurable durability (acks). Use acks=all for production. Optimize with batching and compression."
+  },
+  {
+    "id": "kafka-consumer",
+    "title": "Kafka Consumer & Consumer Groups",
+    "phase": "streaming",
+    "phaseLabel": "Streaming",
+    "description": "Consumers read messages from Kafka topics. Consumer groups enable parallel consumption and automatic load balancing.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 4,
+    "careerLevel": "junior",
+    "interviewImportance": 4,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Deeply — fundamental Kafka consumption pattern",
+    "prerequisites": [
+      "kafka-producer"
+    ],
+    "learningObjectives": [
+      "Understand consumer groups",
+      "Handle offset commits",
+      "Know rebalancing behavior"
+    ],
+    "problemItSolves": "You have a topic with 12 partitions. One consumer can't keep up. Consumer groups let you run 12 consumers in parallel, each reading from a different partition.",
+    "whyItExists": "Consumer groups are Kafka's killer feature for scalable consumption. They automatically distribute partitions across consumers.",
+    "realWorldUsage": "Every Kafka-based system uses consumer groups. They're how you scale consumption horizontally.",
+    "theory": "## Consumer Groups\n\n### How It Works\n```\nTopic: orders (12 partitions)\nConsumer Group: order-processor\n  Consumer 1 → Partitions 0,1,2,3\n  Consumer 2 → Partitions 4,5,6,7\n  Consumer 3 → Partitions 8,9,10,11\n```\n\n### Key Rules\n1. Each partition is consumed by **exactly one consumer** in a group\n2. A consumer can read from **multiple partitions**\n3. If consumers > partitions, some consumers are **idle**\n4. If a consumer dies, its partitions are **rebalanced** to others\n\n### Offset Commits\n```python\nconsumer = KafkaConsumer(\n    'orders',\n    group_id='order-processor',\n    auto_offset_reset='earliest',\n    enable_auto_commit=True,  # or False for manual\n)\n```\nOffsets track which messages have been consumed. Committed offsets ensure no re-processing after restart.",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Write a consumer group with 3 consumers and observe partition assignment"
+    ],
+    "nextTopics": [
+      "kafka-schema-registry"
+    ],
+    "previousTopics": [
+      "kafka-producer"
+    ],
+    "commonMistakes": [
+      "Having more consumers than partitions (extras sit idle)",
+      "Not committing offsets properly (causes re-processing)"
+    ],
+    "interviewQuestions": [
+      "What is a consumer group?",
+      "How are partitions assigned?",
+      "What happens when a consumer dies?",
+      "What are offsets?"
+    ],
+    "flashcards": [
+      {
+        "front": "Kafka Consumer Groups: Key Rule?",
+        "back": "Each partition is consumed by exactly 1 consumer in a group. If consumers > partitions, extras are idle. If a consumer fails, its partitions are rebalanced to remaining consumers."
+      }
+    ],
+    "summary": "Consumer groups distribute partitions across consumers for parallel processing. Each partition → exactly 1 consumer. Auto-rebalance on failure."
+  },
+  {
+    "id": "kafka-schema-registry",
+    "title": "Schema Registry",
+    "phase": "streaming",
+    "phaseLabel": "Streaming",
+    "description": "A centralized schema store that ensures Kafka producers and consumers agree on the data format.",
+    "difficulty": "intermediate",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 2,
+    "careerLevel": "mid",
+    "interviewImportance": 2,
+    "productionImportance": 4,
+    "interviewRecommendation": "Know Concept — important for production Kafka",
+    "prerequisites": [
+      "kafka-consumer"
+    ],
+    "learningObjectives": [
+      "Register Avro/JSON schemas",
+      "Understand compatibility modes",
+      "Use Schema Registry with producers/consumers"
+    ],
+    "problemItSolves": "Producer sends {'name': 'Alice', 'age': 30}. Then changes to {'name': 'Alice', 'years': 30}. Consumer breaks because 'age' is now 'years'. Schema Registry prevents this.",
+    "whyItExists": "Without schema enforcement, producers can send anything, breaking downstream consumers. Schema Registry is the contract between producers and consumers.",
+    "realWorldUsage": "Confluent Schema Registry is the standard. Supports Avro, Protobuf, and JSON Schema.",
+    "theory": "## Schema Registry\n\n### How It Works\n1. Producer registers schema → gets schema ID\n2. Producer sends message with schema ID prefix\n3. Consumer reads schema ID → fetches schema from registry\n4. Consumer deserializes using the registered schema\n\n### Compatibility Modes\n| Mode | Rule |\n|------|------|\n| BACKWARD | New schema can read old data |\n| FORWARD | Old schema can read new data |\n| FULL | Both backward and forward |\n| NONE | No compatibility check |",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "kafka-connect"
+    ],
+    "previousTopics": [
+      "kafka-consumer"
+    ],
+    "commonMistakes": [
+      "Not using Schema Registry in production (leads to broken consumers)"
+    ],
+    "interviewQuestions": [
+      "What is Schema Registry?",
+      "BACKWARD vs FORWARD compatibility?"
+    ],
+    "flashcards": [
+      {
+        "front": "Schema Registry Compatibility Modes?",
+        "back": "BACKWARD: new schema reads old data (safe column addition). FORWARD: old schema reads new data. FULL: both directions. NONE: no enforcement."
+      }
+    ],
+    "summary": "Schema Registry stores and enforces data schemas for Kafka. Ensures backward/forward compatibility between producers and consumers."
+  },
+  {
+    "id": "kafka-connect",
+    "title": "Kafka Connect & Debezium",
+    "phase": "streaming",
+    "phaseLabel": "Streaming",
+    "description": "Pre-built connectors that move data in and out of Kafka without writing code.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "mid",
+    "interviewImportance": 3,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Well — the standard for Kafka integrations",
+    "prerequisites": [
+      "kafka-schema-registry"
+    ],
+    "learningObjectives": [
+      "Set up source and sink connectors",
+      "Configure Debezium for CDC",
+      "Understand connector architecture"
+    ],
+    "problemItSolves": "You need to stream data from Postgres to Kafka to S3. Instead of writing custom producers/consumers, Kafka Connect provides pre-built connectors.",
+    "whyItExists": "Writing custom Kafka producers for every data source is tedious. Kafka Connect standardizes data integration with 200+ pre-built connectors.",
+    "realWorldUsage": "Debezium (CDC connector) and S3 Sink are the most popular connectors. They're used at nearly every company with Kafka.",
+    "theory": "## Kafka Connect\n\n### Architecture\n```\nSource Systems → Source Connectors → Kafka → Sink Connectors → Target Systems\n```\n\n### Common Connectors\n| Connector | Type | Use Case |\n|-----------|------|----------|\n| Debezium (Postgres) | Source | CDC from databases |\n| S3 Sink | Sink | Write Kafka to S3 |\n| JDBC Source | Source | Poll database tables |\n| Elasticsearch Sink | Sink | Search indexing |\n\n### Debezium CDC\nReads the Postgres WAL and streams every INSERT/UPDATE/DELETE as a Kafka message.\n```json\n{\n  \"op\": \"u\",\n  \"before\": {\"id\": 1, \"name\": \"Alice\", \"city\": \"NYC\"},\n  \"after\":  {\"id\": 1, \"name\": \"Alice\", \"city\": \"SF\"}\n}\n```",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Set up Debezium with Docker Compose"
+    ],
+    "nextTopics": [
+      "flink"
+    ],
+    "previousTopics": [
+      "kafka-schema-registry"
+    ],
+    "commonMistakes": [
+      "Writing custom producers when a connector already exists"
+    ],
+    "interviewQuestions": [
+      "What is Kafka Connect?",
+      "What is Debezium?",
+      "Source vs Sink connectors?"
+    ],
+    "flashcards": [
+      {
+        "front": "What is Debezium?",
+        "back": "An open-source CDC tool that runs as a Kafka Connect source connector. Reads database transaction logs (WAL/Binlog) and streams every change as a Kafka message."
+      }
+    ],
+    "summary": "Kafka Connect provides pre-built data integration. Debezium is the standard CDC connector. 200+ connectors available for common systems."
+  },
+  {
+    "id": "aws-glue",
+    "title": "AWS Glue",
+    "phase": "cloud",
+    "phaseLabel": "AWS Cloud",
+    "description": "AWS's serverless ETL service — crawlers for schema discovery, Spark-based jobs for transformation, and the Glue Data Catalog.",
+    "difficulty": "intermediate",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "junior",
+    "interviewImportance": 3,
+    "productionImportance": 4,
+    "interviewRecommendation": "Learn Well — the default ETL service on AWS",
+    "prerequisites": [
+      "s3",
+      "spark-dataframes"
+    ],
+    "learningObjectives": [
+      "Set up Glue crawlers",
+      "Write Glue ETL jobs",
+      "Use the Glue Data Catalog"
+    ],
+    "problemItSolves": "You have raw data in S3 and need to transform it without managing any infrastructure. Glue provides serverless Spark + automatic schema discovery.",
+    "whyItExists": "AWS created Glue to compete with Databricks as a managed Spark service. It also serves as the default data catalog for AWS analytics services.",
+    "realWorldUsage": "Glue Crawlers scan S3 and auto-detect schemas. Glue Jobs run PySpark transformations. Athena queries use the Glue Catalog.",
+    "theory": "## AWS Glue\n\n### Components\n1. **Crawlers**: Scan data in S3, detect schema, populate the Data Catalog\n2. **Data Catalog**: Central metadata store (tables, schemas, partitions)\n3. **ETL Jobs**: Serverless PySpark/Python Shell jobs\n4. **Glue Studio**: Visual ETL designer\n\n### Glue vs Databricks vs EMR\n| Feature | Glue | Databricks | EMR |\n|---------|------|-----------|-----|\n| Management | Serverless | Managed | Semi-managed |\n| Cost | Pay per DPU-hour | Pay per DBU | Pay per instance-hour |\n| Best for | Simple ETL | Complex analytics | Custom Spark |",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Create a Glue Crawler and ETL job"
+    ],
+    "nextTopics": [
+      "aws-athena"
+    ],
+    "previousTopics": [
+      "s3"
+    ],
+    "commonMistakes": [
+      "Using Glue for complex analytics (use Databricks or EMR instead)"
+    ],
+    "interviewQuestions": [
+      "What is AWS Glue?",
+      "Glue vs Databricks?",
+      "What is the Glue Data Catalog?"
+    ],
+    "flashcards": [
+      {
+        "front": "AWS Glue Components?",
+        "back": "1. Crawlers: auto-detect schemas. 2. Data Catalog: central metadata store. 3. ETL Jobs: serverless PySpark. 4. Glue Studio: visual ETL designer."
+      }
+    ],
+    "summary": "AWS Glue provides serverless ETL (Spark), schema discovery (Crawlers), and metadata management (Data Catalog). Default ETL service on AWS."
+  },
+  {
+    "id": "aws-athena",
+    "title": "Amazon Athena",
+    "phase": "cloud",
+    "phaseLabel": "AWS Cloud",
+    "description": "Query S3 data directly using SQL — no infrastructure to manage, pay per query.",
+    "difficulty": "beginner",
+    "estimatedHours": 1,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "junior",
+    "interviewImportance": 3,
+    "productionImportance": 4,
+    "interviewRecommendation": "Learn Well — the easiest way to query S3 data",
+    "prerequisites": [
+      "s3",
+      "aws-glue"
+    ],
+    "learningObjectives": [
+      "Write Athena queries",
+      "Optimize with partitioning and Parquet",
+      "Understand pricing model"
+    ],
+    "problemItSolves": "You have 10TB of CSV files in S3. You want to run SQL queries without setting up a data warehouse. Athena lets you query S3 directly.",
+    "whyItExists": "AWS created Athena (based on Presto) for ad-hoc querying of S3 data. It's the simplest way to query a data lake.",
+    "realWorldUsage": "Athena is used for ad-hoc exploration and lightweight analytics. For heavy workloads, use Redshift or Databricks.",
+    "theory": "## Amazon Athena\n\n### How It Works\n1. Data lives in S3 (Parquet, CSV, JSON, ORC)\n2. Glue Crawler creates table definitions in the Glue Catalog\n3. Athena queries the data using standard SQL\n4. Pay $5 per TB scanned\n\n### Cost Optimization\n- Use **Parquet/ORC** instead of CSV (columnar = scan less data)\n- **Partition** data by date/region (only scan relevant partitions)\n- **CTAS** (CREATE TABLE AS SELECT) to convert CSV to Parquet\n\n### Example\n```sql\nSELECT date, SUM(revenue) \nFROM orders \nWHERE date = '2024-01-01'  -- Partition pruning!\nGROUP BY date\n```",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Query a partitioned Parquet dataset in Athena"
+    ],
+    "nextTopics": [
+      "aws-lambda"
+    ],
+    "previousTopics": [
+      "aws-glue"
+    ],
+    "commonMistakes": [
+      "Querying CSV files in Athena (use Parquet for 90% cost reduction)"
+    ],
+    "interviewQuestions": [
+      "What is Athena?",
+      "How do you optimize Athena costs?",
+      "Athena vs Redshift?"
+    ],
+    "flashcards": [
+      {
+        "front": "Athena Cost Optimization?",
+        "back": "1. Use Parquet/ORC (columnar). 2. Partition data. 3. Use CTAS to convert CSV to Parquet. Pricing: $5/TB scanned. Parquet can reduce costs by 90%."
+      }
+    ],
+    "summary": "Athena queries S3 data using SQL. $5/TB scanned. Optimize with Parquet format and data partitioning for 90% cost reduction."
+  },
+  {
+    "id": "aws-lambda",
+    "title": "AWS Lambda (Overview)",
+    "phase": "cloud",
+    "phaseLabel": "AWS Cloud",
+    "description": "Run code without managing servers — triggered by events like S3 uploads, API calls, or schedules.",
+    "difficulty": "beginner",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 2,
+    "careerLevel": "junior",
+    "interviewImportance": 2,
+    "productionImportance": 3,
+    "interviewRecommendation": "Know Concept — useful for lightweight pipeline triggers",
+    "prerequisites": [
+      "aws-iam"
+    ],
+    "learningObjectives": [
+      "Understand Lambda functions",
+      "Know common triggers (S3, API Gateway, EventBridge)",
+      "Understand limitations (15 min timeout, 10GB memory)"
+    ],
+    "problemItSolves": "A new file lands in S3. You want to automatically trigger a Glue job. Lambda acts as the event-driven 'glue' between AWS services.",
+    "whyItExists": "Lambda enables event-driven architectures without managing servers. For DEs, it's primarily used as a lightweight trigger/orchestrator.",
+    "realWorldUsage": "DEs use Lambda for: triggering Glue jobs on S3 events, lightweight API endpoints, small data transformations (< 15 min).",
+    "theory": "## AWS Lambda\n\n### Key Properties\n- **Serverless**: No infrastructure to manage\n- **Event-driven**: Triggered by S3, API Gateway, EventBridge\n- **Limits**: 15 min timeout, 10GB memory, 250MB deployment package\n\n### Common DE Use Cases\n1. Trigger Glue/EMR job when file lands in S3\n2. Transform small payloads (API → S3)\n3. Dead letter queue processing\n4. Scheduled health checks\n\n### NOT For\n- Long-running ETL (> 15 min)\n- Large data processing (use Spark/Glue instead)",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "aws-emr"
+    ],
+    "previousTopics": [
+      "aws-iam"
+    ],
+    "commonMistakes": [
+      "Using Lambda for large ETL jobs (15 min timeout)"
+    ],
+    "interviewQuestions": [
+      "What is AWS Lambda?",
+      "Lambda vs Glue for ETL?",
+      "What are Lambda's limitations?"
+    ],
+    "flashcards": [
+      {
+        "front": "AWS Lambda Limits?",
+        "back": "15 minute max timeout. 10GB max memory. 250MB deployment package. Not suitable for heavy ETL — use Glue/EMR/Spark instead."
+      }
+    ],
+    "summary": "Lambda runs serverless functions triggered by events. Use for lightweight triggers (S3 → Glue). Not for heavy ETL (15 min limit)."
+  },
+  {
+    "id": "aws-emr",
+    "title": "Amazon EMR",
+    "phase": "cloud",
+    "phaseLabel": "AWS Cloud",
+    "description": "Managed Hadoop/Spark clusters on AWS — more control than Glue, more setup required.",
+    "difficulty": "intermediate",
+    "estimatedHours": 1,
+    "importance": "good-to-know",
+    "interviewWeight": 2,
+    "careerLevel": "mid",
+    "interviewImportance": 2,
+    "productionImportance": 3,
+    "interviewRecommendation": "Know Concept — alternative to Glue/Databricks on AWS",
+    "prerequisites": [
+      "spark-dataframes",
+      "ec2"
+    ],
+    "learningObjectives": [
+      "Understand EMR cluster types",
+      "Compare EMR vs Glue vs Databricks",
+      "Know when to choose EMR"
+    ],
+    "problemItSolves": "You need full control over your Spark configuration, custom libraries, and long-running interactive sessions. EMR gives you a managed Spark cluster without the Databricks price tag.",
+    "whyItExists": "EMR predates Glue and Databricks. It's a semi-managed approach — you get control over the Spark cluster but must handle more configuration.",
+    "realWorldUsage": "EMR is chosen when Glue is too limited (custom JARs, GPU instances) and Databricks is too expensive.",
+    "theory": "## Amazon EMR\n\n### EMR vs Glue vs Databricks\n| Feature | EMR | Glue | Databricks |\n|---------|-----|------|------------|\n| Control | Full | Limited | Medium |\n| Setup | More | Serverless | Managed |\n| Cost | Lower | Medium | Higher |\n| Best for | Custom Spark | Simple ETL | Full analytics |",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [],
+    "nextTopics": [
+      "redshift"
+    ],
+    "previousTopics": [
+      "ec2"
+    ],
+    "commonMistakes": [
+      "Over-engineering with EMR when Glue would suffice"
+    ],
+    "interviewQuestions": [
+      "EMR vs Glue vs Databricks?",
+      "When would you choose EMR?"
+    ],
+    "flashcards": [
+      {
+        "front": "EMR vs Glue?",
+        "back": "EMR: full Spark control, more setup, cheaper. Glue: serverless, limited config, easier. Choose EMR for custom Spark requirements; Glue for simple ETL."
+      }
+    ],
+    "summary": "EMR provides managed Spark clusters with full control. Choose over Glue when you need custom configuration; choose Databricks for full analytics."
+  },
+  {
+    "id": "docker-compose",
+    "title": "Docker Compose",
+    "phase": "devops",
+    "phaseLabel": "DevOps & CI/CD",
+    "description": "Define and run multi-container applications — your entire development stack in one YAML file.",
+    "difficulty": "beginner",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "junior",
+    "interviewImportance": 3,
+    "productionImportance": 4,
+    "interviewRecommendation": "Learn Well — used in every DE project",
+    "prerequisites": [
+      "docker"
+    ],
+    "learningObjectives": [
+      "Write docker-compose.yml",
+      "Configure multi-service environments",
+      "Manage volumes and networks"
+    ],
+    "problemItSolves": "Your project needs Postgres, Kafka, Airflow, and Redis. Instead of installing each separately, Docker Compose starts everything with one command.",
+    "whyItExists": "Docker runs single containers. Compose orchestrates multiple containers as a single application — essential for local DE development.",
+    "realWorldUsage": "Every DE project has a docker-compose.yml for local development: Postgres + Airflow + Kafka + Spark in one file.",
+    "theory": "## Docker Compose\n\n### Example\n```yaml\nversion: '3.8'\nservices:\n  postgres:\n    image: postgres:15\n    environment:\n      POSTGRES_DB: analytics\n      POSTGRES_PASSWORD: secret\n    ports:\n      - '5432:5432'\n    volumes:\n      - pgdata:/var/lib/postgresql/data\n  \n  airflow:\n    image: apache/airflow:2.8.0\n    depends_on:\n      - postgres\n    ports:\n      - '8080:8080'\n\nvolumes:\n  pgdata:\n```\n\n### Commands\n```bash\ndocker-compose up -d      # Start all services\ndocker-compose down        # Stop all services\ndocker-compose logs -f     # Follow logs\ndocker-compose ps          # List running services\n```",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Create a docker-compose.yml with Postgres + Airflow"
+    ],
+    "nextTopics": [
+      "ci-cd"
+    ],
+    "previousTopics": [
+      "docker"
+    ],
+    "commonMistakes": [
+      "Not using volumes (data lost when container stops)"
+    ],
+    "interviewQuestions": [
+      "What is Docker Compose?",
+      "Docker vs Docker Compose?"
+    ],
+    "flashcards": [
+      {
+        "front": "Docker vs Docker Compose?",
+        "back": "Docker: runs single containers. Compose: orchestrates multiple containers from a YAML file. Use Compose for local dev environments (Postgres + Kafka + Airflow)."
+      }
+    ],
+    "summary": "Docker Compose orchestrates multi-container environments from YAML. Essential for local DE development with Postgres, Kafka, Airflow."
+  },
+  {
+    "id": "project-python-etl",
+    "title": "Project: Python ETL Pipeline",
+    "phase": "projects",
+    "phaseLabel": "Projects",
+    "description": "Build a complete ETL pipeline using Python, Pandas, and PostgreSQL — your first portfolio project.",
+    "difficulty": "beginner",
+    "estimatedHours": 8,
+    "importance": "must-know",
+    "interviewWeight": 3,
+    "careerLevel": "foundation",
+    "interviewImportance": 3,
+    "productionImportance": 4,
+    "interviewRecommendation": "Learn Deeply — demonstrates foundational skills",
+    "prerequisites": [
+      "python",
+      "sql"
+    ],
+    "learningObjectives": [
+      "Extract data from APIs and CSVs",
+      "Transform with Pandas",
+      "Load into PostgreSQL",
+      "Schedule with cron/Airflow"
+    ],
+    "problemItSolves": "Your first real project. Extract data from a public API, clean and transform it with Pandas, and load it into a Postgres database.",
+    "whyItExists": "Portfolio projects are the #1 way to get hired as a Data Engineer without prior experience. This project proves you can build end-to-end pipelines.",
+    "realWorldUsage": "This project pattern (API → Transform → Database) is used in every company for data ingestion.",
+    "theory": "## Project: Python ETL\n\n### Architecture\n```\nPublic API → Python Script → Pandas Transform → PostgreSQL\n```\n\n### Steps\n1. Extract: Fetch data from a public API (e.g., OpenWeather, Spotify, GitHub)\n2. Transform: Clean, deduplicate, type-cast with Pandas\n3. Load: Insert into PostgreSQL using SQLAlchemy\n4. Orchestrate: Schedule with cron or Airflow\n\n### Requirements\n- Error handling and logging\n- Idempotent loads (upsert)\n- Configuration via environment variables\n- README with architecture diagram",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": {
+      "title": "Weather Data Pipeline",
+      "description": "Extract weather data from OpenWeatherMap API, transform with Pandas, and load into PostgreSQL with daily scheduling.",
+      "skills": [
+        "Python",
+        "Pandas",
+        "PostgreSQL",
+        "REST APIs"
+      ],
+      "estimatedHours": 8
+    },
+    "exercises": [
+      "Build the full pipeline"
+    ],
+    "nextTopics": [
+      "project-spark-analytics"
+    ],
+    "previousTopics": [
+      "python"
+    ],
+    "commonMistakes": [
+      "No error handling",
+      "Hardcoded credentials"
+    ],
+    "interviewQuestions": [
+      "Walk me through a project you've built."
+    ],
+    "flashcards": [
+      {
+        "front": "What makes a good portfolio project?",
+        "back": "End-to-end (Extract → Transform → Load), error handling, idempotent loads, environment variables for config, documentation with architecture diagram."
+      }
+    ],
+    "summary": "Build a complete Python ETL pipeline: API → Pandas → PostgreSQL. First portfolio project demonstrating foundational DE skills."
+  },
+  {
+    "id": "project-spark-analytics",
+    "title": "Project: Spark Analytics Pipeline",
+    "phase": "projects",
+    "phaseLabel": "Projects",
+    "description": "Process a large dataset (millions of rows) using PySpark — window functions, aggregations, and Delta Lake.",
+    "difficulty": "intermediate",
+    "estimatedHours": 10,
+    "importance": "must-know",
+    "interviewWeight": 4,
+    "careerLevel": "junior",
+    "interviewImportance": 4,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Deeply — demonstrates Spark proficiency",
+    "prerequisites": [
+      "spark-dataframes",
+      "spark-window-functions",
+      "delta-format"
+    ],
+    "learningObjectives": [
+      "Process millions of rows with PySpark",
+      "Use window functions for analytics",
+      "Write to Delta Lake with partitioning",
+      "Optimize with caching and broadcast joins"
+    ],
+    "problemItSolves": "Your second project proves you can handle big data. Process a 10M+ row dataset with Spark, write optimized Delta tables, and produce analytical outputs.",
+    "whyItExists": "This project proves you're not just a Python developer — you can work with distributed data processing at scale.",
+    "realWorldUsage": "This is the type of work a Junior-Mid DE does daily at companies using Spark/Databricks.",
+    "theory": "## Project: Spark Analytics\n\n### Architecture\n```\nCSV/Parquet (10M+ rows) → PySpark → Delta Lake → Analytics Views\n```\n\n### Requirements\n1. Use a large public dataset (NYC Taxi, Stack Overflow, IMDb)\n2. Implement: window functions, joins, aggregations\n3. Write partitioned Delta tables\n4. Create summary views with business metrics\n5. Optimize: broadcast joins, repartition, caching",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": {
+      "title": "NYC Taxi Trip Analytics",
+      "description": "Analyze 10M+ NYC taxi trips: fare trends, driver patterns, zone analytics. Write optimized Delta tables with medallion architecture.",
+      "skills": [
+        "PySpark",
+        "Delta Lake",
+        "Window Functions",
+        "Performance Tuning"
+      ],
+      "estimatedHours": 10
+    },
+    "exercises": [
+      "Build the full Spark analytics pipeline"
+    ],
+    "nextTopics": [
+      "project-airflow-pipeline"
+    ],
+    "previousTopics": [
+      "spark-dataframes"
+    ],
+    "commonMistakes": [
+      "Processing data without checking data quality first"
+    ],
+    "interviewQuestions": [
+      "What Spark optimizations did you use?"
+    ],
+    "flashcards": [
+      {
+        "front": "Spark Analytics Project Checklist?",
+        "back": "1. Large dataset (10M+ rows). 2. Window functions + aggregations. 3. Delta Lake partitioned writes. 4. Performance tuning (broadcast, cache, repartition). 5. README."
+      }
+    ],
+    "summary": "Build a PySpark analytics pipeline on a 10M+ row dataset. Demonstrates Spark proficiency with window functions, Delta Lake, and performance tuning."
+  },
+  {
+    "id": "project-e2e",
+    "title": "Project: Production-Grade End-to-End Pipeline",
+    "phase": "projects",
+    "phaseLabel": "Projects",
+    "description": "The capstone project: ingest, transform, model, orchestrate, test, monitor, and deploy a complete data platform.",
+    "difficulty": "advanced",
+    "estimatedHours": 20,
+    "importance": "must-know",
+    "interviewWeight": 5,
+    "careerLevel": "mid",
+    "interviewImportance": 5,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Deeply — the ultimate portfolio piece",
+    "prerequisites": [
+      "project-spark-analytics",
+      "dbt-best-practices",
+      "airflow-prod-best-practices",
+      "docker-compose"
+    ],
+    "learningObjectives": [
+      "Build a complete lakehouse pipeline",
+      "Implement medallion architecture",
+      "Orchestrate with Airflow",
+      "Test with dbt and Great Expectations",
+      "Deploy with Docker and CI/CD"
+    ],
+    "problemItSolves": "This is the project that gets you hired. A production-grade pipeline that demonstrates every skill a mid-level DE needs.",
+    "whyItExists": "This project is the culmination of the entire DEOS curriculum. It proves you can build and operate real data infrastructure.",
+    "realWorldUsage": "This mirrors what a real DE team builds: ingestion → lakehouse → transformation → serving → monitoring.",
+    "theory": "## Capstone: Production Pipeline\n\n### Architecture\n```\nData Sources → Ingestion → Bronze (raw) → Silver (clean) → Gold (business) → Dashboard\n     ↓              ↓           ↓              ↓             ↓\n   CDC/API      Kafka/API    Delta Lake    dbt Models    Metabase/Superset\n                    ↓\n              Airflow (orchestration)\n                    ↓\n              Docker + CI/CD (deployment)\n```\n\n### Requirements\n1. Multiple data sources (API + database + files)\n2. Medallion architecture (Bronze/Silver/Gold)\n3. dbt models with tests and documentation\n4. Airflow DAGs for orchestration\n5. Docker Compose for local development\n6. CI/CD pipeline (GitHub Actions)\n7. Data quality checks\n8. README with architecture diagram, setup instructions, and design decisions",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": {
+      "title": "E-Commerce Data Platform",
+      "description": "Complete lakehouse platform: ingest orders + products from API and Postgres, build medallion architecture with Spark, transform with dbt, orchestrate with Airflow, deploy with Docker.",
+      "skills": [
+        "Spark",
+        "dbt",
+        "Airflow",
+        "Docker",
+        "Delta Lake",
+        "PostgreSQL",
+        "CI/CD"
+      ],
+      "estimatedHours": 20
+    },
+    "exercises": [
+      "Build the complete platform"
+    ],
+    "nextTopics": [
+      "sys-design-intro"
+    ],
+    "previousTopics": [
+      "project-spark-analytics"
+    ],
+    "commonMistakes": [
+      "Skipping tests and documentation"
+    ],
+    "interviewQuestions": [
+      "Walk me through your end-to-end project."
+    ],
+    "flashcards": [
+      {
+        "front": "Production Pipeline Components?",
+        "back": "Ingestion → Bronze → Silver → Gold (medallion). Orchestration: Airflow. Transformation: dbt. Storage: Delta Lake. Deployment: Docker + CI/CD. Testing: Great Expectations."
+      }
+    ],
+    "summary": "Capstone project: complete lakehouse with medallion architecture, dbt, Airflow, Docker, and CI/CD. The ultimate portfolio piece for mid-level DE roles."
+  },
+  {
+    "id": "sys-design-capacity",
+    "title": "System Design: Capacity Planning",
+    "phase": "system-design",
+    "phaseLabel": "System Design",
+    "description": "Estimate storage, compute, and throughput requirements before designing a data system.",
+    "difficulty": "advanced",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 4,
+    "careerLevel": "mid",
+    "interviewImportance": 4,
+    "productionImportance": 4,
+    "interviewRecommendation": "Learn Deeply — first step in every system design interview",
+    "prerequisites": [
+      "sys-design-intro"
+    ],
+    "learningObjectives": [
+      "Estimate data volume and growth",
+      "Calculate storage requirements",
+      "Determine throughput needs"
+    ],
+    "problemItSolves": "Interviewer: 'Design a pipeline for Uber's ride data.' First question: 'How many rides per day? How large is each event? How many days of retention?' Without capacity planning, your design is baseless.",
+    "whyItExists": "Capacity planning is the FIRST step in every system design interview. It determines whether you need Kafka or a simple queue, S3 or a database.",
+    "realWorldUsage": "Every system design discussion starts with back-of-the-envelope calculations.",
+    "theory": "## Capacity Planning\n\n### Step 1: Estimate Volume\n- Events per day: 10M rides × 1KB each = **10 GB/day**\n- Monthly: 300 GB/month\n- Yearly: 3.6 TB/year\n- With replication (3x): **10.8 TB/year**\n\n### Step 2: Throughput\n- 10M events / 86,400 seconds = **~115 events/second** (average)\n- Peak (2x): ~230 events/second\n- Can a single Postgres handle this? Yes. Do we need Kafka? Probably not at this scale.\n\n### Step 3: Storage Decisions\n| Volume | Storage Choice |\n|--------|---------------|\n| < 100 GB | Postgres/MySQL |\n| 100 GB - 10 TB | S3 + Parquet |\n| > 10 TB | S3 + Delta Lake + Spark |",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Do capacity planning for 3 different scenarios"
+    ],
+    "nextTopics": [
+      "sys-design-batch"
+    ],
+    "previousTopics": [
+      "sys-design-intro"
+    ],
+    "commonMistakes": [
+      "Skipping capacity planning and jumping to architecture"
+    ],
+    "interviewQuestions": [
+      "How do you estimate storage for 100M events/day?"
+    ],
+    "flashcards": [
+      {
+        "front": "Capacity Planning Steps?",
+        "back": "1. Estimate events/day × event size = daily volume. 2. Calculate throughput (events/second). 3. Factor in replication and retention. 4. Choose appropriate storage tier."
+      }
+    ],
+    "summary": "Capacity planning estimates volume, throughput, and storage before designing. First step in every system design interview."
+  },
+  {
+    "id": "sys-design-batch",
+    "title": "System Design: Batch Pipeline",
+    "phase": "system-design",
+    "phaseLabel": "System Design",
+    "description": "Design a batch processing pipeline from data ingestion to serving layer.",
+    "difficulty": "advanced",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 4,
+    "careerLevel": "mid",
+    "interviewImportance": 4,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Deeply — most common system design question for DEs",
+    "prerequisites": [
+      "sys-design-capacity"
+    ],
+    "learningObjectives": [
+      "Design end-to-end batch architecture",
+      "Choose appropriate tools for each layer",
+      "Handle failures and retries"
+    ],
+    "problemItSolves": "Design a daily batch pipeline that processes 100GB of transaction data, transforms it, and serves it to dashboards.",
+    "whyItExists": "Batch pipeline design is the most frequently asked system design question in DE interviews.",
+    "realWorldUsage": "This is what most data teams build: daily/hourly batch pipelines from source systems to analytics.",
+    "theory": "## Batch Pipeline Design\n\n### Generic Architecture\n```\nSources → Ingestion → Raw Storage → Processing → Serving → Consumers\n  ↓           ↓            ↓            ↓           ↓          ↓\nDBs/APIs  Airbyte/Glue   S3 Bronze   Spark/dbt   Warehouse  Dashboards\n```\n\n### Key Decisions\n1. **Ingestion**: Airbyte (open source) vs Fivetran (managed)\n2. **Storage**: S3 + Parquet/Delta (cost-effective) vs Snowflake (managed)\n3. **Processing**: Spark (heavy) vs dbt (SQL-based)\n4. **Orchestration**: Airflow (standard) vs Dagster (modern)\n5. **Serving**: Redshift/Snowflake for BI, Delta/Iceberg for lakehouse",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Design a batch pipeline for an e-commerce company"
+    ],
+    "nextTopics": [
+      "sys-design-streaming"
+    ],
+    "previousTopics": [
+      "sys-design-capacity"
+    ],
+    "commonMistakes": [
+      "Not discussing failure handling and retries"
+    ],
+    "interviewQuestions": [
+      "Design a batch pipeline for processing daily sales data."
+    ],
+    "flashcards": [
+      {
+        "front": "Batch Pipeline Components?",
+        "back": "Sources → Ingestion (Airbyte) → Raw Storage (S3) → Processing (Spark/dbt) → Serving (Warehouse) → Consumers (Dashboards). Orchestrated by Airflow."
+      }
+    ],
+    "summary": "Batch pipeline design: sources → ingestion → storage → processing → serving. Most common DE system design question."
+  },
+  {
+    "id": "sys-design-streaming",
+    "title": "System Design: Streaming Pipeline",
+    "phase": "system-design",
+    "phaseLabel": "System Design",
+    "description": "Design a real-time data processing system using Kafka, Flink/Spark Streaming, and a serving layer.",
+    "difficulty": "advanced",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 4,
+    "careerLevel": "senior",
+    "interviewImportance": 4,
+    "productionImportance": 4,
+    "interviewRecommendation": "Learn Deeply — increasingly common in interviews",
+    "prerequisites": [
+      "sys-design-batch",
+      "kafka-overview"
+    ],
+    "learningObjectives": [
+      "Design streaming architecture",
+      "Handle late data and ordering",
+      "Choose streaming vs micro-batch"
+    ],
+    "problemItSolves": "Design a real-time fraud detection system that processes credit card transactions within 500ms.",
+    "whyItExists": "Streaming interviews test whether you understand the unique challenges: ordering, late data, exactly-once, and state management.",
+    "realWorldUsage": "Companies like Uber, Stripe, and Netflix use streaming pipelines for real-time analytics and fraud detection.",
+    "theory": "## Streaming Pipeline Design\n\n### Architecture\n```\nEvents → Message Queue → Stream Processor → Serving → Actions\n  ↓           ↓               ↓               ↓          ↓\nApp logs   Kafka           Flink/Spark      Redis/DB   Alerts/Dashboard\n```\n\n### Key Challenges\n1. **Ordering**: Events may arrive out of order\n2. **Late Data**: Events may arrive after the processing window closes\n3. **Exactly-Once**: Avoiding duplicate processing\n4. **State**: Managing aggregation state across failures\n5. **Backpressure**: Handling burst traffic",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Design a streaming pipeline for click analytics"
+    ],
+    "nextTopics": [
+      "sys-design-netflix"
+    ],
+    "previousTopics": [
+      "sys-design-batch"
+    ],
+    "commonMistakes": [
+      "Not discussing late data handling"
+    ],
+    "interviewQuestions": [
+      "Design a real-time analytics pipeline."
+    ],
+    "flashcards": [
+      {
+        "front": "Streaming Pipeline Challenges?",
+        "back": "1. Out-of-order events. 2. Late data (watermarks). 3. Exactly-once semantics. 4. State management. 5. Backpressure handling."
+      }
+    ],
+    "summary": "Streaming pipeline design: Kafka → Flink/Spark → Serving. Key challenges: ordering, late data, exactly-once, state, backpressure."
+  },
+  {
+    "id": "interview-spark",
+    "title": "Spark Interview Prep",
+    "phase": "interview",
+    "phaseLabel": "Interview Preparation",
+    "description": "Top 30 Apache Spark interview questions with detailed answers — from basic concepts to performance tuning.",
+    "difficulty": "intermediate",
+    "estimatedHours": 3,
+    "importance": "must-know",
+    "interviewWeight": 5,
+    "careerLevel": "junior",
+    "interviewImportance": 5,
+    "productionImportance": 5,
+    "interviewRecommendation": "Learn Deeply — Spark is the most tested DE skill",
+    "prerequisites": [
+      "spark-tuning",
+      "aqe",
+      "spark-window-functions"
+    ],
+    "learningObjectives": [
+      "Answer the top 30 Spark interview questions",
+      "Explain internal architecture",
+      "Debug performance problems verbally"
+    ],
+    "problemItSolves": "Spark questions appear in 90% of DE interviews. This module covers every commonly asked question with production-quality answers.",
+    "whyItExists": "Spark is the core skill tested in DE interviews. Knowing Spark deeply is the fastest path to getting hired.",
+    "realWorldUsage": "These questions are asked at Amazon, Microsoft, Databricks, Uber, Airbnb, and every Spark-using company.",
+    "theory": "## Top Spark Interview Questions\n\n### Architecture\n1. Explain Spark's architecture (Driver, Executors, Cluster Manager)\n2. What is lazy evaluation?\n3. Transformations vs Actions?\n4. What is the DAG?\n5. Catalyst Optimizer?\n\n### DataFrames\n6. DataFrame vs Dataset vs RDD?\n7. How do Window Functions work?\n8. Explain broadcast joins\n9. repartition vs coalesce?\n\n### Performance\n10. How do you identify data skew?\n11. What is AQE?\n12. How do you tune shuffle partitions?\n13. Caching vs Persistence?\n14. What causes OOM errors in Spark?\n\n### Advanced\n15. How does Structured Streaming work?\n16. What is Tungsten?\n17. How does Spark achieve fault tolerance?",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Practice answering each question in 2-3 minutes"
+    ],
+    "nextTopics": [
+      "interview-kafka"
+    ],
+    "previousTopics": [
+      "spark-tuning"
+    ],
+    "commonMistakes": [
+      "Giving superficial answers without explaining WHY"
+    ],
+    "interviewQuestions": [
+      "All questions in the theory section above"
+    ],
+    "flashcards": [
+      {
+        "front": "Top 3 Spark Interview Topics?",
+        "back": "1. Architecture (DAG, Catalyst, lazy evaluation). 2. Performance (skew, AQE, shuffle partitions, broadcast). 3. DataFrames (window functions, joins, repartition vs coalesce)."
+      }
+    ],
+    "summary": "Comprehensive Spark interview prep covering architecture, DataFrames, performance tuning, and advanced topics."
+  },
+  {
+    "id": "interview-resume",
+    "title": "Resume Building for DEs",
+    "phase": "interview",
+    "phaseLabel": "Interview Preparation",
+    "description": "Craft a resume that gets past ATS filters and impresses hiring managers at top tech companies.",
+    "difficulty": "beginner",
+    "estimatedHours": 2,
+    "importance": "must-know",
+    "interviewWeight": 4,
+    "careerLevel": "foundation",
+    "interviewImportance": 4,
+    "productionImportance": 1,
+    "interviewRecommendation": "Learn Deeply — your resume is the gateway to interviews",
+    "prerequisites": [
+      "project-e2e"
+    ],
+    "learningObjectives": [
+      "Write impact-driven bullet points",
+      "Structure a 1-page technical resume",
+      "Highlight projects effectively",
+      "Pass ATS filters"
+    ],
+    "problemItSolves": "You have the skills but your resume doesn't show it. This module teaches you to write a resume that gets callbacks from Amazon, Microsoft, and Databricks.",
+    "whyItExists": "Most qualified candidates get rejected because their resume doesn't clearly communicate their skills. Resume optimization is a critical skill.",
+    "realWorldUsage": "Recruiters spend 6-10 seconds on initial resume screening. Your resume must pass the '6-second test'.",
+    "theory": "## DE Resume Guide\n\n### Structure\n1. **Header**: Name, LinkedIn, GitHub, Portfolio\n2. **Summary**: 2 lines — your DE identity\n3. **Skills**: Tools you've used (Spark, Airflow, dbt, Kafka, AWS, SQL, Python)\n4. **Experience/Projects**: 3-5 entries with impact metrics\n5. **Education**: Brief\n\n### Bullet Point Formula\n```\n[Action Verb] + [What You Built] + [Technology Used] + [Measurable Impact]\n```\nExample:\n\"Built a Delta Lake pipeline using PySpark that processed 50M daily events, reducing dashboard latency from 4 hours to 15 minutes.\"\n\n### Common Mistakes\n- Listing tools without context\n- No measurable impact\n- Too many pages (keep to 1)\n- Generic summary",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Write 5 impact-driven bullet points for your projects"
+    ],
+    "nextTopics": [
+      "interview-mock"
+    ],
+    "previousTopics": [
+      "project-e2e"
+    ],
+    "commonMistakes": [
+      "Listing technologies without showing impact",
+      "Making the resume longer than 1 page"
+    ],
+    "interviewQuestions": [
+      "Walk me through your resume."
+    ],
+    "flashcards": [
+      {
+        "front": "DE Resume Bullet Formula?",
+        "back": "[Action Verb] + [What You Built] + [Tech Used] + [Impact]. Example: Built a Delta Lake pipeline (PySpark) processing 50M events/day, reducing latency from 4hrs to 15min."
+      }
+    ],
+    "summary": "Write impact-driven resumes: Action + Built What + Technology + Measurable Impact. Keep to 1 page. Highlight projects with metrics."
+  },
+  {
+    "id": "interview-mock",
+    "title": "Mock Interviews & Strategy",
+    "phase": "interview",
+    "phaseLabel": "Interview Preparation",
+    "description": "Prepare for the full DE interview loop: screening, technical, system design, and behavioral rounds.",
+    "difficulty": "intermediate",
+    "estimatedHours": 3,
+    "importance": "must-know",
+    "interviewWeight": 5,
+    "careerLevel": "junior",
+    "interviewImportance": 5,
+    "productionImportance": 1,
+    "interviewRecommendation": "Learn Deeply — practice is the only way to get comfortable",
+    "prerequisites": [
+      "interview-spark",
+      "interview-resume",
+      "behavioral-interview"
+    ],
+    "learningObjectives": [
+      "Understand the DE interview loop",
+      "Practice the STAR method",
+      "Time-box system design answers",
+      "Handle 'I don't know' gracefully"
+    ],
+    "problemItSolves": "You know Spark, SQL, and Airflow — but you freeze in interviews. This module teaches the META-SKILL of interviewing: pacing, structure, and communication.",
+    "whyItExists": "Technical knowledge is necessary but not sufficient. Interview performance depends on communication, structure, and practice.",
+    "realWorldUsage": "Top performers practice mock interviews 5-10 times before real interviews. The pattern: explain your thought process, not just the answer.",
+    "theory": "## DE Interview Loop\n\n### Typical Rounds\n1. **Recruiter Screen** (30 min): Behavioral, motivation, salary\n2. **Technical Screen** (60 min): SQL + Python coding\n3. **System Design** (60 min): Design a data pipeline\n4. **Deep Dive** (60 min): Spark/Kafka/Airflow deep technical\n5. **Behavioral** (45 min): STAR method stories\n\n### System Design Framework (45 min)\n1. **Clarify** (5 min): Ask questions about requirements\n2. **Estimate** (5 min): Back-of-envelope calculations\n3. **Design** (20 min): Draw architecture, explain trade-offs\n4. **Deep Dive** (10 min): Discuss failure modes, scaling\n5. **Wrap Up** (5 min): Summarize, discuss monitoring\n\n### When You Don't Know\n\"I haven't worked with that specifically, but based on my experience with [similar thing], I would approach it by...\"",
+    "resources": {
+      "docs": [],
+      "youtube": [],
+      "udemy": [],
+      "articles": []
+    },
+    "miniProject": null,
+    "exercises": [
+      "Practice a 45-minute system design with a friend or recording"
+    ],
+    "nextTopics": [
+      ""
+    ],
+    "previousTopics": [
+      "interview-spark"
+    ],
+    "commonMistakes": [
+      "Not practicing out loud (thinking ≠ speaking)",
+      "Jumping to solution without clarifying requirements"
+    ],
+    "interviewQuestions": [
+      "How do you prepare for a DE interview?"
+    ],
+    "flashcards": [
+      {
+        "front": "System Design Interview Framework?",
+        "back": "1. Clarify requirements (5 min). 2. Capacity estimation (5 min). 3. High-level design (20 min). 4. Deep dive (10 min). 5. Wrap up (5 min)."
+      }
+    ],
+    "summary": "Practice the full interview loop: technical screen, system design, deep dive, behavioral. Use frameworks for structured answers."
   }
 ]
