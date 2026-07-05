@@ -12,8 +12,8 @@ interface SidebarProps {
 
 export function Sidebar({ theme, toggleTheme, progressPercent, resetProgress, isOpen, onClose }: SidebarProps) {
   const navItems = [
-    { to: '/', icon: Map, label: 'Roadmap' },
-    { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
+    { to: '/roadmap', icon: Map, label: 'Roadmap' },
   ];
 
   return (

@@ -31,7 +31,6 @@ const NODE_TYPES: NodeTypes = {
 
 export function RoadmapCanvas({ roadmapData, modules, progress, toggleModuleComplete }: RoadmapCanvasProps) {
   const navigate = useNavigate();
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
 
   const moduleMap = useMemo(() => {
     const map: Record<string, Module> = {};
@@ -41,10 +40,6 @@ export function RoadmapCanvas({ roadmapData, modules, progress, toggleModuleComp
 
   const initialNodes: Node[] = useMemo(() =>
     roadmapData.nodes
-      .filter(n => {
-        if (!activeCategory) return true;
-        return n.data.category === activeCategory;
-      })
       .map(n => {
         const mod = moduleMap[n.data.moduleId];
         const isCompleted = progress.completedModules.includes(n.id);
@@ -71,17 +66,11 @@ export function RoadmapCanvas({ roadmapData, modules, progress, toggleModuleComp
           },
         };
       }),
-    [roadmapData.nodes, moduleMap, progress, activeCategory, toggleModuleComplete, navigate]
+    [roadmapData.nodes, moduleMap, progress, toggleModuleComplete, navigate]
   );
 
   const initialEdges: Edge[] = useMemo(() =>
     roadmapData.edges
-      .filter(e => {
-        if (!activeCategory) return true;
-        const sourceNode = roadmapData.nodes.find(n => n.id === e.source);
-        const targetNode = roadmapData.nodes.find(n => n.id === e.target);
-        return sourceNode?.data.category === activeCategory || targetNode?.data.category === activeCategory;
-      })
       .map(e => {
         const sourceCompleted = progress.completedModules.includes(e.source);
         return {
@@ -96,7 +85,7 @@ export function RoadmapCanvas({ roadmapData, modules, progress, toggleModuleComp
           type: 'smoothstep',
         };
       }),
-    [roadmapData.edges, roadmapData.nodes, progress, activeCategory]
+    [roadmapData.edges, progress]
   );
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -115,41 +104,10 @@ export function RoadmapCanvas({ roadmapData, modules, progress, toggleModuleComp
     }
   }, [moduleMap, navigate]);
 
-  // Get unique categories for filter
-  const categories = useMemo(() => {
-    const cats = new Set<string>(roadmapData.nodes.map(n => n.data.category));
-    return Array.from(cats);
-  }, [roadmapData.nodes]);
+  // Roadmap component UI
 
   return (
     <div className="relative w-full h-full">
-      {/* Category Filter Bar */}
-      <div className="absolute top-4 left-4 z-10 flex flex-wrap gap-2">
-        <button
-          onClick={() => setActiveCategory(null)}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 border ${
-            !activeCategory
-              ? 'bg-[var(--color-accent)] text-white border-[var(--color-accent)]'
-              : 'bg-[var(--color-bg-card)] text-[var(--color-text-secondary)] border-[var(--color-border-default)] hover:bg-[var(--color-bg-card-hover)]'
-          }`}
-        >
-          All
-        </button>
-        {categories.map(cat => (
-          <button
-            key={cat}
-            onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
-            className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 border ${
-              activeCategory === cat
-                ? 'bg-[var(--color-accent)] text-white border-[var(--color-accent)]'
-                : 'bg-[var(--color-bg-card)] text-[var(--color-text-secondary)] border-[var(--color-border-default)] hover:bg-[var(--color-bg-card-hover)]'
-            }`}
-          >
-            {CATEGORY_LABELS[cat] || cat}
-          </button>
-        ))}
-      </div>
-
       <ReactFlow
         nodes={nodes}
         edges={edges}
