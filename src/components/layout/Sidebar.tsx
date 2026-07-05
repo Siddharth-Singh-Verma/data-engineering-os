@@ -70,7 +70,7 @@ export function Sidebar({ theme, toggleTheme, progressPercent, resetProgress, is
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 px-3">
+        <nav className="flex-1 overflow-y-auto overflow-x-hidden px-3 scrollbar-thin scrollbar-thumb-[var(--color-border-subtle)] scrollbar-track-transparent">
           {navItems.map(item => (
             <NavLink
               key={item.to}
