@@ -8,6 +8,7 @@ export interface DashboardStats {
   totalHours: number;
   hoursLogged: number;
   studyDays: number;
+  studyDaysList: string[];
   currentStreak: number;
   avgQuizScore: number;
   mustKnowProgress: number;
@@ -149,7 +150,7 @@ export function useStats(modules: Module[], progress: UserProgress): DashboardSt
 
     return {
       totalModules, completedCount, progressPercent, totalHours, hoursLogged,
-      studyDays, currentStreak, avgQuizScore, mustKnowProgress, interviewReadiness,
+      studyDays, studyDaysList: progress.studyDays, currentStreak, avgQuizScore, mustKnowProgress, interviewReadiness,
       resumeReadiness, projectsCompleted, totalProjects, currentCareerLevel, recommendedNext,
       phaseProgress, weakAreas, recentModules,
     };

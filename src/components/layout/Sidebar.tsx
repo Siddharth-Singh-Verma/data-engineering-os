@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router';
 import { Map, LayoutDashboard, BookOpen, Sun, Moon, RotateCcw } from 'lucide-react';
+import type { Module, UserProgress } from '@/types';
+import { TopicsTree } from './TopicsTree';
 
 interface SidebarProps {
   theme: 'dark' | 'light';
@@ -8,9 +10,11 @@ interface SidebarProps {
   resetProgress: () => void;
   isOpen: boolean;
   onClose: () => void;
+  modules: Module[];
+  progress: UserProgress;
 }
 
-export function Sidebar({ theme, toggleTheme, progressPercent, resetProgress, isOpen, onClose }: SidebarProps) {
+export function Sidebar({ theme, toggleTheme, progressPercent, resetProgress, isOpen, onClose, modules, progress }: SidebarProps) {
   const navItems = [
     { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
     { to: '/roadmap', icon: Map, label: 'Roadmap' },
@@ -88,6 +92,7 @@ export function Sidebar({ theme, toggleTheme, progressPercent, resetProgress, is
               {item.label}
             </NavLink>
           ))}
+          <TopicsTree modules={modules} progress={progress} onClose={onClose} />
         </nav>
 
         {/* Bottom actions */}

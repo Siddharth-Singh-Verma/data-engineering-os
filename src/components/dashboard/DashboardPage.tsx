@@ -224,7 +224,7 @@ export function DashboardPage({ stats, modules }: DashboardPageProps) {
       {/* Bottom row */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {/* Streak Calendar */}
-        <StreakCalendar studyDays={stats.recentModules.length > 0 ? modules.filter(m => stats.recentModules.includes(m.id)).length > 0 ? [] : [] : []} />
+        <StreakCalendar studyDays={stats.studyDaysList || []} />
 
         {/* Weak Areas */}
         <div className="rounded-xl border p-4" style={{ background: 'var(--color-bg-card)', borderColor: 'var(--color-border-default)' }}>

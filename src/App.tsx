@@ -69,6 +69,8 @@ export default function App() {
         resetProgress={resetProgress}
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
+        modules={modules}
+        progress={progress}
       />
 
       {/* Main content */}
