@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router';
-import { ChevronRight, ChevronDown, Circle, CheckCircle2 } from 'lucide-react';
+import { ChevronRight, ChevronDown, Circle, CheckCircle2, Lock } from 'lucide-react';
 import type { Module, UserProgress } from '@/types';
 import { CATEGORY_LABELS, CATEGORY_COLORS } from '@/types';
 
@@ -76,25 +76,35 @@ export function TopicsTree({ modules, progress, onClose }: TopicsTreeProps) {
                 {phaseModules.map(module => {
                   const isCompleted = progress.completedModules.includes(module.id);
                   const isStarted = progress.moduleProgress[module.id]?.started;
+                  const isUnlocked = module.prerequisites.length === 0 || module.prerequisites.every(p => progress.completedModules.includes(p));
                   
                   return (
                     <NavLink
                       key={module.id}
                       to={`/module/${module.id}`}
-                      onClick={onClose}
+                      onClick={(e) => {
+                        if (!isUnlocked) {
+                          e.preventDefault();
+                          return;
+                        }
+                        onClose();
+                      }}
                       className={({ isActive }) =>
                         `flex items-center gap-2 px-2 py-1.5 rounded-md text-xs transition-colors ${
+                          !isUnlocked ? 'opacity-50 cursor-not-allowed' :
                           isActive
                             ? 'bg-[var(--color-accent-muted)]'
                             : 'hover:bg-[var(--color-bg-card-hover)]'
                         }`
                       }
                       style={({ isActive }) => ({
-                        color: isActive ? 'var(--color-accent)' : 'var(--color-text-secondary)',
+                        color: !isUnlocked ? 'var(--color-text-muted)' : isActive ? 'var(--color-accent)' : 'var(--color-text-secondary)',
                       })}
                     >
                       {isCompleted ? (
                         <CheckCircle2 className="w-3 h-3 shrink-0 text-emerald-500" />
+                      ) : !isUnlocked ? (
+                        <Lock className="w-3 h-3 shrink-0" style={{ color: 'var(--color-text-muted)' }} />
                       ) : isStarted ? (
                         <Circle className="w-3 h-3 shrink-0" style={{ color: 'var(--color-accent)' }} />
                       ) : (
