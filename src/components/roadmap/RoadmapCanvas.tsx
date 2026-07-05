@@ -11,6 +11,7 @@ import {
   type Edge,
   BackgroundVariant,
   type NodeTypes,
+  ReactFlowProvider,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 import { useNavigate } from 'react-router';
@@ -29,7 +30,7 @@ const NODE_TYPES: NodeTypes = {
   roadmapNode: RoadmapNode,
 };
 
-export function RoadmapCanvas({ roadmapData, modules, progress, toggleModuleComplete }: RoadmapCanvasProps) {
+function RoadmapCanvasInner({ roadmapData, modules, progress, toggleModuleComplete }: RoadmapCanvasProps) {
   const navigate = useNavigate();
   const { setCenter, getZoom } = useReactFlow();
 
@@ -174,5 +175,13 @@ export function RoadmapCanvas({ roadmapData, modules, progress, toggleModuleComp
       </ReactFlow>
 
     </div>
+  );
+}
+
+export function RoadmapCanvas(props: RoadmapCanvasProps) {
+  return (
+    <ReactFlowProvider>
+      <RoadmapCanvasInner {...props} />
+    </ReactFlowProvider>
   );
 }
