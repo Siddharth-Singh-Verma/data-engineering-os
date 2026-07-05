@@ -14,7 +14,7 @@
     {
       "id": "sql",
       "position": {
-        "x": 450,
+        "x": 520,
         "y": 100
       },
       "data": {
@@ -25,7 +25,7 @@
     {
       "id": "git",
       "position": {
-        "x": 800,
+        "x": 940,
         "y": 100
       },
       "data": {
@@ -36,7 +36,7 @@
     {
       "id": "linux",
       "position": {
-        "x": 1150,
+        "x": 1360,
         "y": 100
       },
       "data": {
@@ -47,8 +47,8 @@
     {
       "id": "rest-apis",
       "position": {
-        "x": 1150,
-        "y": 300
+        "x": 1360,
+        "y": 380
       },
       "data": {
         "moduleId": "rest-apis",
@@ -58,8 +58,8 @@
     {
       "id": "what-is-de",
       "position": {
-        "x": 800,
-        "y": 300
+        "x": 940,
+        "y": 380
       },
       "data": {
         "moduleId": "what-is-de",
@@ -69,8 +69,8 @@
     {
       "id": "role-of-de",
       "position": {
-        "x": 450,
-        "y": 300
+        "x": 520,
+        "y": 380
       },
       "data": {
         "moduleId": "role-of-de",
@@ -81,7 +81,7 @@
       "id": "batch-vs-streaming",
       "position": {
         "x": 100,
-        "y": 300
+        "y": 380
       },
       "data": {
         "moduleId": "batch-vs-streaming",
@@ -92,7 +92,7 @@
       "id": "etl-vs-elt",
       "position": {
         "x": 100,
-        "y": 500
+        "y": 660
       },
       "data": {
         "moduleId": "etl-vs-elt",
@@ -102,8 +102,8 @@
     {
       "id": "oltp-vs-olap",
       "position": {
-        "x": 450,
-        "y": 500
+        "x": 520,
+        "y": 660
       },
       "data": {
         "moduleId": "oltp-vs-olap",
@@ -113,8 +113,8 @@
     {
       "id": "data-pipeline",
       "position": {
-        "x": 800,
-        "y": 500
+        "x": 940,
+        "y": 660
       },
       "data": {
         "moduleId": "data-pipeline",
@@ -124,8 +124,8 @@
     {
       "id": "data-quality",
       "position": {
-        "x": 1150,
-        "y": 500
+        "x": 1360,
+        "y": 660
       },
       "data": {
         "moduleId": "data-quality",
@@ -135,8 +135,8 @@
     {
       "id": "data-governance",
       "position": {
-        "x": 1150,
-        "y": 700
+        "x": 1360,
+        "y": 940
       },
       "data": {
         "moduleId": "data-governance",
@@ -146,8 +146,8 @@
     {
       "id": "metadata",
       "position": {
-        "x": 800,
-        "y": 700
+        "x": 940,
+        "y": 940
       },
       "data": {
         "moduleId": "metadata",
@@ -157,8 +157,8 @@
     {
       "id": "data-warehouse",
       "position": {
-        "x": 450,
-        "y": 700
+        "x": 520,
+        "y": 940
       },
       "data": {
         "moduleId": "data-warehouse",
@@ -169,7 +169,7 @@
       "id": "data-lake",
       "position": {
         "x": 100,
-        "y": 700
+        "y": 940
       },
       "data": {
         "moduleId": "data-lake",
@@ -180,7 +180,7 @@
       "id": "lakehouse-arch",
       "position": {
         "x": 100,
-        "y": 900
+        "y": 1220
       },
       "data": {
         "moduleId": "lakehouse-arch",
@@ -190,8 +190,8 @@
     {
       "id": "medallion",
       "position": {
-        "x": 450,
-        "y": 900
+        "x": 520,
+        "y": 1220
       },
       "data": {
         "moduleId": "medallion",
@@ -201,8 +201,8 @@
     {
       "id": "data-mesh",
       "position": {
-        "x": 800,
-        "y": 900
+        "x": 940,
+        "y": 1220
       },
       "data": {
         "moduleId": "data-mesh",
@@ -212,8 +212,8 @@
     {
       "id": "data-fabric",
       "position": {
-        "x": 1150,
-        "y": 900
+        "x": 1360,
+        "y": 1220
       },
       "data": {
         "moduleId": "data-fabric",
@@ -223,8 +223,8 @@
     {
       "id": "data-contracts",
       "position": {
-        "x": 1150,
-        "y": 1100
+        "x": 1360,
+        "y": 1500
       },
       "data": {
         "moduleId": "data-contracts",
@@ -234,8 +234,8 @@
     {
       "id": "csv-json",
       "position": {
-        "x": 800,
-        "y": 1100
+        "x": 940,
+        "y": 1500
       },
       "data": {
         "moduleId": "csv-json",
@@ -245,8 +245,8 @@
     {
       "id": "parquet",
       "position": {
-        "x": 450,
-        "y": 1100
+        "x": 520,
+        "y": 1500
       },
       "data": {
         "moduleId": "parquet",
@@ -257,7 +257,7 @@
       "id": "avro",
       "position": {
         "x": 100,
-        "y": 1100
+        "y": 1500
       },
       "data": {
         "moduleId": "avro",
@@ -268,7 +268,7 @@
       "id": "compression",
       "position": {
         "x": 100,
-        "y": 1300
+        "y": 1780
       },
       "data": {
         "moduleId": "compression",
@@ -278,8 +278,8 @@
     {
       "id": "delta-format",
       "position": {
-        "x": 450,
-        "y": 1300
+        "x": 520,
+        "y": 1780
       },
       "data": {
         "moduleId": "delta-format",
@@ -289,8 +289,8 @@
     {
       "id": "iceberg",
       "position": {
-        "x": 800,
-        "y": 1300
+        "x": 940,
+        "y": 1780
       },
       "data": {
         "moduleId": "iceberg",
@@ -300,8 +300,8 @@
     {
       "id": "hudi",
       "position": {
-        "x": 1150,
-        "y": 1300
+        "x": 1360,
+        "y": 1780
       },
       "data": {
         "moduleId": "hudi",
@@ -311,8 +311,8 @@
     {
       "id": "horizontal-scaling",
       "position": {
-        "x": 1150,
-        "y": 1500
+        "x": 1360,
+        "y": 2060
       },
       "data": {
         "moduleId": "horizontal-scaling",
@@ -322,8 +322,8 @@
     {
       "id": "partitions-dist",
       "position": {
-        "x": 800,
-        "y": 1500
+        "x": 940,
+        "y": 2060
       },
       "data": {
         "moduleId": "partitions-dist",
@@ -333,8 +333,8 @@
     {
       "id": "driver-executors",
       "position": {
-        "x": 450,
-        "y": 1500
+        "x": 520,
+        "y": 2060
       },
       "data": {
         "moduleId": "driver-executors",
@@ -345,7 +345,7 @@
       "id": "shuffling",
       "position": {
         "x": 100,
-        "y": 1500
+        "y": 2060
       },
       "data": {
         "moduleId": "shuffling",
@@ -356,7 +356,7 @@
       "id": "resource-management",
       "position": {
         "x": 100,
-        "y": 1700
+        "y": 2340
       },
       "data": {
         "moduleId": "resource-management",
@@ -366,8 +366,8 @@
     {
       "id": "why-spark",
       "position": {
-        "x": 450,
-        "y": 1700
+        "x": 520,
+        "y": 2340
       },
       "data": {
         "moduleId": "why-spark",
@@ -377,8 +377,8 @@
     {
       "id": "rdd",
       "position": {
-        "x": 800,
-        "y": 1700
+        "x": 940,
+        "y": 2340
       },
       "data": {
         "moduleId": "rdd",
@@ -388,8 +388,8 @@
     {
       "id": "spark-dataframes",
       "position": {
-        "x": 1150,
-        "y": 1700
+        "x": 1360,
+        "y": 2340
       },
       "data": {
         "moduleId": "spark-dataframes",
@@ -399,8 +399,8 @@
     {
       "id": "transformations-actions",
       "position": {
-        "x": 1150,
-        "y": 1900
+        "x": 1360,
+        "y": 2620
       },
       "data": {
         "moduleId": "transformations-actions",
@@ -410,8 +410,8 @@
     {
       "id": "dag",
       "position": {
-        "x": 800,
-        "y": 1900
+        "x": 940,
+        "y": 2620
       },
       "data": {
         "moduleId": "dag",
@@ -421,8 +421,8 @@
     {
       "id": "spark-joins",
       "position": {
-        "x": 450,
-        "y": 1900
+        "x": 520,
+        "y": 2620
       },
       "data": {
         "moduleId": "spark-joins",
@@ -433,7 +433,7 @@
       "id": "spark-caching",
       "position": {
         "x": 100,
-        "y": 1900
+        "y": 2620
       },
       "data": {
         "moduleId": "spark-caching",
@@ -444,7 +444,7 @@
       "id": "spark-tuning",
       "position": {
         "x": 100,
-        "y": 2100
+        "y": 2900
       },
       "data": {
         "moduleId": "spark-tuning",
@@ -454,8 +454,8 @@
     {
       "id": "db-workspace",
       "position": {
-        "x": 450,
-        "y": 2100
+        "x": 520,
+        "y": 2900
       },
       "data": {
         "moduleId": "db-workspace",
@@ -465,8 +465,8 @@
     {
       "id": "dlt",
       "position": {
-        "x": 800,
-        "y": 2100
+        "x": 940,
+        "y": 2900
       },
       "data": {
         "moduleId": "dlt",
@@ -476,8 +476,8 @@
     {
       "id": "unity-catalog",
       "position": {
-        "x": 1150,
-        "y": 2100
+        "x": 1360,
+        "y": 2900
       },
       "data": {
         "moduleId": "unity-catalog",
@@ -487,8 +487,8 @@
     {
       "id": "er-model",
       "position": {
-        "x": 1150,
-        "y": 2300
+        "x": 1360,
+        "y": 3180
       },
       "data": {
         "moduleId": "er-model",
@@ -498,8 +498,8 @@
     {
       "id": "normalization",
       "position": {
-        "x": 800,
-        "y": 2300
+        "x": 940,
+        "y": 3180
       },
       "data": {
         "moduleId": "normalization",
@@ -509,8 +509,8 @@
     {
       "id": "star-schema",
       "position": {
-        "x": 450,
-        "y": 2300
+        "x": 520,
+        "y": 3180
       },
       "data": {
         "moduleId": "star-schema",
@@ -521,7 +521,7 @@
       "id": "scd",
       "position": {
         "x": 100,
-        "y": 2300
+        "y": 3180
       },
       "data": {
         "moduleId": "scd",
@@ -532,7 +532,7 @@
       "id": "dbt-core",
       "position": {
         "x": 100,
-        "y": 2500
+        "y": 3460
       },
       "data": {
         "moduleId": "dbt-core",
@@ -542,8 +542,8 @@
     {
       "id": "dbt-models",
       "position": {
-        "x": 450,
-        "y": 2500
+        "x": 520,
+        "y": 3460
       },
       "data": {
         "moduleId": "dbt-models",
@@ -553,8 +553,8 @@
     {
       "id": "jinja-macros",
       "position": {
-        "x": 800,
-        "y": 2500
+        "x": 940,
+        "y": 3460
       },
       "data": {
         "moduleId": "jinja-macros",
@@ -564,8 +564,8 @@
     {
       "id": "dbt-tests",
       "position": {
-        "x": 1150,
-        "y": 2500
+        "x": 1360,
+        "y": 3460
       },
       "data": {
         "moduleId": "dbt-tests",
@@ -575,8 +575,8 @@
     {
       "id": "airflow-intro",
       "position": {
-        "x": 1150,
-        "y": 2700
+        "x": 1360,
+        "y": 3740
       },
       "data": {
         "moduleId": "airflow-intro",
@@ -586,8 +586,8 @@
     {
       "id": "airflow-dags",
       "position": {
-        "x": 800,
-        "y": 2700
+        "x": 940,
+        "y": 3740
       },
       "data": {
         "moduleId": "airflow-dags",
@@ -597,8 +597,8 @@
     {
       "id": "operators",
       "position": {
-        "x": 450,
-        "y": 2700
+        "x": 520,
+        "y": 3740
       },
       "data": {
         "moduleId": "operators",
@@ -609,7 +609,7 @@
       "id": "airflow-arch",
       "position": {
         "x": 100,
-        "y": 2700
+        "y": 3740
       },
       "data": {
         "moduleId": "airflow-arch",
@@ -620,7 +620,7 @@
       "id": "kafka-overview",
       "position": {
         "x": 100,
-        "y": 2900
+        "y": 4020
       },
       "data": {
         "moduleId": "kafka-overview",
@@ -630,8 +630,8 @@
     {
       "id": "kafka-arch",
       "position": {
-        "x": 450,
-        "y": 2900
+        "x": 520,
+        "y": 4020
       },
       "data": {
         "moduleId": "kafka-arch",
@@ -641,8 +641,8 @@
     {
       "id": "kafka-streams",
       "position": {
-        "x": 800,
-        "y": 2900
+        "x": 940,
+        "y": 4020
       },
       "data": {
         "moduleId": "kafka-streams",
@@ -652,8 +652,8 @@
     {
       "id": "flink",
       "position": {
-        "x": 1150,
-        "y": 2900
+        "x": 1360,
+        "y": 4020
       },
       "data": {
         "moduleId": "flink",
@@ -663,8 +663,8 @@
     {
       "id": "aws-iam",
       "position": {
-        "x": 1150,
-        "y": 3100
+        "x": 1360,
+        "y": 4300
       },
       "data": {
         "moduleId": "aws-iam",
@@ -674,8 +674,8 @@
     {
       "id": "s3",
       "position": {
-        "x": 800,
-        "y": 3100
+        "x": 940,
+        "y": 4300
       },
       "data": {
         "moduleId": "s3",
@@ -685,8 +685,8 @@
     {
       "id": "ec2",
       "position": {
-        "x": 450,
-        "y": 3100
+        "x": 520,
+        "y": 4300
       },
       "data": {
         "moduleId": "ec2",
@@ -697,7 +697,7 @@
       "id": "rds",
       "position": {
         "x": 100,
-        "y": 3100
+        "y": 4300
       },
       "data": {
         "moduleId": "rds",
@@ -708,7 +708,7 @@
       "id": "redshift",
       "position": {
         "x": 100,
-        "y": 3300
+        "y": 4580
       },
       "data": {
         "moduleId": "redshift",
@@ -718,8 +718,8 @@
     {
       "id": "docker",
       "position": {
-        "x": 450,
-        "y": 3300
+        "x": 520,
+        "y": 4580
       },
       "data": {
         "moduleId": "docker",
@@ -729,8 +729,8 @@
     {
       "id": "ci-cd",
       "position": {
-        "x": 800,
-        "y": 3300
+        "x": 940,
+        "y": 4580
       },
       "data": {
         "moduleId": "ci-cd",
@@ -740,8 +740,8 @@
     {
       "id": "terraform",
       "position": {
-        "x": 1150,
-        "y": 3300
+        "x": 1360,
+        "y": 4580
       },
       "data": {
         "moduleId": "terraform",
@@ -751,8 +751,8 @@
     {
       "id": "de-projects",
       "position": {
-        "x": 1150,
-        "y": 3500
+        "x": 1360,
+        "y": 4860
       },
       "data": {
         "moduleId": "de-projects",
@@ -762,8 +762,8 @@
     {
       "id": "batch-project",
       "position": {
-        "x": 800,
-        "y": 3500
+        "x": 940,
+        "y": 4860
       },
       "data": {
         "moduleId": "batch-project",
@@ -773,8 +773,8 @@
     {
       "id": "streaming-project",
       "position": {
-        "x": 450,
-        "y": 3500
+        "x": 520,
+        "y": 4860
       },
       "data": {
         "moduleId": "streaming-project",
@@ -785,7 +785,7 @@
       "id": "sys-design-intro",
       "position": {
         "x": 100,
-        "y": 3500
+        "y": 4860
       },
       "data": {
         "moduleId": "sys-design-intro",
@@ -796,7 +796,7 @@
       "id": "sys-design-framework",
       "position": {
         "x": 100,
-        "y": 3700
+        "y": 5140
       },
       "data": {
         "moduleId": "sys-design-framework",
@@ -806,8 +806,8 @@
     {
       "id": "sql-interview",
       "position": {
-        "x": 450,
-        "y": 3700
+        "x": 520,
+        "y": 5140
       },
       "data": {
         "moduleId": "sql-interview",
@@ -817,8 +817,8 @@
     {
       "id": "python-interview",
       "position": {
-        "x": 800,
-        "y": 3700
+        "x": 940,
+        "y": 5140
       },
       "data": {
         "moduleId": "python-interview",
@@ -828,8 +828,8 @@
     {
       "id": "behavioral-interview",
       "position": {
-        "x": 1150,
-        "y": 3700
+        "x": 1360,
+        "y": 5140
       },
       "data": {
         "moduleId": "behavioral-interview",
@@ -839,8 +839,8 @@
     {
       "id": "idempotency",
       "position": {
-        "x": 1150,
-        "y": 3900
+        "x": 1360,
+        "y": 5420
       },
       "data": {
         "moduleId": "idempotency",
@@ -850,8 +850,8 @@
     {
       "id": "schema-evolution",
       "position": {
-        "x": 800,
-        "y": 3900
+        "x": 940,
+        "y": 5420
       },
       "data": {
         "moduleId": "schema-evolution",
@@ -861,8 +861,8 @@
     {
       "id": "data-lineage",
       "position": {
-        "x": 450,
-        "y": 3900
+        "x": 520,
+        "y": 5420
       },
       "data": {
         "moduleId": "data-lineage",
@@ -873,7 +873,7 @@
       "id": "data-observability",
       "position": {
         "x": 100,
-        "y": 3900
+        "y": 5420
       },
       "data": {
         "moduleId": "data-observability",
@@ -884,7 +884,7 @@
       "id": "cdc",
       "position": {
         "x": 100,
-        "y": 4100
+        "y": 5700
       },
       "data": {
         "moduleId": "cdc",
@@ -894,8 +894,8 @@
     {
       "id": "lambda-arch",
       "position": {
-        "x": 450,
-        "y": 4100
+        "x": 520,
+        "y": 5700
       },
       "data": {
         "moduleId": "lambda-arch",
@@ -905,8 +905,8 @@
     {
       "id": "kappa-arch",
       "position": {
-        "x": 800,
-        "y": 4100
+        "x": 940,
+        "y": 5700
       },
       "data": {
         "moduleId": "kappa-arch",
@@ -916,8 +916,8 @@
     {
       "id": "data-catalog",
       "position": {
-        "x": 1150,
-        "y": 4100
+        "x": 1360,
+        "y": 5700
       },
       "data": {
         "moduleId": "data-catalog",
@@ -927,8 +927,8 @@
     {
       "id": "replication",
       "position": {
-        "x": 1150,
-        "y": 4300
+        "x": 1360,
+        "y": 5980
       },
       "data": {
         "moduleId": "replication",
@@ -938,8 +938,8 @@
     {
       "id": "cap-theorem",
       "position": {
-        "x": 800,
-        "y": 4300
+        "x": 940,
+        "y": 5980
       },
       "data": {
         "moduleId": "cap-theorem",
@@ -949,8 +949,8 @@
     {
       "id": "consistency-models",
       "position": {
-        "x": 450,
-        "y": 4300
+        "x": 520,
+        "y": 5980
       },
       "data": {
         "moduleId": "consistency-models",
@@ -961,7 +961,7 @@
       "id": "data-locality",
       "position": {
         "x": 100,
-        "y": 4300
+        "y": 5980
       },
       "data": {
         "moduleId": "data-locality",
@@ -972,7 +972,7 @@
       "id": "spark-datasets",
       "position": {
         "x": 100,
-        "y": 4500
+        "y": 6260
       },
       "data": {
         "moduleId": "spark-datasets",
@@ -982,8 +982,8 @@
     {
       "id": "lazy-evaluation",
       "position": {
-        "x": 450,
-        "y": 4500
+        "x": 520,
+        "y": 6260
       },
       "data": {
         "moduleId": "lazy-evaluation",
@@ -993,8 +993,8 @@
     {
       "id": "tungsten",
       "position": {
-        "x": 800,
-        "y": 4500
+        "x": 940,
+        "y": 6260
       },
       "data": {
         "moduleId": "tungsten",
@@ -1004,8 +1004,8 @@
     {
       "id": "aqe",
       "position": {
-        "x": 1150,
-        "y": 4500
+        "x": 1360,
+        "y": 6260
       },
       "data": {
         "moduleId": "aqe",
@@ -1015,8 +1015,8 @@
     {
       "id": "spark-window-functions",
       "position": {
-        "x": 1150,
-        "y": 4700
+        "x": 1360,
+        "y": 6540
       },
       "data": {
         "moduleId": "spark-window-functions",
@@ -1026,8 +1026,8 @@
     {
       "id": "spark-structured-streaming",
       "position": {
-        "x": 800,
-        "y": 4700
+        "x": 940,
+        "y": 6540
       },
       "data": {
         "moduleId": "spark-structured-streaming",
@@ -1037,8 +1037,8 @@
     {
       "id": "spark-ui",
       "position": {
-        "x": 450,
-        "y": 4700
+        "x": 520,
+        "y": 6540
       },
       "data": {
         "moduleId": "spark-ui",
@@ -1049,7 +1049,7 @@
       "id": "spark-partitioning",
       "position": {
         "x": 100,
-        "y": 4700
+        "y": 6540
       },
       "data": {
         "moduleId": "spark-partitioning",
@@ -1060,7 +1060,7 @@
       "id": "db-notebooks",
       "position": {
         "x": 100,
-        "y": 4900
+        "y": 6820
       },
       "data": {
         "moduleId": "db-notebooks",
@@ -1070,8 +1070,8 @@
     {
       "id": "db-clusters",
       "position": {
-        "x": 450,
-        "y": 4900
+        "x": 520,
+        "y": 6820
       },
       "data": {
         "moduleId": "db-clusters",
@@ -1081,8 +1081,8 @@
     {
       "id": "db-jobs",
       "position": {
-        "x": 800,
-        "y": 4900
+        "x": 940,
+        "y": 6820
       },
       "data": {
         "moduleId": "db-jobs",
@@ -1092,8 +1092,8 @@
     {
       "id": "db-sql",
       "position": {
-        "x": 1150,
-        "y": 4900
+        "x": 1360,
+        "y": 6820
       },
       "data": {
         "moduleId": "db-sql",
@@ -1103,8 +1103,8 @@
     {
       "id": "db-photon",
       "position": {
-        "x": 1150,
-        "y": 5100
+        "x": 1360,
+        "y": 7100
       },
       "data": {
         "moduleId": "db-photon",
@@ -1114,8 +1114,8 @@
     {
       "id": "db-cost",
       "position": {
-        "x": 800,
-        "y": 5100
+        "x": 940,
+        "y": 7100
       },
       "data": {
         "moduleId": "db-cost",
@@ -1125,8 +1125,8 @@
     {
       "id": "denormalization",
       "position": {
-        "x": 450,
-        "y": 5100
+        "x": 520,
+        "y": 7100
       },
       "data": {
         "moduleId": "denormalization",
@@ -1137,7 +1137,7 @@
       "id": "snowflake-schema",
       "position": {
         "x": 100,
-        "y": 5100
+        "y": 7100
       },
       "data": {
         "moduleId": "snowflake-schema",
@@ -1148,7 +1148,7 @@
       "id": "fact-tables",
       "position": {
         "x": 100,
-        "y": 5300
+        "y": 7380
       },
       "data": {
         "moduleId": "fact-tables",
@@ -1158,8 +1158,8 @@
     {
       "id": "grain",
       "position": {
-        "x": 450,
-        "y": 5300
+        "x": 520,
+        "y": 7380
       },
       "data": {
         "moduleId": "grain",
@@ -1169,8 +1169,8 @@
     {
       "id": "kimball",
       "position": {
-        "x": 800,
-        "y": 5300
+        "x": 940,
+        "y": 7380
       },
       "data": {
         "moduleId": "kimball",
@@ -1180,8 +1180,8 @@
     {
       "id": "data-vault",
       "position": {
-        "x": 1150,
-        "y": 5300
+        "x": 1360,
+        "y": 7380
       },
       "data": {
         "moduleId": "data-vault",
@@ -1191,8 +1191,8 @@
     {
       "id": "dbt-seeds",
       "position": {
-        "x": 1150,
-        "y": 5500
+        "x": 1360,
+        "y": 7660
       },
       "data": {
         "moduleId": "dbt-seeds",
@@ -1202,8 +1202,8 @@
     {
       "id": "dbt-sources",
       "position": {
-        "x": 800,
-        "y": 5500
+        "x": 940,
+        "y": 7660
       },
       "data": {
         "moduleId": "dbt-sources",
@@ -1213,8 +1213,8 @@
     {
       "id": "dbt-snapshots",
       "position": {
-        "x": 450,
-        "y": 5500
+        "x": 520,
+        "y": 7660
       },
       "data": {
         "moduleId": "dbt-snapshots",
@@ -1225,7 +1225,7 @@
       "id": "dbt-incremental",
       "position": {
         "x": 100,
-        "y": 5500
+        "y": 7660
       },
       "data": {
         "moduleId": "dbt-incremental",
@@ -1236,7 +1236,7 @@
       "id": "dbt-best-practices",
       "position": {
         "x": 100,
-        "y": 5700
+        "y": 7940
       },
       "data": {
         "moduleId": "dbt-best-practices",
@@ -1246,8 +1246,8 @@
     {
       "id": "airflow-hooks",
       "position": {
-        "x": 450,
-        "y": 5700
+        "x": 520,
+        "y": 7940
       },
       "data": {
         "moduleId": "airflow-hooks",
@@ -1257,8 +1257,8 @@
     {
       "id": "airflow-taskflow",
       "position": {
-        "x": 800,
-        "y": 5700
+        "x": 940,
+        "y": 7940
       },
       "data": {
         "moduleId": "airflow-taskflow",
@@ -1268,8 +1268,8 @@
     {
       "id": "airflow-xcom",
       "position": {
-        "x": 1150,
-        "y": 5700
+        "x": 1360,
+        "y": 7940
       },
       "data": {
         "moduleId": "airflow-xcom",
@@ -1279,8 +1279,8 @@
     {
       "id": "airflow-prod-best-practices",
       "position": {
-        "x": 1150,
-        "y": 5900
+        "x": 1360,
+        "y": 8220
       },
       "data": {
         "moduleId": "airflow-prod-best-practices",
@@ -1290,8 +1290,8 @@
     {
       "id": "kafka-topics",
       "position": {
-        "x": 800,
-        "y": 5900
+        "x": 940,
+        "y": 8220
       },
       "data": {
         "moduleId": "kafka-topics",
@@ -1301,8 +1301,8 @@
     {
       "id": "kafka-producer",
       "position": {
-        "x": 450,
-        "y": 5900
+        "x": 520,
+        "y": 8220
       },
       "data": {
         "moduleId": "kafka-producer",
@@ -1313,7 +1313,7 @@
       "id": "kafka-consumer",
       "position": {
         "x": 100,
-        "y": 5900
+        "y": 8220
       },
       "data": {
         "moduleId": "kafka-consumer",
@@ -1324,7 +1324,7 @@
       "id": "kafka-schema-registry",
       "position": {
         "x": 100,
-        "y": 6100
+        "y": 8500
       },
       "data": {
         "moduleId": "kafka-schema-registry",
@@ -1334,8 +1334,8 @@
     {
       "id": "kafka-connect",
       "position": {
-        "x": 450,
-        "y": 6100
+        "x": 520,
+        "y": 8500
       },
       "data": {
         "moduleId": "kafka-connect",
@@ -1345,8 +1345,8 @@
     {
       "id": "aws-glue",
       "position": {
-        "x": 800,
-        "y": 6100
+        "x": 940,
+        "y": 8500
       },
       "data": {
         "moduleId": "aws-glue",
@@ -1356,8 +1356,8 @@
     {
       "id": "aws-athena",
       "position": {
-        "x": 1150,
-        "y": 6100
+        "x": 1360,
+        "y": 8500
       },
       "data": {
         "moduleId": "aws-athena",
@@ -1367,8 +1367,8 @@
     {
       "id": "aws-lambda",
       "position": {
-        "x": 1150,
-        "y": 6300
+        "x": 1360,
+        "y": 8780
       },
       "data": {
         "moduleId": "aws-lambda",
@@ -1378,8 +1378,8 @@
     {
       "id": "aws-emr",
       "position": {
-        "x": 800,
-        "y": 6300
+        "x": 940,
+        "y": 8780
       },
       "data": {
         "moduleId": "aws-emr",
@@ -1389,8 +1389,8 @@
     {
       "id": "docker-compose",
       "position": {
-        "x": 450,
-        "y": 6300
+        "x": 520,
+        "y": 8780
       },
       "data": {
         "moduleId": "docker-compose",
@@ -1401,7 +1401,7 @@
       "id": "project-python-etl",
       "position": {
         "x": 100,
-        "y": 6300
+        "y": 8780
       },
       "data": {
         "moduleId": "project-python-etl",
@@ -1412,7 +1412,7 @@
       "id": "project-spark-analytics",
       "position": {
         "x": 100,
-        "y": 6500
+        "y": 9060
       },
       "data": {
         "moduleId": "project-spark-analytics",
@@ -1422,8 +1422,8 @@
     {
       "id": "project-e2e",
       "position": {
-        "x": 450,
-        "y": 6500
+        "x": 520,
+        "y": 9060
       },
       "data": {
         "moduleId": "project-e2e",
@@ -1433,8 +1433,8 @@
     {
       "id": "sys-design-capacity",
       "position": {
-        "x": 800,
-        "y": 6500
+        "x": 940,
+        "y": 9060
       },
       "data": {
         "moduleId": "sys-design-capacity",
@@ -1444,8 +1444,8 @@
     {
       "id": "sys-design-batch",
       "position": {
-        "x": 1150,
-        "y": 6500
+        "x": 1360,
+        "y": 9060
       },
       "data": {
         "moduleId": "sys-design-batch",
@@ -1455,8 +1455,8 @@
     {
       "id": "sys-design-streaming",
       "position": {
-        "x": 1150,
-        "y": 6700
+        "x": 1360,
+        "y": 9340
       },
       "data": {
         "moduleId": "sys-design-streaming",
@@ -1466,8 +1466,8 @@
     {
       "id": "interview-spark",
       "position": {
-        "x": 800,
-        "y": 6700
+        "x": 940,
+        "y": 9340
       },
       "data": {
         "moduleId": "interview-spark",
@@ -1477,8 +1477,8 @@
     {
       "id": "interview-resume",
       "position": {
-        "x": 450,
-        "y": 6700
+        "x": 520,
+        "y": 9340
       },
       "data": {
         "moduleId": "interview-resume",
@@ -1489,7 +1489,7 @@
       "id": "interview-mock",
       "position": {
         "x": 100,
-        "y": 6700
+        "y": 9340
       },
       "data": {
         "moduleId": "interview-mock",

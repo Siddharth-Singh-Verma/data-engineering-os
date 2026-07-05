@@ -6,8 +6,8 @@ const nodes = [];
 const edges = [];
 
 const ROW_LENGTH = 4;
-const X_SPACING = 350;
-const Y_SPACING = 200;
+const X_SPACING = 420;
+const Y_SPACING = 280;
 
 for (let i = 0; i < modules.length; i++) {
   const mod = modules[i];
