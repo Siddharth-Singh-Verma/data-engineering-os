@@ -108,12 +108,12 @@ export function useStats(modules: Module[], progress: UserProgress): DashboardSt
 
     // Recommended next topic (first unlocked, not-started, highest-priority module)
     let recommendedNext: { id: string; title: string; phase: string } | null = null;
-    const unstarted = modules
-      .filter(m => !progress.completedModules.includes(m.id))
-      .filter(m => m.prerequisites.every(p => progress.completedModules.includes(p)))
-      .sort((a, b) => (b.interviewImportance || b.interviewWeight) - (a.interviewImportance || a.interviewWeight));
+    let unstarted = modules.filter(m => !progress.completedModules.includes(m.id));
     if (unstarted.length > 0) {
-      recommendedNext = { id: unstarted[0].id, title: unstarted[0].title, phase: unstarted[0].phase };
+      let unlocked = unstarted.filter(m => m.prerequisites.every(p => progress.completedModules.includes(p)));
+      if (unlocked.length === 0) unlocked = unstarted; // fallback to any unstarted if deadlocked
+      unlocked.sort((a, b) => (b.interviewImportance || b.interviewWeight || 0) - (a.interviewImportance || a.interviewWeight || 0));
+      recommendedNext = { id: unlocked[0].id, title: unlocked[0].title, phase: unlocked[0].phase };
     }
 
     // Phase progress
