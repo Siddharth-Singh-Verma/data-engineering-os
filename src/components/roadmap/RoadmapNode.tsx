@@ -13,6 +13,7 @@ interface RoadmapNodeDataType {
   isCompleted: boolean;
   isUnlocked: boolean;
   isStarted: boolean;
+  align: 'left' | 'right';
   onToggleComplete: (id: string) => void;
   onNavigate: (id: string) => void;
 }
@@ -51,7 +52,9 @@ export const RoadmapNode = memo(({ data }: NodeProps) => {
         width: '340px', // Wider card like DataVidhya
       }}
     >
-      <Handle type="target" position={Position.Top} className="!bg-transparent !border-0 !w-3 !h-3" />
+      {/* Horizontal handles for timeline connections */}
+      <Handle type="target" id="left" position={Position.Left} className="!bg-transparent !border-0 !w-1 !h-1" />
+      <Handle type="target" id="right" position={Position.Right} className="!bg-transparent !border-0 !w-1 !h-1" />
 
       <div
         className={`relative rounded-2xl border bg-[var(--color-bg-card)] transition-all duration-300 overflow-hidden flex flex-col ${d.isCompleted ? 'border-emerald-500/30' : d.isStarted ? 'border-blue-500/30 shadow-[0_0_15px_rgba(59,130,246,0.15)]' : 'border-[var(--color-border-default)] shadow-sm'}`}
@@ -152,8 +155,6 @@ export const RoadmapNode = memo(({ data }: NodeProps) => {
           </button>
         </div>
       </div>
-
-      <Handle type="source" position={Position.Bottom} className="!bg-transparent !border-0 !w-3 !h-3" />
     </div>
   );
 });

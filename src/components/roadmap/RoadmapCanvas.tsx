@@ -16,6 +16,7 @@ import {
 import '@xyflow/react/dist/style.css';
 import { useNavigate } from 'react-router';
 import { RoadmapNode } from './RoadmapNode';
+import { TimelineNode } from './TimelineNode';
 import type { Module, UserProgress, RoadmapData } from '@/types';
 import { CATEGORY_LABELS } from '@/types';
 
@@ -28,6 +29,7 @@ interface RoadmapCanvasProps {
 
 const NODE_TYPES: NodeTypes = {
   roadmapNode: RoadmapNode,
+  timelineNode: TimelineNode,
 };
 
 function RoadmapCanvasInner({ roadmapData, modules, progress, toggleModuleComplete }: RoadmapCanvasProps) {
@@ -43,7 +45,22 @@ function RoadmapCanvasInner({ roadmapData, modules, progress, toggleModuleComple
   const initialNodes: Node[] = useMemo(() =>
     roadmapData.nodes
       .map(n => {
-        const mod = moduleMap[n.data.moduleId];
+        if (n.type === 'timelineNode') {
+          const isCompleted = progress.completedModules.includes(n.data.moduleId as string);
+          const isStarted = progress.moduleProgress[n.data.moduleId as string]?.started || false;
+          return {
+            id: n.id,
+            type: 'timelineNode',
+            position: n.position,
+            data: {
+              ...n.data,
+              isCompleted,
+              isStarted,
+            }
+          };
+        }
+
+        const mod = moduleMap[n.data.moduleId as string];
         const isCompleted = progress.completedModules.includes(n.id);
         const isUnlocked = mod
           ? (mod.prerequisites || []).every(p => progress.completedModules.includes(p))
@@ -74,17 +91,30 @@ function RoadmapCanvasInner({ roadmapData, modules, progress, toggleModuleComple
   const initialEdges: Edge[] = useMemo(() =>
     roadmapData.edges
       .map(e => {
-        const sourceCompleted = progress.completedModules.includes(e.source);
+        let sourceCompleted = false;
+        if (e.source.startsWith('timeline-')) {
+          const id = e.source.replace('timeline-', '');
+          sourceCompleted = progress.completedModules.includes(id);
+        } else {
+          sourceCompleted = progress.completedModules.includes(e.source);
+        }
+
+        const isSpine = e.id.startsWith('e-spine-');
+        const isBranch = e.id.startsWith('e-branch-');
+
         return {
           id: e.id,
           source: e.source,
+          sourceHandle: e.sourceHandle,
           target: e.target,
-          animated: sourceCompleted,
+          targetHandle: e.targetHandle,
+          animated: sourceCompleted && !isSpine,
           style: {
             stroke: sourceCompleted ? 'hsl(142, 71%, 45%)' : 'hsl(220, 15%, 25%)',
             strokeWidth: sourceCompleted ? 2.5 : 1.5,
+            strokeDasharray: isSpine || isBranch ? '5 5' : 'none', // Dashed lines for timeline
           },
-          type: 'smoothstep',
+          type: e.type || 'smoothstep',
         };
       }),
     [roadmapData.edges, progress]

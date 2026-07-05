@@ -1,2177 +1,4896 @@
 {
   "nodes": [
     {
-      "id": "python",
+      "id": "timeline-python",
+      "type": "timelineNode",
       "position": {
-        "x": 100,
+        "x": 500,
+        "y": 180
+      },
+      "data": {
+        "moduleId": "python"
+      }
+    },
+    {
+      "id": "python",
+      "type": "roadmapNode",
+      "position": {
+        "x": 140,
         "y": 100
       },
       "data": {
         "moduleId": "python",
-        "category": "foundation"
+        "category": "foundation",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-sql",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 420
+      },
+      "data": {
+        "moduleId": "sql"
       }
     },
     {
       "id": "sql",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 100
+        "x": 580,
+        "y": 340
       },
       "data": {
         "moduleId": "sql",
-        "category": "foundation"
+        "category": "foundation",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-git",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 660
+      },
+      "data": {
+        "moduleId": "git"
       }
     },
     {
       "id": "git",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 100
+        "x": 140,
+        "y": 580
       },
       "data": {
         "moduleId": "git",
-        "category": "foundation"
+        "category": "foundation",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-linux",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 900
+      },
+      "data": {
+        "moduleId": "linux"
       }
     },
     {
       "id": "linux",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 100
+        "x": 580,
+        "y": 820
       },
       "data": {
         "moduleId": "linux",
-        "category": "foundation"
+        "category": "foundation",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-rest-apis",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 1140
+      },
+      "data": {
+        "moduleId": "rest-apis"
       }
     },
     {
       "id": "rest-apis",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 380
+        "x": 140,
+        "y": 1060
       },
       "data": {
         "moduleId": "rest-apis",
-        "category": "foundation"
+        "category": "foundation",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-what-is-de",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 1380
+      },
+      "data": {
+        "moduleId": "what-is-de"
       }
     },
     {
       "id": "what-is-de",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 380
+        "x": 580,
+        "y": 1300
       },
       "data": {
         "moduleId": "what-is-de",
-        "category": "concepts"
+        "category": "concepts",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-role-of-de",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 1620
+      },
+      "data": {
+        "moduleId": "role-of-de"
       }
     },
     {
       "id": "role-of-de",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 380
+        "x": 140,
+        "y": 1540
       },
       "data": {
         "moduleId": "role-of-de",
-        "category": "concepts"
+        "category": "concepts",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-batch-vs-streaming",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 1860
+      },
+      "data": {
+        "moduleId": "batch-vs-streaming"
       }
     },
     {
       "id": "batch-vs-streaming",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 380
+        "x": 580,
+        "y": 1780
       },
       "data": {
         "moduleId": "batch-vs-streaming",
-        "category": "concepts"
+        "category": "concepts",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-etl-vs-elt",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 2100
+      },
+      "data": {
+        "moduleId": "etl-vs-elt"
       }
     },
     {
       "id": "etl-vs-elt",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 660
+        "x": 140,
+        "y": 2020
       },
       "data": {
         "moduleId": "etl-vs-elt",
-        "category": "concepts"
+        "category": "concepts",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-oltp-vs-olap",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 2340
+      },
+      "data": {
+        "moduleId": "oltp-vs-olap"
       }
     },
     {
       "id": "oltp-vs-olap",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 660
+        "x": 580,
+        "y": 2260
       },
       "data": {
         "moduleId": "oltp-vs-olap",
-        "category": "concepts"
+        "category": "concepts",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-data-pipeline",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 2580
+      },
+      "data": {
+        "moduleId": "data-pipeline"
       }
     },
     {
       "id": "data-pipeline",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 660
+        "x": 140,
+        "y": 2500
       },
       "data": {
         "moduleId": "data-pipeline",
-        "category": "concepts"
+        "category": "concepts",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-data-quality",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 2820
+      },
+      "data": {
+        "moduleId": "data-quality"
       }
     },
     {
       "id": "data-quality",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 660
+        "x": 580,
+        "y": 2740
       },
       "data": {
         "moduleId": "data-quality",
-        "category": "concepts"
+        "category": "concepts",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-data-governance",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 3060
+      },
+      "data": {
+        "moduleId": "data-governance"
       }
     },
     {
       "id": "data-governance",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 940
+        "x": 140,
+        "y": 2980
       },
       "data": {
         "moduleId": "data-governance",
-        "category": "concepts"
+        "category": "concepts",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-metadata",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 3300
+      },
+      "data": {
+        "moduleId": "metadata"
       }
     },
     {
       "id": "metadata",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 940
+        "x": 580,
+        "y": 3220
       },
       "data": {
         "moduleId": "metadata",
-        "category": "concepts"
+        "category": "concepts",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-data-warehouse",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 3540
+      },
+      "data": {
+        "moduleId": "data-warehouse"
       }
     },
     {
       "id": "data-warehouse",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 940
+        "x": 140,
+        "y": 3460
       },
       "data": {
         "moduleId": "data-warehouse",
-        "category": "architecture"
+        "category": "architecture",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-data-lake",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 3780
+      },
+      "data": {
+        "moduleId": "data-lake"
       }
     },
     {
       "id": "data-lake",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 940
+        "x": 580,
+        "y": 3700
       },
       "data": {
         "moduleId": "data-lake",
-        "category": "architecture"
+        "category": "architecture",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-lakehouse-arch",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 4020
+      },
+      "data": {
+        "moduleId": "lakehouse-arch"
       }
     },
     {
       "id": "lakehouse-arch",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 1220
+        "x": 140,
+        "y": 3940
       },
       "data": {
         "moduleId": "lakehouse-arch",
-        "category": "architecture"
+        "category": "architecture",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-medallion",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 4260
+      },
+      "data": {
+        "moduleId": "medallion"
       }
     },
     {
       "id": "medallion",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 1220
+        "x": 580,
+        "y": 4180
       },
       "data": {
         "moduleId": "medallion",
-        "category": "architecture"
+        "category": "architecture",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-data-mesh",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 4500
+      },
+      "data": {
+        "moduleId": "data-mesh"
       }
     },
     {
       "id": "data-mesh",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 1220
+        "x": 140,
+        "y": 4420
       },
       "data": {
         "moduleId": "data-mesh",
-        "category": "architecture"
+        "category": "architecture",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-data-fabric",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 4740
+      },
+      "data": {
+        "moduleId": "data-fabric"
       }
     },
     {
       "id": "data-fabric",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 1220
+        "x": 580,
+        "y": 4660
       },
       "data": {
         "moduleId": "data-fabric",
-        "category": "architecture"
+        "category": "architecture",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-data-contracts",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 4980
+      },
+      "data": {
+        "moduleId": "data-contracts"
       }
     },
     {
       "id": "data-contracts",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 1500
+        "x": 140,
+        "y": 4900
       },
       "data": {
         "moduleId": "data-contracts",
-        "category": "architecture"
+        "category": "architecture",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-csv-json",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 5220
+      },
+      "data": {
+        "moduleId": "csv-json"
       }
     },
     {
       "id": "csv-json",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 1500
+        "x": 580,
+        "y": 5140
       },
       "data": {
         "moduleId": "csv-json",
-        "category": "storage"
+        "category": "storage",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-parquet",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 5460
+      },
+      "data": {
+        "moduleId": "parquet"
       }
     },
     {
       "id": "parquet",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 1500
+        "x": 140,
+        "y": 5380
       },
       "data": {
         "moduleId": "parquet",
-        "category": "storage"
+        "category": "storage",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-avro",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 5700
+      },
+      "data": {
+        "moduleId": "avro"
       }
     },
     {
       "id": "avro",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 1500
+        "x": 580,
+        "y": 5620
       },
       "data": {
         "moduleId": "avro",
-        "category": "storage"
+        "category": "storage",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-compression",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 5940
+      },
+      "data": {
+        "moduleId": "compression"
       }
     },
     {
       "id": "compression",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 1780
+        "x": 140,
+        "y": 5860
       },
       "data": {
         "moduleId": "compression",
-        "category": "storage"
+        "category": "storage",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-delta-format",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 6180
+      },
+      "data": {
+        "moduleId": "delta-format"
       }
     },
     {
       "id": "delta-format",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 1780
+        "x": 580,
+        "y": 6100
       },
       "data": {
         "moduleId": "delta-format",
-        "category": "storage"
+        "category": "storage",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-iceberg",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 6420
+      },
+      "data": {
+        "moduleId": "iceberg"
       }
     },
     {
       "id": "iceberg",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 1780
+        "x": 140,
+        "y": 6340
       },
       "data": {
         "moduleId": "iceberg",
-        "category": "storage"
+        "category": "storage",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-hudi",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 6660
+      },
+      "data": {
+        "moduleId": "hudi"
       }
     },
     {
       "id": "hudi",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 1780
+        "x": 580,
+        "y": 6580
       },
       "data": {
         "moduleId": "hudi",
-        "category": "storage"
+        "category": "storage",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-horizontal-scaling",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 6900
+      },
+      "data": {
+        "moduleId": "horizontal-scaling"
       }
     },
     {
       "id": "horizontal-scaling",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 2060
+        "x": 140,
+        "y": 6820
       },
       "data": {
         "moduleId": "horizontal-scaling",
-        "category": "distributed"
+        "category": "distributed",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-partitions-dist",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 7140
+      },
+      "data": {
+        "moduleId": "partitions-dist"
       }
     },
     {
       "id": "partitions-dist",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 2060
+        "x": 580,
+        "y": 7060
       },
       "data": {
         "moduleId": "partitions-dist",
-        "category": "distributed"
+        "category": "distributed",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-driver-executors",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 7380
+      },
+      "data": {
+        "moduleId": "driver-executors"
       }
     },
     {
       "id": "driver-executors",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 2060
+        "x": 140,
+        "y": 7300
       },
       "data": {
         "moduleId": "driver-executors",
-        "category": "distributed"
+        "category": "distributed",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-shuffling",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 7620
+      },
+      "data": {
+        "moduleId": "shuffling"
       }
     },
     {
       "id": "shuffling",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 2060
+        "x": 580,
+        "y": 7540
       },
       "data": {
         "moduleId": "shuffling",
-        "category": "distributed"
+        "category": "distributed",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-resource-management",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 7860
+      },
+      "data": {
+        "moduleId": "resource-management"
       }
     },
     {
       "id": "resource-management",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 2340
+        "x": 140,
+        "y": 7780
       },
       "data": {
         "moduleId": "resource-management",
-        "category": "distributed"
+        "category": "distributed",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-why-spark",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 8100
+      },
+      "data": {
+        "moduleId": "why-spark"
       }
     },
     {
       "id": "why-spark",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 2340
+        "x": 580,
+        "y": 8020
       },
       "data": {
         "moduleId": "why-spark",
-        "category": "spark"
+        "category": "spark",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-rdd",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 8340
+      },
+      "data": {
+        "moduleId": "rdd"
       }
     },
     {
       "id": "rdd",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 2340
+        "x": 140,
+        "y": 8260
       },
       "data": {
         "moduleId": "rdd",
-        "category": "spark"
+        "category": "spark",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-spark-dataframes",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 8580
+      },
+      "data": {
+        "moduleId": "spark-dataframes"
       }
     },
     {
       "id": "spark-dataframes",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 2340
+        "x": 580,
+        "y": 8500
       },
       "data": {
         "moduleId": "spark-dataframes",
-        "category": "spark"
+        "category": "spark",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-transformations-actions",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 8820
+      },
+      "data": {
+        "moduleId": "transformations-actions"
       }
     },
     {
       "id": "transformations-actions",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 2620
+        "x": 140,
+        "y": 8740
       },
       "data": {
         "moduleId": "transformations-actions",
-        "category": "spark"
+        "category": "spark",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-dag",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 9060
+      },
+      "data": {
+        "moduleId": "dag"
       }
     },
     {
       "id": "dag",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 2620
+        "x": 580,
+        "y": 8980
       },
       "data": {
         "moduleId": "dag",
-        "category": "spark"
+        "category": "spark",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-spark-joins",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 9300
+      },
+      "data": {
+        "moduleId": "spark-joins"
       }
     },
     {
       "id": "spark-joins",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 2620
+        "x": 140,
+        "y": 9220
       },
       "data": {
         "moduleId": "spark-joins",
-        "category": "spark"
+        "category": "spark",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-spark-caching",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 9540
+      },
+      "data": {
+        "moduleId": "spark-caching"
       }
     },
     {
       "id": "spark-caching",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 2620
+        "x": 580,
+        "y": 9460
       },
       "data": {
         "moduleId": "spark-caching",
-        "category": "spark"
+        "category": "spark",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-spark-tuning",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 9780
+      },
+      "data": {
+        "moduleId": "spark-tuning"
       }
     },
     {
       "id": "spark-tuning",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 2900
+        "x": 140,
+        "y": 9700
       },
       "data": {
         "moduleId": "spark-tuning",
-        "category": "spark"
+        "category": "spark",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-db-workspace",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 10020
+      },
+      "data": {
+        "moduleId": "db-workspace"
       }
     },
     {
       "id": "db-workspace",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 2900
+        "x": 580,
+        "y": 9940
       },
       "data": {
         "moduleId": "db-workspace",
-        "category": "databricks"
+        "category": "databricks",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-dlt",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 10260
+      },
+      "data": {
+        "moduleId": "dlt"
       }
     },
     {
       "id": "dlt",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 2900
+        "x": 140,
+        "y": 10180
       },
       "data": {
         "moduleId": "dlt",
-        "category": "databricks"
+        "category": "databricks",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-unity-catalog",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 10500
+      },
+      "data": {
+        "moduleId": "unity-catalog"
       }
     },
     {
       "id": "unity-catalog",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 2900
+        "x": 580,
+        "y": 10420
       },
       "data": {
         "moduleId": "unity-catalog",
-        "category": "databricks"
+        "category": "databricks",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-er-model",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 10740
+      },
+      "data": {
+        "moduleId": "er-model"
       }
     },
     {
       "id": "er-model",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 3180
+        "x": 140,
+        "y": 10660
       },
       "data": {
         "moduleId": "er-model",
-        "category": "modeling"
+        "category": "modeling",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-normalization",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 10980
+      },
+      "data": {
+        "moduleId": "normalization"
       }
     },
     {
       "id": "normalization",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 3180
+        "x": 580,
+        "y": 10900
       },
       "data": {
         "moduleId": "normalization",
-        "category": "modeling"
+        "category": "modeling",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-star-schema",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 11220
+      },
+      "data": {
+        "moduleId": "star-schema"
       }
     },
     {
       "id": "star-schema",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 3180
+        "x": 140,
+        "y": 11140
       },
       "data": {
         "moduleId": "star-schema",
-        "category": "modeling"
+        "category": "modeling",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-scd",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 11460
+      },
+      "data": {
+        "moduleId": "scd"
       }
     },
     {
       "id": "scd",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 3180
+        "x": 580,
+        "y": 11380
       },
       "data": {
         "moduleId": "scd",
-        "category": "modeling"
+        "category": "modeling",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-dbt-core",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 11700
+      },
+      "data": {
+        "moduleId": "dbt-core"
       }
     },
     {
       "id": "dbt-core",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 3460
+        "x": 140,
+        "y": 11620
       },
       "data": {
         "moduleId": "dbt-core",
-        "category": "transformation"
+        "category": "transformation",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-dbt-models",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 11940
+      },
+      "data": {
+        "moduleId": "dbt-models"
       }
     },
     {
       "id": "dbt-models",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 3460
+        "x": 580,
+        "y": 11860
       },
       "data": {
         "moduleId": "dbt-models",
-        "category": "transformation"
+        "category": "transformation",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-jinja-macros",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 12180
+      },
+      "data": {
+        "moduleId": "jinja-macros"
       }
     },
     {
       "id": "jinja-macros",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 3460
+        "x": 140,
+        "y": 12100
       },
       "data": {
         "moduleId": "jinja-macros",
-        "category": "transformation"
+        "category": "transformation",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-dbt-tests",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 12420
+      },
+      "data": {
+        "moduleId": "dbt-tests"
       }
     },
     {
       "id": "dbt-tests",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 3460
+        "x": 580,
+        "y": 12340
       },
       "data": {
         "moduleId": "dbt-tests",
-        "category": "transformation"
+        "category": "transformation",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-airflow-intro",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 12660
+      },
+      "data": {
+        "moduleId": "airflow-intro"
       }
     },
     {
       "id": "airflow-intro",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 3740
+        "x": 140,
+        "y": 12580
       },
       "data": {
         "moduleId": "airflow-intro",
-        "category": "orchestration"
+        "category": "orchestration",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-airflow-dags",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 12900
+      },
+      "data": {
+        "moduleId": "airflow-dags"
       }
     },
     {
       "id": "airflow-dags",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 3740
+        "x": 580,
+        "y": 12820
       },
       "data": {
         "moduleId": "airflow-dags",
-        "category": "orchestration"
+        "category": "orchestration",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-operators",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 13140
+      },
+      "data": {
+        "moduleId": "operators"
       }
     },
     {
       "id": "operators",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 3740
+        "x": 140,
+        "y": 13060
       },
       "data": {
         "moduleId": "operators",
-        "category": "orchestration"
+        "category": "orchestration",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-airflow-arch",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 13380
+      },
+      "data": {
+        "moduleId": "airflow-arch"
       }
     },
     {
       "id": "airflow-arch",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 3740
+        "x": 580,
+        "y": 13300
       },
       "data": {
         "moduleId": "airflow-arch",
-        "category": "orchestration"
+        "category": "orchestration",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-kafka-overview",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 13620
+      },
+      "data": {
+        "moduleId": "kafka-overview"
       }
     },
     {
       "id": "kafka-overview",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 4020
+        "x": 140,
+        "y": 13540
       },
       "data": {
         "moduleId": "kafka-overview",
-        "category": "streaming"
+        "category": "streaming",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-kafka-arch",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 13860
+      },
+      "data": {
+        "moduleId": "kafka-arch"
       }
     },
     {
       "id": "kafka-arch",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 4020
+        "x": 580,
+        "y": 13780
       },
       "data": {
         "moduleId": "kafka-arch",
-        "category": "streaming"
+        "category": "streaming",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-kafka-streams",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 14100
+      },
+      "data": {
+        "moduleId": "kafka-streams"
       }
     },
     {
       "id": "kafka-streams",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 4020
+        "x": 140,
+        "y": 14020
       },
       "data": {
         "moduleId": "kafka-streams",
-        "category": "streaming"
+        "category": "streaming",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-flink",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 14340
+      },
+      "data": {
+        "moduleId": "flink"
       }
     },
     {
       "id": "flink",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 4020
+        "x": 580,
+        "y": 14260
       },
       "data": {
         "moduleId": "flink",
-        "category": "streaming"
+        "category": "streaming",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-aws-iam",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 14580
+      },
+      "data": {
+        "moduleId": "aws-iam"
       }
     },
     {
       "id": "aws-iam",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 4300
+        "x": 140,
+        "y": 14500
       },
       "data": {
         "moduleId": "aws-iam",
-        "category": "aws"
+        "category": "aws",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-s3",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 14820
+      },
+      "data": {
+        "moduleId": "s3"
       }
     },
     {
       "id": "s3",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 4300
+        "x": 580,
+        "y": 14740
       },
       "data": {
         "moduleId": "s3",
-        "category": "aws"
+        "category": "aws",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-ec2",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 15060
+      },
+      "data": {
+        "moduleId": "ec2"
       }
     },
     {
       "id": "ec2",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 4300
+        "x": 140,
+        "y": 14980
       },
       "data": {
         "moduleId": "ec2",
-        "category": "aws"
+        "category": "aws",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-rds",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 15300
+      },
+      "data": {
+        "moduleId": "rds"
       }
     },
     {
       "id": "rds",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 4300
+        "x": 580,
+        "y": 15220
       },
       "data": {
         "moduleId": "rds",
-        "category": "aws"
+        "category": "aws",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-redshift",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 15540
+      },
+      "data": {
+        "moduleId": "redshift"
       }
     },
     {
       "id": "redshift",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 4580
+        "x": 140,
+        "y": 15460
       },
       "data": {
         "moduleId": "redshift",
-        "category": "aws"
+        "category": "aws",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-docker",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 15780
+      },
+      "data": {
+        "moduleId": "docker"
       }
     },
     {
       "id": "docker",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 4580
+        "x": 580,
+        "y": 15700
       },
       "data": {
         "moduleId": "docker",
-        "category": "devops"
+        "category": "devops",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-ci-cd",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 16020
+      },
+      "data": {
+        "moduleId": "ci-cd"
       }
     },
     {
       "id": "ci-cd",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 4580
+        "x": 140,
+        "y": 15940
       },
       "data": {
         "moduleId": "ci-cd",
-        "category": "devops"
+        "category": "devops",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-terraform",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 16260
+      },
+      "data": {
+        "moduleId": "terraform"
       }
     },
     {
       "id": "terraform",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 4580
+        "x": 580,
+        "y": 16180
       },
       "data": {
         "moduleId": "terraform",
-        "category": "devops"
+        "category": "devops",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-de-projects",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 16500
+      },
+      "data": {
+        "moduleId": "de-projects"
       }
     },
     {
       "id": "de-projects",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 4860
+        "x": 140,
+        "y": 16420
       },
       "data": {
         "moduleId": "de-projects",
-        "category": "projects"
+        "category": "projects",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-batch-project",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 16740
+      },
+      "data": {
+        "moduleId": "batch-project"
       }
     },
     {
       "id": "batch-project",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 4860
+        "x": 580,
+        "y": 16660
       },
       "data": {
         "moduleId": "batch-project",
-        "category": "projects"
+        "category": "projects",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-streaming-project",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 16980
+      },
+      "data": {
+        "moduleId": "streaming-project"
       }
     },
     {
       "id": "streaming-project",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 4860
+        "x": 140,
+        "y": 16900
       },
       "data": {
         "moduleId": "streaming-project",
-        "category": "projects"
+        "category": "projects",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-sys-design-intro",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 17220
+      },
+      "data": {
+        "moduleId": "sys-design-intro"
       }
     },
     {
       "id": "sys-design-intro",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 4860
+        "x": 580,
+        "y": 17140
       },
       "data": {
         "moduleId": "sys-design-intro",
-        "category": "system-design"
+        "category": "system-design",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-sys-design-framework",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 17460
+      },
+      "data": {
+        "moduleId": "sys-design-framework"
       }
     },
     {
       "id": "sys-design-framework",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 5140
+        "x": 140,
+        "y": 17380
       },
       "data": {
         "moduleId": "sys-design-framework",
-        "category": "system-design"
+        "category": "system-design",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-sql-interview",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 17700
+      },
+      "data": {
+        "moduleId": "sql-interview"
       }
     },
     {
       "id": "sql-interview",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 5140
+        "x": 580,
+        "y": 17620
       },
       "data": {
         "moduleId": "sql-interview",
-        "category": "interview"
+        "category": "interview",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-python-interview",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 17940
+      },
+      "data": {
+        "moduleId": "python-interview"
       }
     },
     {
       "id": "python-interview",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 5140
+        "x": 140,
+        "y": 17860
       },
       "data": {
         "moduleId": "python-interview",
-        "category": "interview"
+        "category": "interview",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-behavioral-interview",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 18180
+      },
+      "data": {
+        "moduleId": "behavioral-interview"
       }
     },
     {
       "id": "behavioral-interview",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 5140
+        "x": 580,
+        "y": 18100
       },
       "data": {
         "moduleId": "behavioral-interview",
-        "category": "interview"
+        "category": "interview",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-idempotency",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 18420
+      },
+      "data": {
+        "moduleId": "idempotency"
       }
     },
     {
       "id": "idempotency",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 5420
+        "x": 140,
+        "y": 18340
       },
       "data": {
         "moduleId": "idempotency",
-        "category": "concepts"
+        "category": "concepts",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-schema-evolution",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 18660
+      },
+      "data": {
+        "moduleId": "schema-evolution"
       }
     },
     {
       "id": "schema-evolution",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 5420
+        "x": 580,
+        "y": 18580
       },
       "data": {
         "moduleId": "schema-evolution",
-        "category": "concepts"
+        "category": "concepts",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-data-lineage",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 18900
+      },
+      "data": {
+        "moduleId": "data-lineage"
       }
     },
     {
       "id": "data-lineage",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 5420
+        "x": 140,
+        "y": 18820
       },
       "data": {
         "moduleId": "data-lineage",
-        "category": "concepts"
+        "category": "concepts",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-data-observability",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 19140
+      },
+      "data": {
+        "moduleId": "data-observability"
       }
     },
     {
       "id": "data-observability",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 5420
+        "x": 580,
+        "y": 19060
       },
       "data": {
         "moduleId": "data-observability",
-        "category": "concepts"
+        "category": "concepts",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-cdc",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 19380
+      },
+      "data": {
+        "moduleId": "cdc"
       }
     },
     {
       "id": "cdc",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 5700
+        "x": 140,
+        "y": 19300
       },
       "data": {
         "moduleId": "cdc",
-        "category": "concepts"
+        "category": "concepts",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-lambda-arch",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 19620
+      },
+      "data": {
+        "moduleId": "lambda-arch"
       }
     },
     {
       "id": "lambda-arch",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 5700
+        "x": 580,
+        "y": 19540
       },
       "data": {
         "moduleId": "lambda-arch",
-        "category": "architecture"
+        "category": "architecture",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-kappa-arch",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 19860
+      },
+      "data": {
+        "moduleId": "kappa-arch"
       }
     },
     {
       "id": "kappa-arch",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 5700
+        "x": 140,
+        "y": 19780
       },
       "data": {
         "moduleId": "kappa-arch",
-        "category": "architecture"
+        "category": "architecture",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-data-catalog",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 20100
+      },
+      "data": {
+        "moduleId": "data-catalog"
       }
     },
     {
       "id": "data-catalog",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 5700
+        "x": 580,
+        "y": 20020
       },
       "data": {
         "moduleId": "data-catalog",
-        "category": "architecture"
+        "category": "architecture",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-replication",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 20340
+      },
+      "data": {
+        "moduleId": "replication"
       }
     },
     {
       "id": "replication",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 5980
+        "x": 140,
+        "y": 20260
       },
       "data": {
         "moduleId": "replication",
-        "category": "distributed"
+        "category": "distributed",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-cap-theorem",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 20580
+      },
+      "data": {
+        "moduleId": "cap-theorem"
       }
     },
     {
       "id": "cap-theorem",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 5980
+        "x": 580,
+        "y": 20500
       },
       "data": {
         "moduleId": "cap-theorem",
-        "category": "distributed"
+        "category": "distributed",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-consistency-models",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 20820
+      },
+      "data": {
+        "moduleId": "consistency-models"
       }
     },
     {
       "id": "consistency-models",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 5980
+        "x": 140,
+        "y": 20740
       },
       "data": {
         "moduleId": "consistency-models",
-        "category": "distributed"
+        "category": "distributed",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-data-locality",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 21060
+      },
+      "data": {
+        "moduleId": "data-locality"
       }
     },
     {
       "id": "data-locality",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 5980
+        "x": 580,
+        "y": 20980
       },
       "data": {
         "moduleId": "data-locality",
-        "category": "distributed"
+        "category": "distributed",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-spark-datasets",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 21300
+      },
+      "data": {
+        "moduleId": "spark-datasets"
       }
     },
     {
       "id": "spark-datasets",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 6260
+        "x": 140,
+        "y": 21220
       },
       "data": {
         "moduleId": "spark-datasets",
-        "category": "spark"
+        "category": "spark",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-lazy-evaluation",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 21540
+      },
+      "data": {
+        "moduleId": "lazy-evaluation"
       }
     },
     {
       "id": "lazy-evaluation",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 6260
+        "x": 580,
+        "y": 21460
       },
       "data": {
         "moduleId": "lazy-evaluation",
-        "category": "spark"
+        "category": "spark",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-tungsten",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 21780
+      },
+      "data": {
+        "moduleId": "tungsten"
       }
     },
     {
       "id": "tungsten",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 6260
+        "x": 140,
+        "y": 21700
       },
       "data": {
         "moduleId": "tungsten",
-        "category": "spark"
+        "category": "spark",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-aqe",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 22020
+      },
+      "data": {
+        "moduleId": "aqe"
       }
     },
     {
       "id": "aqe",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 6260
+        "x": 580,
+        "y": 21940
       },
       "data": {
         "moduleId": "aqe",
-        "category": "spark"
+        "category": "spark",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-spark-window-functions",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 22260
+      },
+      "data": {
+        "moduleId": "spark-window-functions"
       }
     },
     {
       "id": "spark-window-functions",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 6540
+        "x": 140,
+        "y": 22180
       },
       "data": {
         "moduleId": "spark-window-functions",
-        "category": "spark"
+        "category": "spark",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-spark-structured-streaming",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 22500
+      },
+      "data": {
+        "moduleId": "spark-structured-streaming"
       }
     },
     {
       "id": "spark-structured-streaming",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 6540
+        "x": 580,
+        "y": 22420
       },
       "data": {
         "moduleId": "spark-structured-streaming",
-        "category": "spark"
+        "category": "spark",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-spark-ui",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 22740
+      },
+      "data": {
+        "moduleId": "spark-ui"
       }
     },
     {
       "id": "spark-ui",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 6540
+        "x": 140,
+        "y": 22660
       },
       "data": {
         "moduleId": "spark-ui",
-        "category": "spark"
+        "category": "spark",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-spark-partitioning",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 22980
+      },
+      "data": {
+        "moduleId": "spark-partitioning"
       }
     },
     {
       "id": "spark-partitioning",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 6540
+        "x": 580,
+        "y": 22900
       },
       "data": {
         "moduleId": "spark-partitioning",
-        "category": "spark"
+        "category": "spark",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-db-notebooks",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 23220
+      },
+      "data": {
+        "moduleId": "db-notebooks"
       }
     },
     {
       "id": "db-notebooks",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 6820
+        "x": 140,
+        "y": 23140
       },
       "data": {
         "moduleId": "db-notebooks",
-        "category": "databricks"
+        "category": "databricks",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-db-clusters",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 23460
+      },
+      "data": {
+        "moduleId": "db-clusters"
       }
     },
     {
       "id": "db-clusters",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 6820
+        "x": 580,
+        "y": 23380
       },
       "data": {
         "moduleId": "db-clusters",
-        "category": "databricks"
+        "category": "databricks",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-db-jobs",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 23700
+      },
+      "data": {
+        "moduleId": "db-jobs"
       }
     },
     {
       "id": "db-jobs",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 6820
+        "x": 140,
+        "y": 23620
       },
       "data": {
         "moduleId": "db-jobs",
-        "category": "databricks"
+        "category": "databricks",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-db-sql",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 23940
+      },
+      "data": {
+        "moduleId": "db-sql"
       }
     },
     {
       "id": "db-sql",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 6820
+        "x": 580,
+        "y": 23860
       },
       "data": {
         "moduleId": "db-sql",
-        "category": "databricks"
+        "category": "databricks",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-db-photon",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 24180
+      },
+      "data": {
+        "moduleId": "db-photon"
       }
     },
     {
       "id": "db-photon",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 7100
+        "x": 140,
+        "y": 24100
       },
       "data": {
         "moduleId": "db-photon",
-        "category": "databricks"
+        "category": "databricks",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-db-cost",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 24420
+      },
+      "data": {
+        "moduleId": "db-cost"
       }
     },
     {
       "id": "db-cost",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 7100
+        "x": 580,
+        "y": 24340
       },
       "data": {
         "moduleId": "db-cost",
-        "category": "databricks"
+        "category": "databricks",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-denormalization",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 24660
+      },
+      "data": {
+        "moduleId": "denormalization"
       }
     },
     {
       "id": "denormalization",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 7100
+        "x": 140,
+        "y": 24580
       },
       "data": {
         "moduleId": "denormalization",
-        "category": "modeling"
+        "category": "modeling",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-snowflake-schema",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 24900
+      },
+      "data": {
+        "moduleId": "snowflake-schema"
       }
     },
     {
       "id": "snowflake-schema",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 7100
+        "x": 580,
+        "y": 24820
       },
       "data": {
         "moduleId": "snowflake-schema",
-        "category": "modeling"
+        "category": "modeling",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-fact-tables",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 25140
+      },
+      "data": {
+        "moduleId": "fact-tables"
       }
     },
     {
       "id": "fact-tables",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 7380
+        "x": 140,
+        "y": 25060
       },
       "data": {
         "moduleId": "fact-tables",
-        "category": "modeling"
+        "category": "modeling",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-grain",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 25380
+      },
+      "data": {
+        "moduleId": "grain"
       }
     },
     {
       "id": "grain",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 7380
+        "x": 580,
+        "y": 25300
       },
       "data": {
         "moduleId": "grain",
-        "category": "modeling"
+        "category": "modeling",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-kimball",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 25620
+      },
+      "data": {
+        "moduleId": "kimball"
       }
     },
     {
       "id": "kimball",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 7380
+        "x": 140,
+        "y": 25540
       },
       "data": {
         "moduleId": "kimball",
-        "category": "modeling"
+        "category": "modeling",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-data-vault",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 25860
+      },
+      "data": {
+        "moduleId": "data-vault"
       }
     },
     {
       "id": "data-vault",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 7380
+        "x": 580,
+        "y": 25780
       },
       "data": {
         "moduleId": "data-vault",
-        "category": "modeling"
+        "category": "modeling",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-dbt-seeds",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 26100
+      },
+      "data": {
+        "moduleId": "dbt-seeds"
       }
     },
     {
       "id": "dbt-seeds",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 7660
+        "x": 140,
+        "y": 26020
       },
       "data": {
         "moduleId": "dbt-seeds",
-        "category": "transformation"
+        "category": "transformation",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-dbt-sources",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 26340
+      },
+      "data": {
+        "moduleId": "dbt-sources"
       }
     },
     {
       "id": "dbt-sources",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 7660
+        "x": 580,
+        "y": 26260
       },
       "data": {
         "moduleId": "dbt-sources",
-        "category": "transformation"
+        "category": "transformation",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-dbt-snapshots",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 26580
+      },
+      "data": {
+        "moduleId": "dbt-snapshots"
       }
     },
     {
       "id": "dbt-snapshots",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 7660
+        "x": 140,
+        "y": 26500
       },
       "data": {
         "moduleId": "dbt-snapshots",
-        "category": "transformation"
+        "category": "transformation",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-dbt-incremental",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 26820
+      },
+      "data": {
+        "moduleId": "dbt-incremental"
       }
     },
     {
       "id": "dbt-incremental",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 7660
+        "x": 580,
+        "y": 26740
       },
       "data": {
         "moduleId": "dbt-incremental",
-        "category": "transformation"
+        "category": "transformation",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-dbt-best-practices",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 27060
+      },
+      "data": {
+        "moduleId": "dbt-best-practices"
       }
     },
     {
       "id": "dbt-best-practices",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 7940
+        "x": 140,
+        "y": 26980
       },
       "data": {
         "moduleId": "dbt-best-practices",
-        "category": "transformation"
+        "category": "transformation",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-airflow-hooks",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 27300
+      },
+      "data": {
+        "moduleId": "airflow-hooks"
       }
     },
     {
       "id": "airflow-hooks",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 7940
+        "x": 580,
+        "y": 27220
       },
       "data": {
         "moduleId": "airflow-hooks",
-        "category": "orchestration"
+        "category": "orchestration",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-airflow-taskflow",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 27540
+      },
+      "data": {
+        "moduleId": "airflow-taskflow"
       }
     },
     {
       "id": "airflow-taskflow",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 7940
+        "x": 140,
+        "y": 27460
       },
       "data": {
         "moduleId": "airflow-taskflow",
-        "category": "orchestration"
+        "category": "orchestration",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-airflow-xcom",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 27780
+      },
+      "data": {
+        "moduleId": "airflow-xcom"
       }
     },
     {
       "id": "airflow-xcom",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 7940
+        "x": 580,
+        "y": 27700
       },
       "data": {
         "moduleId": "airflow-xcom",
-        "category": "orchestration"
+        "category": "orchestration",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-airflow-prod-best-practices",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 28020
+      },
+      "data": {
+        "moduleId": "airflow-prod-best-practices"
       }
     },
     {
       "id": "airflow-prod-best-practices",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 8220
+        "x": 140,
+        "y": 27940
       },
       "data": {
         "moduleId": "airflow-prod-best-practices",
-        "category": "orchestration"
+        "category": "orchestration",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-kafka-topics",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 28260
+      },
+      "data": {
+        "moduleId": "kafka-topics"
       }
     },
     {
       "id": "kafka-topics",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 8220
+        "x": 580,
+        "y": 28180
       },
       "data": {
         "moduleId": "kafka-topics",
-        "category": "streaming"
+        "category": "streaming",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-kafka-producer",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 28500
+      },
+      "data": {
+        "moduleId": "kafka-producer"
       }
     },
     {
       "id": "kafka-producer",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 8220
+        "x": 140,
+        "y": 28420
       },
       "data": {
         "moduleId": "kafka-producer",
-        "category": "streaming"
+        "category": "streaming",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-kafka-consumer",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 28740
+      },
+      "data": {
+        "moduleId": "kafka-consumer"
       }
     },
     {
       "id": "kafka-consumer",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 8220
+        "x": 580,
+        "y": 28660
       },
       "data": {
         "moduleId": "kafka-consumer",
-        "category": "streaming"
+        "category": "streaming",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-kafka-schema-registry",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 28980
+      },
+      "data": {
+        "moduleId": "kafka-schema-registry"
       }
     },
     {
       "id": "kafka-schema-registry",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 8500
+        "x": 140,
+        "y": 28900
       },
       "data": {
         "moduleId": "kafka-schema-registry",
-        "category": "streaming"
+        "category": "streaming",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-kafka-connect",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 29220
+      },
+      "data": {
+        "moduleId": "kafka-connect"
       }
     },
     {
       "id": "kafka-connect",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 8500
+        "x": 580,
+        "y": 29140
       },
       "data": {
         "moduleId": "kafka-connect",
-        "category": "streaming"
+        "category": "streaming",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-aws-glue",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 29460
+      },
+      "data": {
+        "moduleId": "aws-glue"
       }
     },
     {
       "id": "aws-glue",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 8500
+        "x": 140,
+        "y": 29380
       },
       "data": {
         "moduleId": "aws-glue",
-        "category": "cloud"
+        "category": "cloud",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-aws-athena",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 29700
+      },
+      "data": {
+        "moduleId": "aws-athena"
       }
     },
     {
       "id": "aws-athena",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 8500
+        "x": 580,
+        "y": 29620
       },
       "data": {
         "moduleId": "aws-athena",
-        "category": "cloud"
+        "category": "cloud",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-aws-lambda",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 29940
+      },
+      "data": {
+        "moduleId": "aws-lambda"
       }
     },
     {
       "id": "aws-lambda",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 8780
+        "x": 140,
+        "y": 29860
       },
       "data": {
         "moduleId": "aws-lambda",
-        "category": "cloud"
+        "category": "cloud",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-aws-emr",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 30180
+      },
+      "data": {
+        "moduleId": "aws-emr"
       }
     },
     {
       "id": "aws-emr",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 8780
+        "x": 580,
+        "y": 30100
       },
       "data": {
         "moduleId": "aws-emr",
-        "category": "cloud"
+        "category": "cloud",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-docker-compose",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 30420
+      },
+      "data": {
+        "moduleId": "docker-compose"
       }
     },
     {
       "id": "docker-compose",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 8780
+        "x": 140,
+        "y": 30340
       },
       "data": {
         "moduleId": "docker-compose",
-        "category": "devops"
+        "category": "devops",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-project-python-etl",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 30660
+      },
+      "data": {
+        "moduleId": "project-python-etl"
       }
     },
     {
       "id": "project-python-etl",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 8780
+        "x": 580,
+        "y": 30580
       },
       "data": {
         "moduleId": "project-python-etl",
-        "category": "projects"
+        "category": "projects",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-project-spark-analytics",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 30900
+      },
+      "data": {
+        "moduleId": "project-spark-analytics"
       }
     },
     {
       "id": "project-spark-analytics",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 9060
+        "x": 140,
+        "y": 30820
       },
       "data": {
         "moduleId": "project-spark-analytics",
-        "category": "projects"
+        "category": "projects",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-project-e2e",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 31140
+      },
+      "data": {
+        "moduleId": "project-e2e"
       }
     },
     {
       "id": "project-e2e",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 9060
+        "x": 580,
+        "y": 31060
       },
       "data": {
         "moduleId": "project-e2e",
-        "category": "projects"
+        "category": "projects",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-sys-design-capacity",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 31380
+      },
+      "data": {
+        "moduleId": "sys-design-capacity"
       }
     },
     {
       "id": "sys-design-capacity",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 9060
+        "x": 140,
+        "y": 31300
       },
       "data": {
         "moduleId": "sys-design-capacity",
-        "category": "system-design"
+        "category": "system-design",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-sys-design-batch",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 31620
+      },
+      "data": {
+        "moduleId": "sys-design-batch"
       }
     },
     {
       "id": "sys-design-batch",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 9060
+        "x": 580,
+        "y": 31540
       },
       "data": {
         "moduleId": "sys-design-batch",
-        "category": "system-design"
+        "category": "system-design",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-sys-design-streaming",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 31860
+      },
+      "data": {
+        "moduleId": "sys-design-streaming"
       }
     },
     {
       "id": "sys-design-streaming",
+      "type": "roadmapNode",
       "position": {
-        "x": 1360,
-        "y": 9340
+        "x": 140,
+        "y": 31780
       },
       "data": {
         "moduleId": "sys-design-streaming",
-        "category": "system-design"
+        "category": "system-design",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-interview-spark",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 32100
+      },
+      "data": {
+        "moduleId": "interview-spark"
       }
     },
     {
       "id": "interview-spark",
+      "type": "roadmapNode",
       "position": {
-        "x": 940,
-        "y": 9340
+        "x": 580,
+        "y": 32020
       },
       "data": {
         "moduleId": "interview-spark",
-        "category": "interview"
+        "category": "interview",
+        "align": "right"
+      }
+    },
+    {
+      "id": "timeline-interview-resume",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 32340
+      },
+      "data": {
+        "moduleId": "interview-resume"
       }
     },
     {
       "id": "interview-resume",
+      "type": "roadmapNode",
       "position": {
-        "x": 520,
-        "y": 9340
+        "x": 140,
+        "y": 32260
       },
       "data": {
         "moduleId": "interview-resume",
-        "category": "interview"
+        "category": "interview",
+        "align": "left"
+      }
+    },
+    {
+      "id": "timeline-interview-mock",
+      "type": "timelineNode",
+      "position": {
+        "x": 500,
+        "y": 32580
+      },
+      "data": {
+        "moduleId": "interview-mock"
       }
     },
     {
       "id": "interview-mock",
+      "type": "roadmapNode",
       "position": {
-        "x": 100,
-        "y": 9340
+        "x": 580,
+        "y": 32500
       },
       "data": {
         "moduleId": "interview-mock",
-        "category": "interview"
+        "category": "interview",
+        "align": "right"
       }
     }
   ],
   "edges": [
     {
-      "id": "e-python-sql",
-      "source": "python",
-      "target": "sql"
+      "id": "e-branch-python",
+      "source": "timeline-python",
+      "target": "python",
+      "type": "straight"
     },
     {
-      "id": "e-sql-git",
-      "source": "sql",
-      "target": "git"
+      "id": "e-spine-python-sql",
+      "source": "timeline-python",
+      "target": "timeline-sql",
+      "type": "straight"
     },
     {
-      "id": "e-git-linux",
-      "source": "git",
-      "target": "linux"
+      "id": "e-branch-sql",
+      "source": "timeline-sql",
+      "target": "sql",
+      "type": "straight"
     },
     {
-      "id": "e-linux-rest-apis",
-      "source": "linux",
-      "target": "rest-apis"
+      "id": "e-spine-sql-git",
+      "source": "timeline-sql",
+      "target": "timeline-git",
+      "type": "straight"
     },
     {
-      "id": "e-rest-apis-what-is-de",
-      "source": "rest-apis",
-      "target": "what-is-de"
+      "id": "e-branch-git",
+      "source": "timeline-git",
+      "target": "git",
+      "type": "straight"
     },
     {
-      "id": "e-what-is-de-role-of-de",
-      "source": "what-is-de",
-      "target": "role-of-de"
+      "id": "e-spine-git-linux",
+      "source": "timeline-git",
+      "target": "timeline-linux",
+      "type": "straight"
     },
     {
-      "id": "e-role-of-de-batch-vs-streaming",
-      "source": "role-of-de",
-      "target": "batch-vs-streaming"
+      "id": "e-branch-linux",
+      "source": "timeline-linux",
+      "target": "linux",
+      "type": "straight"
     },
     {
-      "id": "e-batch-vs-streaming-etl-vs-elt",
-      "source": "batch-vs-streaming",
-      "target": "etl-vs-elt"
+      "id": "e-spine-linux-rest-apis",
+      "source": "timeline-linux",
+      "target": "timeline-rest-apis",
+      "type": "straight"
     },
     {
-      "id": "e-etl-vs-elt-oltp-vs-olap",
-      "source": "etl-vs-elt",
-      "target": "oltp-vs-olap"
+      "id": "e-branch-rest-apis",
+      "source": "timeline-rest-apis",
+      "target": "rest-apis",
+      "type": "straight"
     },
     {
-      "id": "e-oltp-vs-olap-data-pipeline",
-      "source": "oltp-vs-olap",
-      "target": "data-pipeline"
+      "id": "e-spine-rest-apis-what-is-de",
+      "source": "timeline-rest-apis",
+      "target": "timeline-what-is-de",
+      "type": "straight"
     },
     {
-      "id": "e-data-pipeline-data-quality",
-      "source": "data-pipeline",
-      "target": "data-quality"
+      "id": "e-branch-what-is-de",
+      "source": "timeline-what-is-de",
+      "target": "what-is-de",
+      "type": "straight"
     },
     {
-      "id": "e-data-quality-data-governance",
-      "source": "data-quality",
-      "target": "data-governance"
+      "id": "e-spine-what-is-de-role-of-de",
+      "source": "timeline-what-is-de",
+      "target": "timeline-role-of-de",
+      "type": "straight"
     },
     {
-      "id": "e-data-governance-metadata",
-      "source": "data-governance",
-      "target": "metadata"
+      "id": "e-branch-role-of-de",
+      "source": "timeline-role-of-de",
+      "target": "role-of-de",
+      "type": "straight"
     },
     {
-      "id": "e-metadata-data-warehouse",
-      "source": "metadata",
-      "target": "data-warehouse"
+      "id": "e-spine-role-of-de-batch-vs-streaming",
+      "source": "timeline-role-of-de",
+      "target": "timeline-batch-vs-streaming",
+      "type": "straight"
     },
     {
-      "id": "e-data-warehouse-data-lake",
-      "source": "data-warehouse",
-      "target": "data-lake"
+      "id": "e-branch-batch-vs-streaming",
+      "source": "timeline-batch-vs-streaming",
+      "target": "batch-vs-streaming",
+      "type": "straight"
     },
     {
-      "id": "e-data-lake-lakehouse-arch",
-      "source": "data-lake",
-      "target": "lakehouse-arch"
+      "id": "e-spine-batch-vs-streaming-etl-vs-elt",
+      "source": "timeline-batch-vs-streaming",
+      "target": "timeline-etl-vs-elt",
+      "type": "straight"
     },
     {
-      "id": "e-lakehouse-arch-medallion",
-      "source": "lakehouse-arch",
-      "target": "medallion"
+      "id": "e-branch-etl-vs-elt",
+      "source": "timeline-etl-vs-elt",
+      "target": "etl-vs-elt",
+      "type": "straight"
     },
     {
-      "id": "e-medallion-data-mesh",
-      "source": "medallion",
-      "target": "data-mesh"
+      "id": "e-spine-etl-vs-elt-oltp-vs-olap",
+      "source": "timeline-etl-vs-elt",
+      "target": "timeline-oltp-vs-olap",
+      "type": "straight"
     },
     {
-      "id": "e-data-mesh-data-fabric",
-      "source": "data-mesh",
-      "target": "data-fabric"
+      "id": "e-branch-oltp-vs-olap",
+      "source": "timeline-oltp-vs-olap",
+      "target": "oltp-vs-olap",
+      "type": "straight"
     },
     {
-      "id": "e-data-fabric-data-contracts",
-      "source": "data-fabric",
-      "target": "data-contracts"
+      "id": "e-spine-oltp-vs-olap-data-pipeline",
+      "source": "timeline-oltp-vs-olap",
+      "target": "timeline-data-pipeline",
+      "type": "straight"
     },
     {
-      "id": "e-data-contracts-csv-json",
-      "source": "data-contracts",
-      "target": "csv-json"
+      "id": "e-branch-data-pipeline",
+      "source": "timeline-data-pipeline",
+      "target": "data-pipeline",
+      "type": "straight"
     },
     {
-      "id": "e-csv-json-parquet",
-      "source": "csv-json",
-      "target": "parquet"
+      "id": "e-spine-data-pipeline-data-quality",
+      "source": "timeline-data-pipeline",
+      "target": "timeline-data-quality",
+      "type": "straight"
     },
     {
-      "id": "e-parquet-avro",
-      "source": "parquet",
-      "target": "avro"
+      "id": "e-branch-data-quality",
+      "source": "timeline-data-quality",
+      "target": "data-quality",
+      "type": "straight"
     },
     {
-      "id": "e-avro-compression",
-      "source": "avro",
-      "target": "compression"
+      "id": "e-spine-data-quality-data-governance",
+      "source": "timeline-data-quality",
+      "target": "timeline-data-governance",
+      "type": "straight"
     },
     {
-      "id": "e-compression-delta-format",
-      "source": "compression",
-      "target": "delta-format"
+      "id": "e-branch-data-governance",
+      "source": "timeline-data-governance",
+      "target": "data-governance",
+      "type": "straight"
     },
     {
-      "id": "e-delta-format-iceberg",
-      "source": "delta-format",
-      "target": "iceberg"
+      "id": "e-spine-data-governance-metadata",
+      "source": "timeline-data-governance",
+      "target": "timeline-metadata",
+      "type": "straight"
     },
     {
-      "id": "e-iceberg-hudi",
-      "source": "iceberg",
-      "target": "hudi"
+      "id": "e-branch-metadata",
+      "source": "timeline-metadata",
+      "target": "metadata",
+      "type": "straight"
     },
     {
-      "id": "e-hudi-horizontal-scaling",
-      "source": "hudi",
-      "target": "horizontal-scaling"
+      "id": "e-spine-metadata-data-warehouse",
+      "source": "timeline-metadata",
+      "target": "timeline-data-warehouse",
+      "type": "straight"
     },
     {
-      "id": "e-horizontal-scaling-partitions-dist",
-      "source": "horizontal-scaling",
-      "target": "partitions-dist"
+      "id": "e-branch-data-warehouse",
+      "source": "timeline-data-warehouse",
+      "target": "data-warehouse",
+      "type": "straight"
     },
     {
-      "id": "e-partitions-dist-driver-executors",
-      "source": "partitions-dist",
-      "target": "driver-executors"
+      "id": "e-spine-data-warehouse-data-lake",
+      "source": "timeline-data-warehouse",
+      "target": "timeline-data-lake",
+      "type": "straight"
     },
     {
-      "id": "e-driver-executors-shuffling",
-      "source": "driver-executors",
-      "target": "shuffling"
+      "id": "e-branch-data-lake",
+      "source": "timeline-data-lake",
+      "target": "data-lake",
+      "type": "straight"
     },
     {
-      "id": "e-shuffling-resource-management",
-      "source": "shuffling",
-      "target": "resource-management"
+      "id": "e-spine-data-lake-lakehouse-arch",
+      "source": "timeline-data-lake",
+      "target": "timeline-lakehouse-arch",
+      "type": "straight"
     },
     {
-      "id": "e-resource-management-why-spark",
-      "source": "resource-management",
-      "target": "why-spark"
+      "id": "e-branch-lakehouse-arch",
+      "source": "timeline-lakehouse-arch",
+      "target": "lakehouse-arch",
+      "type": "straight"
     },
     {
-      "id": "e-why-spark-rdd",
-      "source": "why-spark",
-      "target": "rdd"
+      "id": "e-spine-lakehouse-arch-medallion",
+      "source": "timeline-lakehouse-arch",
+      "target": "timeline-medallion",
+      "type": "straight"
     },
     {
-      "id": "e-rdd-spark-dataframes",
-      "source": "rdd",
-      "target": "spark-dataframes"
+      "id": "e-branch-medallion",
+      "source": "timeline-medallion",
+      "target": "medallion",
+      "type": "straight"
     },
     {
-      "id": "e-spark-dataframes-transformations-actions",
-      "source": "spark-dataframes",
-      "target": "transformations-actions"
+      "id": "e-spine-medallion-data-mesh",
+      "source": "timeline-medallion",
+      "target": "timeline-data-mesh",
+      "type": "straight"
     },
     {
-      "id": "e-transformations-actions-dag",
-      "source": "transformations-actions",
-      "target": "dag"
+      "id": "e-branch-data-mesh",
+      "source": "timeline-data-mesh",
+      "target": "data-mesh",
+      "type": "straight"
     },
     {
-      "id": "e-dag-spark-joins",
-      "source": "dag",
-      "target": "spark-joins"
+      "id": "e-spine-data-mesh-data-fabric",
+      "source": "timeline-data-mesh",
+      "target": "timeline-data-fabric",
+      "type": "straight"
     },
     {
-      "id": "e-spark-joins-spark-caching",
-      "source": "spark-joins",
-      "target": "spark-caching"
+      "id": "e-branch-data-fabric",
+      "source": "timeline-data-fabric",
+      "target": "data-fabric",
+      "type": "straight"
     },
     {
-      "id": "e-spark-caching-spark-tuning",
-      "source": "spark-caching",
-      "target": "spark-tuning"
+      "id": "e-spine-data-fabric-data-contracts",
+      "source": "timeline-data-fabric",
+      "target": "timeline-data-contracts",
+      "type": "straight"
     },
     {
-      "id": "e-spark-tuning-db-workspace",
-      "source": "spark-tuning",
-      "target": "db-workspace"
+      "id": "e-branch-data-contracts",
+      "source": "timeline-data-contracts",
+      "target": "data-contracts",
+      "type": "straight"
     },
     {
-      "id": "e-db-workspace-dlt",
-      "source": "db-workspace",
-      "target": "dlt"
+      "id": "e-spine-data-contracts-csv-json",
+      "source": "timeline-data-contracts",
+      "target": "timeline-csv-json",
+      "type": "straight"
     },
     {
-      "id": "e-dlt-unity-catalog",
-      "source": "dlt",
-      "target": "unity-catalog"
+      "id": "e-branch-csv-json",
+      "source": "timeline-csv-json",
+      "target": "csv-json",
+      "type": "straight"
     },
     {
-      "id": "e-unity-catalog-er-model",
-      "source": "unity-catalog",
-      "target": "er-model"
+      "id": "e-spine-csv-json-parquet",
+      "source": "timeline-csv-json",
+      "target": "timeline-parquet",
+      "type": "straight"
     },
     {
-      "id": "e-er-model-normalization",
-      "source": "er-model",
-      "target": "normalization"
+      "id": "e-branch-parquet",
+      "source": "timeline-parquet",
+      "target": "parquet",
+      "type": "straight"
     },
     {
-      "id": "e-normalization-star-schema",
-      "source": "normalization",
-      "target": "star-schema"
+      "id": "e-spine-parquet-avro",
+      "source": "timeline-parquet",
+      "target": "timeline-avro",
+      "type": "straight"
     },
     {
-      "id": "e-star-schema-scd",
-      "source": "star-schema",
-      "target": "scd"
+      "id": "e-branch-avro",
+      "source": "timeline-avro",
+      "target": "avro",
+      "type": "straight"
     },
     {
-      "id": "e-scd-dbt-core",
-      "source": "scd",
-      "target": "dbt-core"
+      "id": "e-spine-avro-compression",
+      "source": "timeline-avro",
+      "target": "timeline-compression",
+      "type": "straight"
     },
     {
-      "id": "e-dbt-core-dbt-models",
-      "source": "dbt-core",
-      "target": "dbt-models"
+      "id": "e-branch-compression",
+      "source": "timeline-compression",
+      "target": "compression",
+      "type": "straight"
     },
     {
-      "id": "e-dbt-models-jinja-macros",
-      "source": "dbt-models",
-      "target": "jinja-macros"
+      "id": "e-spine-compression-delta-format",
+      "source": "timeline-compression",
+      "target": "timeline-delta-format",
+      "type": "straight"
     },
     {
-      "id": "e-jinja-macros-dbt-tests",
-      "source": "jinja-macros",
-      "target": "dbt-tests"
+      "id": "e-branch-delta-format",
+      "source": "timeline-delta-format",
+      "target": "delta-format",
+      "type": "straight"
     },
     {
-      "id": "e-dbt-tests-airflow-intro",
-      "source": "dbt-tests",
-      "target": "airflow-intro"
+      "id": "e-spine-delta-format-iceberg",
+      "source": "timeline-delta-format",
+      "target": "timeline-iceberg",
+      "type": "straight"
     },
     {
-      "id": "e-airflow-intro-airflow-dags",
-      "source": "airflow-intro",
-      "target": "airflow-dags"
+      "id": "e-branch-iceberg",
+      "source": "timeline-iceberg",
+      "target": "iceberg",
+      "type": "straight"
     },
     {
-      "id": "e-airflow-dags-operators",
-      "source": "airflow-dags",
-      "target": "operators"
+      "id": "e-spine-iceberg-hudi",
+      "source": "timeline-iceberg",
+      "target": "timeline-hudi",
+      "type": "straight"
     },
     {
-      "id": "e-operators-airflow-arch",
-      "source": "operators",
-      "target": "airflow-arch"
+      "id": "e-branch-hudi",
+      "source": "timeline-hudi",
+      "target": "hudi",
+      "type": "straight"
     },
     {
-      "id": "e-airflow-arch-kafka-overview",
-      "source": "airflow-arch",
-      "target": "kafka-overview"
+      "id": "e-spine-hudi-horizontal-scaling",
+      "source": "timeline-hudi",
+      "target": "timeline-horizontal-scaling",
+      "type": "straight"
     },
     {
-      "id": "e-kafka-overview-kafka-arch",
-      "source": "kafka-overview",
-      "target": "kafka-arch"
+      "id": "e-branch-horizontal-scaling",
+      "source": "timeline-horizontal-scaling",
+      "target": "horizontal-scaling",
+      "type": "straight"
     },
     {
-      "id": "e-kafka-arch-kafka-streams",
-      "source": "kafka-arch",
-      "target": "kafka-streams"
+      "id": "e-spine-horizontal-scaling-partitions-dist",
+      "source": "timeline-horizontal-scaling",
+      "target": "timeline-partitions-dist",
+      "type": "straight"
     },
     {
-      "id": "e-kafka-streams-flink",
-      "source": "kafka-streams",
-      "target": "flink"
+      "id": "e-branch-partitions-dist",
+      "source": "timeline-partitions-dist",
+      "target": "partitions-dist",
+      "type": "straight"
     },
     {
-      "id": "e-flink-aws-iam",
-      "source": "flink",
-      "target": "aws-iam"
+      "id": "e-spine-partitions-dist-driver-executors",
+      "source": "timeline-partitions-dist",
+      "target": "timeline-driver-executors",
+      "type": "straight"
     },
     {
-      "id": "e-aws-iam-s3",
-      "source": "aws-iam",
-      "target": "s3"
+      "id": "e-branch-driver-executors",
+      "source": "timeline-driver-executors",
+      "target": "driver-executors",
+      "type": "straight"
     },
     {
-      "id": "e-s3-ec2",
-      "source": "s3",
-      "target": "ec2"
+      "id": "e-spine-driver-executors-shuffling",
+      "source": "timeline-driver-executors",
+      "target": "timeline-shuffling",
+      "type": "straight"
     },
     {
-      "id": "e-ec2-rds",
-      "source": "ec2",
-      "target": "rds"
+      "id": "e-branch-shuffling",
+      "source": "timeline-shuffling",
+      "target": "shuffling",
+      "type": "straight"
     },
     {
-      "id": "e-rds-redshift",
-      "source": "rds",
-      "target": "redshift"
+      "id": "e-spine-shuffling-resource-management",
+      "source": "timeline-shuffling",
+      "target": "timeline-resource-management",
+      "type": "straight"
     },
     {
-      "id": "e-redshift-docker",
-      "source": "redshift",
-      "target": "docker"
+      "id": "e-branch-resource-management",
+      "source": "timeline-resource-management",
+      "target": "resource-management",
+      "type": "straight"
     },
     {
-      "id": "e-docker-ci-cd",
-      "source": "docker",
-      "target": "ci-cd"
+      "id": "e-spine-resource-management-why-spark",
+      "source": "timeline-resource-management",
+      "target": "timeline-why-spark",
+      "type": "straight"
     },
     {
-      "id": "e-ci-cd-terraform",
-      "source": "ci-cd",
-      "target": "terraform"
+      "id": "e-branch-why-spark",
+      "source": "timeline-why-spark",
+      "target": "why-spark",
+      "type": "straight"
     },
     {
-      "id": "e-terraform-de-projects",
-      "source": "terraform",
-      "target": "de-projects"
+      "id": "e-spine-why-spark-rdd",
+      "source": "timeline-why-spark",
+      "target": "timeline-rdd",
+      "type": "straight"
     },
     {
-      "id": "e-de-projects-batch-project",
-      "source": "de-projects",
-      "target": "batch-project"
+      "id": "e-branch-rdd",
+      "source": "timeline-rdd",
+      "target": "rdd",
+      "type": "straight"
     },
     {
-      "id": "e-batch-project-streaming-project",
-      "source": "batch-project",
-      "target": "streaming-project"
+      "id": "e-spine-rdd-spark-dataframes",
+      "source": "timeline-rdd",
+      "target": "timeline-spark-dataframes",
+      "type": "straight"
     },
     {
-      "id": "e-streaming-project-sys-design-intro",
-      "source": "streaming-project",
-      "target": "sys-design-intro"
+      "id": "e-branch-spark-dataframes",
+      "source": "timeline-spark-dataframes",
+      "target": "spark-dataframes",
+      "type": "straight"
     },
     {
-      "id": "e-sys-design-intro-sys-design-framework",
-      "source": "sys-design-intro",
-      "target": "sys-design-framework"
+      "id": "e-spine-spark-dataframes-transformations-actions",
+      "source": "timeline-spark-dataframes",
+      "target": "timeline-transformations-actions",
+      "type": "straight"
     },
     {
-      "id": "e-sys-design-framework-sql-interview",
-      "source": "sys-design-framework",
-      "target": "sql-interview"
+      "id": "e-branch-transformations-actions",
+      "source": "timeline-transformations-actions",
+      "target": "transformations-actions",
+      "type": "straight"
     },
     {
-      "id": "e-sql-interview-python-interview",
-      "source": "sql-interview",
-      "target": "python-interview"
+      "id": "e-spine-transformations-actions-dag",
+      "source": "timeline-transformations-actions",
+      "target": "timeline-dag",
+      "type": "straight"
     },
     {
-      "id": "e-python-interview-behavioral-interview",
-      "source": "python-interview",
-      "target": "behavioral-interview"
+      "id": "e-branch-dag",
+      "source": "timeline-dag",
+      "target": "dag",
+      "type": "straight"
     },
     {
-      "id": "e-behavioral-interview-idempotency",
-      "source": "behavioral-interview",
-      "target": "idempotency"
+      "id": "e-spine-dag-spark-joins",
+      "source": "timeline-dag",
+      "target": "timeline-spark-joins",
+      "type": "straight"
     },
     {
-      "id": "e-idempotency-schema-evolution",
-      "source": "idempotency",
-      "target": "schema-evolution"
+      "id": "e-branch-spark-joins",
+      "source": "timeline-spark-joins",
+      "target": "spark-joins",
+      "type": "straight"
     },
     {
-      "id": "e-schema-evolution-data-lineage",
-      "source": "schema-evolution",
-      "target": "data-lineage"
+      "id": "e-spine-spark-joins-spark-caching",
+      "source": "timeline-spark-joins",
+      "target": "timeline-spark-caching",
+      "type": "straight"
     },
     {
-      "id": "e-data-lineage-data-observability",
-      "source": "data-lineage",
-      "target": "data-observability"
+      "id": "e-branch-spark-caching",
+      "source": "timeline-spark-caching",
+      "target": "spark-caching",
+      "type": "straight"
     },
     {
-      "id": "e-data-observability-cdc",
-      "source": "data-observability",
-      "target": "cdc"
+      "id": "e-spine-spark-caching-spark-tuning",
+      "source": "timeline-spark-caching",
+      "target": "timeline-spark-tuning",
+      "type": "straight"
     },
     {
-      "id": "e-cdc-lambda-arch",
-      "source": "cdc",
-      "target": "lambda-arch"
+      "id": "e-branch-spark-tuning",
+      "source": "timeline-spark-tuning",
+      "target": "spark-tuning",
+      "type": "straight"
     },
     {
-      "id": "e-lambda-arch-kappa-arch",
-      "source": "lambda-arch",
-      "target": "kappa-arch"
+      "id": "e-spine-spark-tuning-db-workspace",
+      "source": "timeline-spark-tuning",
+      "target": "timeline-db-workspace",
+      "type": "straight"
     },
     {
-      "id": "e-kappa-arch-data-catalog",
-      "source": "kappa-arch",
-      "target": "data-catalog"
+      "id": "e-branch-db-workspace",
+      "source": "timeline-db-workspace",
+      "target": "db-workspace",
+      "type": "straight"
     },
     {
-      "id": "e-data-catalog-replication",
-      "source": "data-catalog",
-      "target": "replication"
+      "id": "e-spine-db-workspace-dlt",
+      "source": "timeline-db-workspace",
+      "target": "timeline-dlt",
+      "type": "straight"
     },
     {
-      "id": "e-replication-cap-theorem",
-      "source": "replication",
-      "target": "cap-theorem"
+      "id": "e-branch-dlt",
+      "source": "timeline-dlt",
+      "target": "dlt",
+      "type": "straight"
     },
     {
-      "id": "e-cap-theorem-consistency-models",
-      "source": "cap-theorem",
-      "target": "consistency-models"
+      "id": "e-spine-dlt-unity-catalog",
+      "source": "timeline-dlt",
+      "target": "timeline-unity-catalog",
+      "type": "straight"
     },
     {
-      "id": "e-consistency-models-data-locality",
-      "source": "consistency-models",
-      "target": "data-locality"
+      "id": "e-branch-unity-catalog",
+      "source": "timeline-unity-catalog",
+      "target": "unity-catalog",
+      "type": "straight"
     },
     {
-      "id": "e-data-locality-spark-datasets",
-      "source": "data-locality",
-      "target": "spark-datasets"
+      "id": "e-spine-unity-catalog-er-model",
+      "source": "timeline-unity-catalog",
+      "target": "timeline-er-model",
+      "type": "straight"
     },
     {
-      "id": "e-spark-datasets-lazy-evaluation",
-      "source": "spark-datasets",
-      "target": "lazy-evaluation"
+      "id": "e-branch-er-model",
+      "source": "timeline-er-model",
+      "target": "er-model",
+      "type": "straight"
     },
     {
-      "id": "e-lazy-evaluation-tungsten",
-      "source": "lazy-evaluation",
-      "target": "tungsten"
+      "id": "e-spine-er-model-normalization",
+      "source": "timeline-er-model",
+      "target": "timeline-normalization",
+      "type": "straight"
     },
     {
-      "id": "e-tungsten-aqe",
-      "source": "tungsten",
-      "target": "aqe"
+      "id": "e-branch-normalization",
+      "source": "timeline-normalization",
+      "target": "normalization",
+      "type": "straight"
     },
     {
-      "id": "e-aqe-spark-window-functions",
-      "source": "aqe",
-      "target": "spark-window-functions"
+      "id": "e-spine-normalization-star-schema",
+      "source": "timeline-normalization",
+      "target": "timeline-star-schema",
+      "type": "straight"
     },
     {
-      "id": "e-spark-window-functions-spark-structured-streaming",
-      "source": "spark-window-functions",
-      "target": "spark-structured-streaming"
+      "id": "e-branch-star-schema",
+      "source": "timeline-star-schema",
+      "target": "star-schema",
+      "type": "straight"
     },
     {
-      "id": "e-spark-structured-streaming-spark-ui",
-      "source": "spark-structured-streaming",
-      "target": "spark-ui"
+      "id": "e-spine-star-schema-scd",
+      "source": "timeline-star-schema",
+      "target": "timeline-scd",
+      "type": "straight"
     },
     {
-      "id": "e-spark-ui-spark-partitioning",
-      "source": "spark-ui",
-      "target": "spark-partitioning"
+      "id": "e-branch-scd",
+      "source": "timeline-scd",
+      "target": "scd",
+      "type": "straight"
     },
     {
-      "id": "e-spark-partitioning-db-notebooks",
-      "source": "spark-partitioning",
-      "target": "db-notebooks"
+      "id": "e-spine-scd-dbt-core",
+      "source": "timeline-scd",
+      "target": "timeline-dbt-core",
+      "type": "straight"
     },
     {
-      "id": "e-db-notebooks-db-clusters",
-      "source": "db-notebooks",
-      "target": "db-clusters"
+      "id": "e-branch-dbt-core",
+      "source": "timeline-dbt-core",
+      "target": "dbt-core",
+      "type": "straight"
     },
     {
-      "id": "e-db-clusters-db-jobs",
-      "source": "db-clusters",
-      "target": "db-jobs"
+      "id": "e-spine-dbt-core-dbt-models",
+      "source": "timeline-dbt-core",
+      "target": "timeline-dbt-models",
+      "type": "straight"
     },
     {
-      "id": "e-db-jobs-db-sql",
-      "source": "db-jobs",
-      "target": "db-sql"
+      "id": "e-branch-dbt-models",
+      "source": "timeline-dbt-models",
+      "target": "dbt-models",
+      "type": "straight"
     },
     {
-      "id": "e-db-sql-db-photon",
-      "source": "db-sql",
-      "target": "db-photon"
+      "id": "e-spine-dbt-models-jinja-macros",
+      "source": "timeline-dbt-models",
+      "target": "timeline-jinja-macros",
+      "type": "straight"
     },
     {
-      "id": "e-db-photon-db-cost",
-      "source": "db-photon",
-      "target": "db-cost"
+      "id": "e-branch-jinja-macros",
+      "source": "timeline-jinja-macros",
+      "target": "jinja-macros",
+      "type": "straight"
     },
     {
-      "id": "e-db-cost-denormalization",
-      "source": "db-cost",
-      "target": "denormalization"
+      "id": "e-spine-jinja-macros-dbt-tests",
+      "source": "timeline-jinja-macros",
+      "target": "timeline-dbt-tests",
+      "type": "straight"
     },
     {
-      "id": "e-denormalization-snowflake-schema",
-      "source": "denormalization",
-      "target": "snowflake-schema"
+      "id": "e-branch-dbt-tests",
+      "source": "timeline-dbt-tests",
+      "target": "dbt-tests",
+      "type": "straight"
     },
     {
-      "id": "e-snowflake-schema-fact-tables",
-      "source": "snowflake-schema",
-      "target": "fact-tables"
+      "id": "e-spine-dbt-tests-airflow-intro",
+      "source": "timeline-dbt-tests",
+      "target": "timeline-airflow-intro",
+      "type": "straight"
     },
     {
-      "id": "e-fact-tables-grain",
-      "source": "fact-tables",
-      "target": "grain"
+      "id": "e-branch-airflow-intro",
+      "source": "timeline-airflow-intro",
+      "target": "airflow-intro",
+      "type": "straight"
     },
     {
-      "id": "e-grain-kimball",
-      "source": "grain",
-      "target": "kimball"
+      "id": "e-spine-airflow-intro-airflow-dags",
+      "source": "timeline-airflow-intro",
+      "target": "timeline-airflow-dags",
+      "type": "straight"
     },
     {
-      "id": "e-kimball-data-vault",
-      "source": "kimball",
-      "target": "data-vault"
+      "id": "e-branch-airflow-dags",
+      "source": "timeline-airflow-dags",
+      "target": "airflow-dags",
+      "type": "straight"
     },
     {
-      "id": "e-data-vault-dbt-seeds",
-      "source": "data-vault",
-      "target": "dbt-seeds"
+      "id": "e-spine-airflow-dags-operators",
+      "source": "timeline-airflow-dags",
+      "target": "timeline-operators",
+      "type": "straight"
     },
     {
-      "id": "e-dbt-seeds-dbt-sources",
-      "source": "dbt-seeds",
-      "target": "dbt-sources"
+      "id": "e-branch-operators",
+      "source": "timeline-operators",
+      "target": "operators",
+      "type": "straight"
     },
     {
-      "id": "e-dbt-sources-dbt-snapshots",
-      "source": "dbt-sources",
-      "target": "dbt-snapshots"
+      "id": "e-spine-operators-airflow-arch",
+      "source": "timeline-operators",
+      "target": "timeline-airflow-arch",
+      "type": "straight"
     },
     {
-      "id": "e-dbt-snapshots-dbt-incremental",
-      "source": "dbt-snapshots",
-      "target": "dbt-incremental"
+      "id": "e-branch-airflow-arch",
+      "source": "timeline-airflow-arch",
+      "target": "airflow-arch",
+      "type": "straight"
     },
     {
-      "id": "e-dbt-incremental-dbt-best-practices",
-      "source": "dbt-incremental",
-      "target": "dbt-best-practices"
+      "id": "e-spine-airflow-arch-kafka-overview",
+      "source": "timeline-airflow-arch",
+      "target": "timeline-kafka-overview",
+      "type": "straight"
     },
     {
-      "id": "e-dbt-best-practices-airflow-hooks",
-      "source": "dbt-best-practices",
-      "target": "airflow-hooks"
+      "id": "e-branch-kafka-overview",
+      "source": "timeline-kafka-overview",
+      "target": "kafka-overview",
+      "type": "straight"
     },
     {
-      "id": "e-airflow-hooks-airflow-taskflow",
-      "source": "airflow-hooks",
-      "target": "airflow-taskflow"
+      "id": "e-spine-kafka-overview-kafka-arch",
+      "source": "timeline-kafka-overview",
+      "target": "timeline-kafka-arch",
+      "type": "straight"
     },
     {
-      "id": "e-airflow-taskflow-airflow-xcom",
-      "source": "airflow-taskflow",
-      "target": "airflow-xcom"
+      "id": "e-branch-kafka-arch",
+      "source": "timeline-kafka-arch",
+      "target": "kafka-arch",
+      "type": "straight"
     },
     {
-      "id": "e-airflow-xcom-airflow-prod-best-practices",
-      "source": "airflow-xcom",
-      "target": "airflow-prod-best-practices"
+      "id": "e-spine-kafka-arch-kafka-streams",
+      "source": "timeline-kafka-arch",
+      "target": "timeline-kafka-streams",
+      "type": "straight"
     },
     {
-      "id": "e-airflow-prod-best-practices-kafka-topics",
-      "source": "airflow-prod-best-practices",
-      "target": "kafka-topics"
+      "id": "e-branch-kafka-streams",
+      "source": "timeline-kafka-streams",
+      "target": "kafka-streams",
+      "type": "straight"
     },
     {
-      "id": "e-kafka-topics-kafka-producer",
-      "source": "kafka-topics",
-      "target": "kafka-producer"
+      "id": "e-spine-kafka-streams-flink",
+      "source": "timeline-kafka-streams",
+      "target": "timeline-flink",
+      "type": "straight"
     },
     {
-      "id": "e-kafka-producer-kafka-consumer",
-      "source": "kafka-producer",
-      "target": "kafka-consumer"
+      "id": "e-branch-flink",
+      "source": "timeline-flink",
+      "target": "flink",
+      "type": "straight"
     },
     {
-      "id": "e-kafka-consumer-kafka-schema-registry",
-      "source": "kafka-consumer",
-      "target": "kafka-schema-registry"
+      "id": "e-spine-flink-aws-iam",
+      "source": "timeline-flink",
+      "target": "timeline-aws-iam",
+      "type": "straight"
     },
     {
-      "id": "e-kafka-schema-registry-kafka-connect",
-      "source": "kafka-schema-registry",
-      "target": "kafka-connect"
+      "id": "e-branch-aws-iam",
+      "source": "timeline-aws-iam",
+      "target": "aws-iam",
+      "type": "straight"
     },
     {
-      "id": "e-kafka-connect-aws-glue",
-      "source": "kafka-connect",
-      "target": "aws-glue"
+      "id": "e-spine-aws-iam-s3",
+      "source": "timeline-aws-iam",
+      "target": "timeline-s3",
+      "type": "straight"
     },
     {
-      "id": "e-aws-glue-aws-athena",
-      "source": "aws-glue",
-      "target": "aws-athena"
+      "id": "e-branch-s3",
+      "source": "timeline-s3",
+      "target": "s3",
+      "type": "straight"
     },
     {
-      "id": "e-aws-athena-aws-lambda",
-      "source": "aws-athena",
-      "target": "aws-lambda"
+      "id": "e-spine-s3-ec2",
+      "source": "timeline-s3",
+      "target": "timeline-ec2",
+      "type": "straight"
     },
     {
-      "id": "e-aws-lambda-aws-emr",
-      "source": "aws-lambda",
-      "target": "aws-emr"
+      "id": "e-branch-ec2",
+      "source": "timeline-ec2",
+      "target": "ec2",
+      "type": "straight"
     },
     {
-      "id": "e-aws-emr-docker-compose",
-      "source": "aws-emr",
-      "target": "docker-compose"
+      "id": "e-spine-ec2-rds",
+      "source": "timeline-ec2",
+      "target": "timeline-rds",
+      "type": "straight"
     },
     {
-      "id": "e-docker-compose-project-python-etl",
-      "source": "docker-compose",
-      "target": "project-python-etl"
+      "id": "e-branch-rds",
+      "source": "timeline-rds",
+      "target": "rds",
+      "type": "straight"
     },
     {
-      "id": "e-project-python-etl-project-spark-analytics",
-      "source": "project-python-etl",
-      "target": "project-spark-analytics"
+      "id": "e-spine-rds-redshift",
+      "source": "timeline-rds",
+      "target": "timeline-redshift",
+      "type": "straight"
     },
     {
-      "id": "e-project-spark-analytics-project-e2e",
-      "source": "project-spark-analytics",
-      "target": "project-e2e"
+      "id": "e-branch-redshift",
+      "source": "timeline-redshift",
+      "target": "redshift",
+      "type": "straight"
     },
     {
-      "id": "e-project-e2e-sys-design-capacity",
-      "source": "project-e2e",
-      "target": "sys-design-capacity"
+      "id": "e-spine-redshift-docker",
+      "source": "timeline-redshift",
+      "target": "timeline-docker",
+      "type": "straight"
     },
     {
-      "id": "e-sys-design-capacity-sys-design-batch",
-      "source": "sys-design-capacity",
-      "target": "sys-design-batch"
+      "id": "e-branch-docker",
+      "source": "timeline-docker",
+      "target": "docker",
+      "type": "straight"
     },
     {
-      "id": "e-sys-design-batch-sys-design-streaming",
-      "source": "sys-design-batch",
-      "target": "sys-design-streaming"
+      "id": "e-spine-docker-ci-cd",
+      "source": "timeline-docker",
+      "target": "timeline-ci-cd",
+      "type": "straight"
     },
     {
-      "id": "e-sys-design-streaming-interview-spark",
-      "source": "sys-design-streaming",
-      "target": "interview-spark"
+      "id": "e-branch-ci-cd",
+      "source": "timeline-ci-cd",
+      "target": "ci-cd",
+      "type": "straight"
     },
     {
-      "id": "e-interview-spark-interview-resume",
-      "source": "interview-spark",
-      "target": "interview-resume"
+      "id": "e-spine-ci-cd-terraform",
+      "source": "timeline-ci-cd",
+      "target": "timeline-terraform",
+      "type": "straight"
     },
     {
-      "id": "e-interview-resume-interview-mock",
-      "source": "interview-resume",
-      "target": "interview-mock"
+      "id": "e-branch-terraform",
+      "source": "timeline-terraform",
+      "target": "terraform",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-terraform-de-projects",
+      "source": "timeline-terraform",
+      "target": "timeline-de-projects",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-de-projects",
+      "source": "timeline-de-projects",
+      "target": "de-projects",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-de-projects-batch-project",
+      "source": "timeline-de-projects",
+      "target": "timeline-batch-project",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-batch-project",
+      "source": "timeline-batch-project",
+      "target": "batch-project",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-batch-project-streaming-project",
+      "source": "timeline-batch-project",
+      "target": "timeline-streaming-project",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-streaming-project",
+      "source": "timeline-streaming-project",
+      "target": "streaming-project",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-streaming-project-sys-design-intro",
+      "source": "timeline-streaming-project",
+      "target": "timeline-sys-design-intro",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-sys-design-intro",
+      "source": "timeline-sys-design-intro",
+      "target": "sys-design-intro",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-sys-design-intro-sys-design-framework",
+      "source": "timeline-sys-design-intro",
+      "target": "timeline-sys-design-framework",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-sys-design-framework",
+      "source": "timeline-sys-design-framework",
+      "target": "sys-design-framework",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-sys-design-framework-sql-interview",
+      "source": "timeline-sys-design-framework",
+      "target": "timeline-sql-interview",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-sql-interview",
+      "source": "timeline-sql-interview",
+      "target": "sql-interview",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-sql-interview-python-interview",
+      "source": "timeline-sql-interview",
+      "target": "timeline-python-interview",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-python-interview",
+      "source": "timeline-python-interview",
+      "target": "python-interview",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-python-interview-behavioral-interview",
+      "source": "timeline-python-interview",
+      "target": "timeline-behavioral-interview",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-behavioral-interview",
+      "source": "timeline-behavioral-interview",
+      "target": "behavioral-interview",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-behavioral-interview-idempotency",
+      "source": "timeline-behavioral-interview",
+      "target": "timeline-idempotency",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-idempotency",
+      "source": "timeline-idempotency",
+      "target": "idempotency",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-idempotency-schema-evolution",
+      "source": "timeline-idempotency",
+      "target": "timeline-schema-evolution",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-schema-evolution",
+      "source": "timeline-schema-evolution",
+      "target": "schema-evolution",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-schema-evolution-data-lineage",
+      "source": "timeline-schema-evolution",
+      "target": "timeline-data-lineage",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-data-lineage",
+      "source": "timeline-data-lineage",
+      "target": "data-lineage",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-data-lineage-data-observability",
+      "source": "timeline-data-lineage",
+      "target": "timeline-data-observability",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-data-observability",
+      "source": "timeline-data-observability",
+      "target": "data-observability",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-data-observability-cdc",
+      "source": "timeline-data-observability",
+      "target": "timeline-cdc",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-cdc",
+      "source": "timeline-cdc",
+      "target": "cdc",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-cdc-lambda-arch",
+      "source": "timeline-cdc",
+      "target": "timeline-lambda-arch",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-lambda-arch",
+      "source": "timeline-lambda-arch",
+      "target": "lambda-arch",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-lambda-arch-kappa-arch",
+      "source": "timeline-lambda-arch",
+      "target": "timeline-kappa-arch",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-kappa-arch",
+      "source": "timeline-kappa-arch",
+      "target": "kappa-arch",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-kappa-arch-data-catalog",
+      "source": "timeline-kappa-arch",
+      "target": "timeline-data-catalog",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-data-catalog",
+      "source": "timeline-data-catalog",
+      "target": "data-catalog",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-data-catalog-replication",
+      "source": "timeline-data-catalog",
+      "target": "timeline-replication",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-replication",
+      "source": "timeline-replication",
+      "target": "replication",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-replication-cap-theorem",
+      "source": "timeline-replication",
+      "target": "timeline-cap-theorem",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-cap-theorem",
+      "source": "timeline-cap-theorem",
+      "target": "cap-theorem",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-cap-theorem-consistency-models",
+      "source": "timeline-cap-theorem",
+      "target": "timeline-consistency-models",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-consistency-models",
+      "source": "timeline-consistency-models",
+      "target": "consistency-models",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-consistency-models-data-locality",
+      "source": "timeline-consistency-models",
+      "target": "timeline-data-locality",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-data-locality",
+      "source": "timeline-data-locality",
+      "target": "data-locality",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-data-locality-spark-datasets",
+      "source": "timeline-data-locality",
+      "target": "timeline-spark-datasets",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-spark-datasets",
+      "source": "timeline-spark-datasets",
+      "target": "spark-datasets",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-spark-datasets-lazy-evaluation",
+      "source": "timeline-spark-datasets",
+      "target": "timeline-lazy-evaluation",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-lazy-evaluation",
+      "source": "timeline-lazy-evaluation",
+      "target": "lazy-evaluation",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-lazy-evaluation-tungsten",
+      "source": "timeline-lazy-evaluation",
+      "target": "timeline-tungsten",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-tungsten",
+      "source": "timeline-tungsten",
+      "target": "tungsten",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-tungsten-aqe",
+      "source": "timeline-tungsten",
+      "target": "timeline-aqe",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-aqe",
+      "source": "timeline-aqe",
+      "target": "aqe",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-aqe-spark-window-functions",
+      "source": "timeline-aqe",
+      "target": "timeline-spark-window-functions",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-spark-window-functions",
+      "source": "timeline-spark-window-functions",
+      "target": "spark-window-functions",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-spark-window-functions-spark-structured-streaming",
+      "source": "timeline-spark-window-functions",
+      "target": "timeline-spark-structured-streaming",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-spark-structured-streaming",
+      "source": "timeline-spark-structured-streaming",
+      "target": "spark-structured-streaming",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-spark-structured-streaming-spark-ui",
+      "source": "timeline-spark-structured-streaming",
+      "target": "timeline-spark-ui",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-spark-ui",
+      "source": "timeline-spark-ui",
+      "target": "spark-ui",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-spark-ui-spark-partitioning",
+      "source": "timeline-spark-ui",
+      "target": "timeline-spark-partitioning",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-spark-partitioning",
+      "source": "timeline-spark-partitioning",
+      "target": "spark-partitioning",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-spark-partitioning-db-notebooks",
+      "source": "timeline-spark-partitioning",
+      "target": "timeline-db-notebooks",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-db-notebooks",
+      "source": "timeline-db-notebooks",
+      "target": "db-notebooks",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-db-notebooks-db-clusters",
+      "source": "timeline-db-notebooks",
+      "target": "timeline-db-clusters",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-db-clusters",
+      "source": "timeline-db-clusters",
+      "target": "db-clusters",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-db-clusters-db-jobs",
+      "source": "timeline-db-clusters",
+      "target": "timeline-db-jobs",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-db-jobs",
+      "source": "timeline-db-jobs",
+      "target": "db-jobs",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-db-jobs-db-sql",
+      "source": "timeline-db-jobs",
+      "target": "timeline-db-sql",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-db-sql",
+      "source": "timeline-db-sql",
+      "target": "db-sql",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-db-sql-db-photon",
+      "source": "timeline-db-sql",
+      "target": "timeline-db-photon",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-db-photon",
+      "source": "timeline-db-photon",
+      "target": "db-photon",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-db-photon-db-cost",
+      "source": "timeline-db-photon",
+      "target": "timeline-db-cost",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-db-cost",
+      "source": "timeline-db-cost",
+      "target": "db-cost",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-db-cost-denormalization",
+      "source": "timeline-db-cost",
+      "target": "timeline-denormalization",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-denormalization",
+      "source": "timeline-denormalization",
+      "target": "denormalization",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-denormalization-snowflake-schema",
+      "source": "timeline-denormalization",
+      "target": "timeline-snowflake-schema",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-snowflake-schema",
+      "source": "timeline-snowflake-schema",
+      "target": "snowflake-schema",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-snowflake-schema-fact-tables",
+      "source": "timeline-snowflake-schema",
+      "target": "timeline-fact-tables",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-fact-tables",
+      "source": "timeline-fact-tables",
+      "target": "fact-tables",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-fact-tables-grain",
+      "source": "timeline-fact-tables",
+      "target": "timeline-grain",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-grain",
+      "source": "timeline-grain",
+      "target": "grain",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-grain-kimball",
+      "source": "timeline-grain",
+      "target": "timeline-kimball",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-kimball",
+      "source": "timeline-kimball",
+      "target": "kimball",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-kimball-data-vault",
+      "source": "timeline-kimball",
+      "target": "timeline-data-vault",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-data-vault",
+      "source": "timeline-data-vault",
+      "target": "data-vault",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-data-vault-dbt-seeds",
+      "source": "timeline-data-vault",
+      "target": "timeline-dbt-seeds",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-dbt-seeds",
+      "source": "timeline-dbt-seeds",
+      "target": "dbt-seeds",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-dbt-seeds-dbt-sources",
+      "source": "timeline-dbt-seeds",
+      "target": "timeline-dbt-sources",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-dbt-sources",
+      "source": "timeline-dbt-sources",
+      "target": "dbt-sources",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-dbt-sources-dbt-snapshots",
+      "source": "timeline-dbt-sources",
+      "target": "timeline-dbt-snapshots",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-dbt-snapshots",
+      "source": "timeline-dbt-snapshots",
+      "target": "dbt-snapshots",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-dbt-snapshots-dbt-incremental",
+      "source": "timeline-dbt-snapshots",
+      "target": "timeline-dbt-incremental",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-dbt-incremental",
+      "source": "timeline-dbt-incremental",
+      "target": "dbt-incremental",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-dbt-incremental-dbt-best-practices",
+      "source": "timeline-dbt-incremental",
+      "target": "timeline-dbt-best-practices",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-dbt-best-practices",
+      "source": "timeline-dbt-best-practices",
+      "target": "dbt-best-practices",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-dbt-best-practices-airflow-hooks",
+      "source": "timeline-dbt-best-practices",
+      "target": "timeline-airflow-hooks",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-airflow-hooks",
+      "source": "timeline-airflow-hooks",
+      "target": "airflow-hooks",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-airflow-hooks-airflow-taskflow",
+      "source": "timeline-airflow-hooks",
+      "target": "timeline-airflow-taskflow",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-airflow-taskflow",
+      "source": "timeline-airflow-taskflow",
+      "target": "airflow-taskflow",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-airflow-taskflow-airflow-xcom",
+      "source": "timeline-airflow-taskflow",
+      "target": "timeline-airflow-xcom",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-airflow-xcom",
+      "source": "timeline-airflow-xcom",
+      "target": "airflow-xcom",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-airflow-xcom-airflow-prod-best-practices",
+      "source": "timeline-airflow-xcom",
+      "target": "timeline-airflow-prod-best-practices",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-airflow-prod-best-practices",
+      "source": "timeline-airflow-prod-best-practices",
+      "target": "airflow-prod-best-practices",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-airflow-prod-best-practices-kafka-topics",
+      "source": "timeline-airflow-prod-best-practices",
+      "target": "timeline-kafka-topics",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-kafka-topics",
+      "source": "timeline-kafka-topics",
+      "target": "kafka-topics",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-kafka-topics-kafka-producer",
+      "source": "timeline-kafka-topics",
+      "target": "timeline-kafka-producer",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-kafka-producer",
+      "source": "timeline-kafka-producer",
+      "target": "kafka-producer",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-kafka-producer-kafka-consumer",
+      "source": "timeline-kafka-producer",
+      "target": "timeline-kafka-consumer",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-kafka-consumer",
+      "source": "timeline-kafka-consumer",
+      "target": "kafka-consumer",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-kafka-consumer-kafka-schema-registry",
+      "source": "timeline-kafka-consumer",
+      "target": "timeline-kafka-schema-registry",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-kafka-schema-registry",
+      "source": "timeline-kafka-schema-registry",
+      "target": "kafka-schema-registry",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-kafka-schema-registry-kafka-connect",
+      "source": "timeline-kafka-schema-registry",
+      "target": "timeline-kafka-connect",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-kafka-connect",
+      "source": "timeline-kafka-connect",
+      "target": "kafka-connect",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-kafka-connect-aws-glue",
+      "source": "timeline-kafka-connect",
+      "target": "timeline-aws-glue",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-aws-glue",
+      "source": "timeline-aws-glue",
+      "target": "aws-glue",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-aws-glue-aws-athena",
+      "source": "timeline-aws-glue",
+      "target": "timeline-aws-athena",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-aws-athena",
+      "source": "timeline-aws-athena",
+      "target": "aws-athena",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-aws-athena-aws-lambda",
+      "source": "timeline-aws-athena",
+      "target": "timeline-aws-lambda",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-aws-lambda",
+      "source": "timeline-aws-lambda",
+      "target": "aws-lambda",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-aws-lambda-aws-emr",
+      "source": "timeline-aws-lambda",
+      "target": "timeline-aws-emr",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-aws-emr",
+      "source": "timeline-aws-emr",
+      "target": "aws-emr",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-aws-emr-docker-compose",
+      "source": "timeline-aws-emr",
+      "target": "timeline-docker-compose",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-docker-compose",
+      "source": "timeline-docker-compose",
+      "target": "docker-compose",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-docker-compose-project-python-etl",
+      "source": "timeline-docker-compose",
+      "target": "timeline-project-python-etl",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-project-python-etl",
+      "source": "timeline-project-python-etl",
+      "target": "project-python-etl",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-project-python-etl-project-spark-analytics",
+      "source": "timeline-project-python-etl",
+      "target": "timeline-project-spark-analytics",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-project-spark-analytics",
+      "source": "timeline-project-spark-analytics",
+      "target": "project-spark-analytics",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-project-spark-analytics-project-e2e",
+      "source": "timeline-project-spark-analytics",
+      "target": "timeline-project-e2e",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-project-e2e",
+      "source": "timeline-project-e2e",
+      "target": "project-e2e",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-project-e2e-sys-design-capacity",
+      "source": "timeline-project-e2e",
+      "target": "timeline-sys-design-capacity",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-sys-design-capacity",
+      "source": "timeline-sys-design-capacity",
+      "target": "sys-design-capacity",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-sys-design-capacity-sys-design-batch",
+      "source": "timeline-sys-design-capacity",
+      "target": "timeline-sys-design-batch",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-sys-design-batch",
+      "source": "timeline-sys-design-batch",
+      "target": "sys-design-batch",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-sys-design-batch-sys-design-streaming",
+      "source": "timeline-sys-design-batch",
+      "target": "timeline-sys-design-streaming",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-sys-design-streaming",
+      "source": "timeline-sys-design-streaming",
+      "target": "sys-design-streaming",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-sys-design-streaming-interview-spark",
+      "source": "timeline-sys-design-streaming",
+      "target": "timeline-interview-spark",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-interview-spark",
+      "source": "timeline-interview-spark",
+      "target": "interview-spark",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-interview-spark-interview-resume",
+      "source": "timeline-interview-spark",
+      "target": "timeline-interview-resume",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-interview-resume",
+      "source": "timeline-interview-resume",
+      "target": "interview-resume",
+      "type": "straight"
+    },
+    {
+      "id": "e-spine-interview-resume-interview-mock",
+      "source": "timeline-interview-resume",
+      "target": "timeline-interview-mock",
+      "type": "straight"
+    },
+    {
+      "id": "e-branch-interview-mock",
+      "source": "timeline-interview-mock",
+      "target": "interview-mock",
+      "type": "straight"
     }
   ]
 }
