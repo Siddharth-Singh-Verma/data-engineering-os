@@ -6,6 +6,7 @@ import {
   Background,
   useNodesState,
   useEdgesState,
+  useReactFlow,
   type Node,
   type Edge,
   BackgroundVariant,
@@ -14,7 +15,6 @@ import {
 import '@xyflow/react/dist/style.css';
 import { useNavigate } from 'react-router';
 import { RoadmapNode } from './RoadmapNode';
-import { RoadmapLegend } from './RoadmapLegend';
 import type { Module, UserProgress, RoadmapData } from '@/types';
 import { CATEGORY_LABELS } from '@/types';
 
@@ -31,6 +31,7 @@ const NODE_TYPES: NodeTypes = {
 
 export function RoadmapCanvas({ roadmapData, modules, progress, toggleModuleComplete }: RoadmapCanvasProps) {
   const navigate = useNavigate();
+  const { setCenter, getZoom } = useReactFlow();
 
   const moduleMap = useMemo(() => {
     const map: Record<string, Module> = {};
@@ -94,7 +95,21 @@ export function RoadmapCanvas({ roadmapData, modules, progress, toggleModuleComp
   useEffect(() => {
     setNodes(initialNodes);
     setEdges(initialEdges);
-  }, [initialNodes, initialEdges, setNodes, setEdges]);
+    
+    // Auto-center on first incomplete module
+    const timer = setTimeout(() => {
+      const targetNode = initialNodes.find(n => {
+        const d = n.data as any;
+        return !d.isCompleted && d.isUnlocked;
+      });
+      
+      if (targetNode) {
+        setCenter(targetNode.position.x + 100, targetNode.position.y + 50, { zoom: getZoom() || 0.8, duration: 800 });
+      }
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, [initialNodes, initialEdges, setNodes, setEdges, setCenter, getZoom]);
 
   const onNodeClick = useCallback((_: React.MouseEvent, node: Node) => {
     const mod = moduleMap[node.id];
@@ -158,8 +173,6 @@ export function RoadmapCanvas({ roadmapData, modules, progress, toggleModuleComp
         />
       </ReactFlow>
 
-      {/* Legend */}
-      <RoadmapLegend />
     </div>
   );
 }
