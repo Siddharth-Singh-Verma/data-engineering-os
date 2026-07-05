@@ -105,7 +105,8 @@ function RoadmapCanvasInner({ roadmapData, modules, progress, toggleModuleComple
       });
       
       if (targetNode) {
-        setCenter(targetNode.position.x + 100, targetNode.position.y + 50, { zoom: getZoom() || 0.8, duration: 800 });
+        // Center on the target node (adjusting for 340px width and ~150px height) and set a comfortable default zoom
+        setCenter(targetNode.position.x + 170, targetNode.position.y + 75, { zoom: 0.6, duration: 800 });
       }
     }, 100);
     
